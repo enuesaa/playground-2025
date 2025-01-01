@@ -1,5 +1,5 @@
 # playground-2025
-My playground in 2025 🐦  
+My playground in 2025 🐍  
 Repository for getting started with new library.
 
 ## Archives
