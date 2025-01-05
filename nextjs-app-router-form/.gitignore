@@ -1,0 +1,14 @@
+# misc
+.DS_Store
+
+# js
+node_modules
+.pnpm-debug.log*
+
+# next.js
+.env*
+.vercel
+/.next/
+/out/
+/build
+next-env.d.ts
