@@ -1,0 +1,12 @@
+# dev server
+localhost:3000 {
+	respond "Goodbye, world!"
+
+	handle /api/* {
+		reverse_proxy example.com
+	}
+    
+    handle /aa/* {
+        respond "Goodbye, world! aa"
+	}
+}
