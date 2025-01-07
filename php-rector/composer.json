@@ -1,0 +1,25 @@
+{
+    "name": "enuesaa/sampleapp",
+    "description": "Sample App",
+    "license": "MIT",
+    "version": "0.0.1",
+    "require": {
+        "symfony/console": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require-dev": {
+        "rector/rector": "^2.0"
+    },
+    "scripts": {
+        "rect": "rector"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2.27"
+        }
+    }
+}
