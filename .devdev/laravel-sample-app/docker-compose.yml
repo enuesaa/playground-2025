@@ -2,8 +2,18 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
-    # command: composer install
+      dockerfile: ./docker/app/Dockerfile
+    command: bash -c 'composer install && php-fpm'
     volumes:
       - .:/app
     tty: true
+
+  web:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
+      - .:/app
+    depends_on:
+      - app

@@ -7,11 +7,15 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install zip mbstring
+    && docker-php-ext-install zip mbstring pdo_mysql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+# TODO: remove
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# COPY composer.json composer.lock .
-# RUN composer install --optimize-autoloader --no-interaction
+WORKDIR /app
+COPY . .
+RUN composer install --optimize-autoloader --no-interaction
+
+CMD ["php-fpm"]
