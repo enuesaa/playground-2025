@@ -1,6 +1,6 @@
 {
-    "name": "enuesaa/sampleapp",
-    "description": "Sample App",
+    "name": "enuesaa/php-rector-try",
+    "description": "",
     "license": "MIT",
     "version": "0.0.1",
     "require": {
