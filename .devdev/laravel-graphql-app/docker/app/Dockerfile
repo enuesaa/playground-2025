@@ -14,7 +14,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # TODO: remove
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-WORKDIR /app
+WORKDIR /var/www/html
 COPY . .
 RUN composer install --optimize-autoloader --no-interaction
 
