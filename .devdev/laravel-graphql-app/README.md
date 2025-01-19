@@ -13,6 +13,7 @@
 
 ## Links
 - https://qiita.com/fujita-goq/items/8942d76dd2f542cb3ae0
+- https://speakerdeck.com/azuki/graphql-haiizo-laravel-dexue-bu-graphql-ru-men?slide=21
 
 ## Lighthouse
 - Laravel の GraphQL ライブラリ

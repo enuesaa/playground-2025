@@ -17,6 +17,8 @@ type Query {
       "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
       name: String @where(operator: "like")
     ): [User!]! @paginate(defaultCount: 10)
+
+    notes: [Note!]!
 }
 
 "Account of a person who utilizes this application."
@@ -38,4 +40,8 @@ type User {
 
     "When the account was last updated."
     updated_at: DateTime!
+}
+
+type Note {
+    name: String!
 }
