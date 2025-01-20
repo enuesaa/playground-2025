@@ -20,3 +20,26 @@
   - git で設定値を管理しており CodePipeline を走らせて AppConfig の環境へデプロイするイメージ
 - 設定値を AppConfig で保管することもでき、その場合、diff もできる
 - 設定値のバリデーション (lambda) もできる
+
+## 設定値の取得方法
+- Agent が前提みたい。CLI だとちょっと面倒
+- ちなみに サブコマンド も別。管理系が `aws appconfig` でデータ系が `aws appconfigdata`
+
+```console
+$ aws appconfigdata start-configuration-session --application-identifier <name> --environment-identifier dev --configuration-profile-identifier main
+{
+  "InitialConfigurationToken": "xxx"
+}
+
+$ aws appconfigdata get-latest-configuration --configuration-token 'xxx' out.json
+{
+  "NextPollConfigurationToken": "xxx",
+  "NextPollIntervalInSeconds": "60",
+  "ContentType": "application/octet-stream"
+}
+
+$ cat out.json
+// 設定値が入っている
+```
+
+- https://awscli.amazonaws.com/v2/documentation/api/latest/reference/appconfigdata/index.html#cli-aws-appconfigdata
