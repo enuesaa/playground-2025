@@ -41,9 +41,16 @@ func main() {
 
 	wsconns := NewWsConns()
 
+	var data string
+
 	app.Get("/sync", websocket.New(func(c *websocket.Conn) {
 		requestId := wsconns.Add(c)
 		defer wsconns.Remove(requestId)
+		log.Printf("started: %s\n", requestId)
+
+		if data != "" {
+			wsconns.Send(data)
+		}
 
 		for {
 			messageType, msgbytes, err := c.ReadMessage()
@@ -53,8 +60,9 @@ func main() {
 			if messageType == websocket.CloseGoingAway {
 				break
 			}
-			msg := string(msgbytes)
-			wsconns.Send(msg)
+			data = string(msgbytes)
+			log.Printf("receive: %s\n", requestId)
+			wsconns.Send(data)
 		}
 	}))
 

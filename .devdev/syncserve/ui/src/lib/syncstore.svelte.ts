@@ -1,23 +1,28 @@
+import { PUBLIC_SYNC_API_URL } from '$env/static/public'
+
+
+const socket = new WebSocket(PUBLIC_SYNC_API_URL)
+
 export function createSyncStore() {
   let data = $state('')
-
-
-
-  const socket = new WebSocket('ws://localhost:80/sync');
-  socket.onopen = () => {
-    console.log('socket connected');
-  };
-  socket.onmessage = (event) => {
-    if (typeof event.data !== 'string') {
-      return;
-    }
-    data = event.data
-  }
 
 	return {
 		get data() {
       return data
     },
-		// increment: () => count += 1
+    connect() {
+      socket.onmessage = (event) => {
+        if (typeof event.data !== 'string') {
+          return;
+        }
+        data = event.data
+      }
+    },
+    send(text: string) {
+      // socket.onopen = () => {
+        socket.send(text)
+        // socket.close()
+      // }
+    }
 	}
 }
