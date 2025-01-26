@@ -1,6 +1,9 @@
-import { PUBLIC_SYNC_API_URL } from '$env/static/public'
+import { PUBLIC_SYNC_API_HOST } from '$env/static/public'
+import { browser } from '$app/environment'
 
-const socket = new WebSocket(PUBLIC_SYNC_API_URL)
+const host = PUBLIC_SYNC_API_HOST !== '' ? PUBLIC_SYNC_API_HOST : (browser ? location.host : 'localhost:80')
+
+let socket = new WebSocket(`ws://${host}/sync`)
 let data = $state('')
 
 export function useSyncStore() {
@@ -17,10 +20,7 @@ export function useSyncStore() {
       }
     },
     send(text: string) {
-      // socket.onopen = () => {
-        socket.send(text)
-        // socket.close()
-      // }
+      socket.send(text)
     }
 	}
 }
