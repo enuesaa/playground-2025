@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/enuesaa/playground-2025/.devdev/syncserve/ui"
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
-	"github.com/enuesaa/playground-2025/.devdev/syncserve/ui"
 )
 
 func main() {
@@ -56,7 +56,7 @@ func main() {
 		fileExt := filepath.Ext(path)
 		mimeType := mime.TypeByExtension(fileExt)
 		c.Set(fiber.HeaderContentType, mimeType)
-	
+
 		return c.SendString(string(f))
 	})
 
