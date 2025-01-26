@@ -1,47 +1,22 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"mime"
+	"path/filepath"
+	"strings"
 
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
+	"github.com/enuesaa/playground-2025/.devdev/syncserve/ui"
 )
-
-func NewWsConns() WsConns {
-	return WsConns {
-		conns: make(map[string]*websocket.Conn),
-	}
-}
-
-type WsConns struct {
-	conns map[string]*websocket.Conn
-}
-func (c *WsConns) Add(conn *websocket.Conn) string {
-	id := uuid.NewString()
-	c.conns[id] = conn
-	return id
-}
-func (c *WsConns) Remove(id string) {
-	if conn, ok := c.conns[id]; ok {
-		delete(c.conns, id)
-		conn.Close()
-	}
-}
-func (c *WsConns) Send(message string) {
-	for id, conn := range c.conns {
-		if err := conn.WriteMessage(websocket.TextMessage, []byte(message)); err != nil {
-			c.Remove(id)
-		}
-	}
-}
 
 func main() {
 	app := fiber.New()
 
+	data := ""
 	wsconns := NewWsConns()
-
-	var data string
 
 	app.Get("/sync", websocket.New(func(c *websocket.Conn) {
 		requestId := wsconns.Add(c)
@@ -65,6 +40,25 @@ func main() {
 			wsconns.Send(data)
 		}
 	}))
+
+	app.Get("/*", func(c *fiber.Ctx) error {
+		requestPath := c.Path() // like `/`
+
+		path := fmt.Sprintf("dist%s", requestPath) // like `dist/`
+		if strings.HasSuffix(path, "/") {
+			path += "index.html"
+		}
+
+		f, err := ui.Dist.ReadFile(path)
+		if err != nil {
+			return err
+		}
+		fileExt := filepath.Ext(path)
+		mimeType := mime.TypeByExtension(fileExt)
+		c.Set(fiber.HeaderContentType, mimeType)
+	
+		return c.SendString(string(f))
+	})
 
 	if err := app.Listen(":80"); err != nil {
 		log.Fatalf("Error: %s", err.Error())
