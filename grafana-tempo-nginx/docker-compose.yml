@@ -1,0 +1,52 @@
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+    volumes:
+      - grafanadata:/var/lib/grafana
+    depends_on:
+      - tempo
+
+  # loki:
+  #   container_name: loki
+  #   image: grafana/loki:2.9.2
+  #   ports:
+  #     - 3100:3100
+  #   command: -config.file=/etc/loki/local-config.yaml
+
+  # otel-collector:
+  #   image: otel/opentelemetry-collector-contrib:latest
+  #   # command: ["--config=/etc/otel-config.yml"]
+  #   volumes:
+  #     - ./otel-config.yml:/etc/otelcol-contrib/config.yaml
+  #   ports:
+  #     - 4317:4317
+  #     - 4318:4318
+  #   depends_on:
+  #     - loki
+
+  tempo:
+    image: grafana/tempo:latest
+    command: [--config.file=/etc/tempo.yaml]
+    volumes:
+      - ./tempo.yml:/etc/tempo.yaml
+    ports:
+      - 3200:3200
+      - 4317:4317
+      - 4318:4318
+
+  web:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports: 
+      - 8080:80
+    depends_on:
+      - tempo
+    tty: true
+
+volumes:
+  grafanadata:
