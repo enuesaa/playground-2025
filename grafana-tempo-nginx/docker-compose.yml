@@ -10,24 +10,6 @@ services:
     depends_on:
       - tempo
 
-  # loki:
-  #   container_name: loki
-  #   image: grafana/loki:2.9.2
-  #   ports:
-  #     - 3100:3100
-  #   command: -config.file=/etc/loki/local-config.yaml
-
-  # otel-collector:
-  #   image: otel/opentelemetry-collector-contrib:latest
-  #   # command: ["--config=/etc/otel-config.yml"]
-  #   volumes:
-  #     - ./otel-config.yml:/etc/otelcol-contrib/config.yaml
-  #   ports:
-  #     - 4317:4317
-  #     - 4318:4318
-  #   depends_on:
-  #     - loki
-
   tempo:
     image: grafana/tempo:latest
     command: [--config.file=/etc/tempo.yaml]
@@ -37,8 +19,26 @@ services:
       - 3200:3200
       - 4317:4317
       - 4318:4318
+  
+  # loki:
+  #   container_name: loki
+  #   image: grafana/loki:2.9.2
+  #   ports:
+  #     - 3100:3100
+  #   command: -config.file=/etc/loki/local-config.yaml
 
-  web:
+  # collector:
+  #   image: otel/opentelemetry-collector-contrib:latest
+  #   command: ["--config=/etc/collector.yml"]
+  #   volumes:
+  #     - ./collector.yml:/etc/collector.yml
+  #   ports:
+  #     - 4317:4317
+  #     - 4318:4318
+  #   depends_on:
+  #     - loki
+
+  nginx:
     build:
       context: .
       dockerfile: nginx/Dockerfile
