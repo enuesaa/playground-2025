@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install zip mbstring pdo_mysql
+    && docker-php-ext-install zip mbstring pdo_mysql pcntl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -15,6 +15,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /var/www/html
+
 COPY . .
 RUN composer install --optimize-autoloader --no-interaction
 
