@@ -21,3 +21,8 @@
 - スキーマを定義したら PHP を書く必要なく、そのまま DB を見に行く模様
 - HTTP レイヤーが DB に密結合している感じが Laravel らしいなと思った。
 - resolver を PHP で書きたいので、調査中
+
+## Laravel pint
+- コード整形ツール
+- CS Fixer を内包しているらしい
+- see https://qiita.com/ucan-lab/items/8807a092eb6d87ddfe34
