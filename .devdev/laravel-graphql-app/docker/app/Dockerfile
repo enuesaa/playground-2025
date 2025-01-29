@@ -1,4 +1,4 @@
-FROM php:8.2.27-fpm
+FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
     libzip-dev \
@@ -10,9 +10,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip mbstring pdo_mysql pcntl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# TODO: remove
-ENV COMPOSER_ALLOW_SUPERUSER=1
 
 WORKDIR /var/www/html
 

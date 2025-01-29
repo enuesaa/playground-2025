@@ -5,9 +5,8 @@
     "description": "",
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9",
         "mll-lab/laravel-graphiql": "^3.2",
         "nuwave/lighthouse": "^6.48"
     },
