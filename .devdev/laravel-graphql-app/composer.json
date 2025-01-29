@@ -33,7 +33,8 @@
     "scripts": {
         "format": "pint",
         "tailog": "php artisan pail",
-        "post-autoload-dump": "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+        "clear": "php artisan optimize:clear",
+        "post-autoload-dump": "@clear",
         "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
     },
     "extra": {
