@@ -26,3 +26,4 @@
 - コード整形ツール
 - CS Fixer を内包しているらしい
 - see https://qiita.com/ucan-lab/items/8807a092eb6d87ddfe34
+- run `composer run format`
