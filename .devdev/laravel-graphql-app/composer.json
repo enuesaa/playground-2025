@@ -31,7 +31,7 @@
         }
     },
     "scripts": {
-        "format": "pint",
+        "format": "pint --preset psr12",
         "tailog": "php artisan pail",
         "clear": "php artisan optimize:clear",
         "post-autoload-dump": "@clear",

@@ -13,8 +13,5 @@
 .phpunit.cache
 .phpunit.result.cache
 
-# pint
-.pint.cache
-
 # editor
 .vscode
