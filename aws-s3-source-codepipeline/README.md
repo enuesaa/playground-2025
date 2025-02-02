@@ -9,7 +9,20 @@
   - cloudtrail の証跡から EventBridge 経由で検知しトリガー
     - s3::PutObject は通常の CloudTrail ではなく s3 にエクスポートされる証跡にしか入らない
     - そのため、それを EventBridge イベントにするっていうルール設定がまず必要
-    - 続いて、EventBridge のルールで、それを検知して codepipeline:StartPipelineExecution を実行する
+    - 続いて、EventBridge のルールで、それを検知して codepipeline::StartPipelineExecution を実行する
     - 証跡経由だからちょっと微妙かも
   - s3 event 通知 + EventBridge
     - 筋はいい
+- S3 バケットはバージョニングを On にしないとダメ
+- ユースケース
+  - AWS的には、S3 にソースコードの tar.gz ファイルがアップロードされるのを想定しているっぽい。
+    - 普通に CodeBuild が続くイメージ
+    - まあ、なんか諸々の事情でこういうケースはありそう。
+  - DataSync 的な使い方もできる
+    - S3 から S3 へ
+    - けっこういいんじゃないか。
+    - ちょっとした ETL
+  - 何か使えそうなんだよなあ。
+- ソースバケットへの書き込みは注意
+  - 例えば横着して CodePipeline の Artifact を同じバケットに書き込むよう設定したら無限にパイプラインが走る
+  - Artifact を解析するユースケースはありそうで、ちょっと注意必要だと思った
