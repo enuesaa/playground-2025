@@ -1,0 +1,26 @@
+# see https://github.com/bytebase/bytebase/blob/main/quickstart/getting-started.docker-compose.yml
+
+services:
+  bytebase:
+    image: bytebase/bytebase
+    ports:
+      - 5678:5678
+    volumes:
+      - bytebasedata:/var/opt/bytebase
+    command: ["--data", "/var/opt/bytebase", "--port", "5678", "--external-url", "http://localhost:5678"]
+    depends_on:
+      - employee-prod
+      - employee-test
+
+  employee-prod:
+    image: bytebase/sample-database:mysql-employee-small
+    ports:
+      - 3306:3306
+
+  employee-test:
+    image: bytebase/sample-database:mysql-employee-small
+    ports:
+      - 3307:3306
+
+volumes:
+  bytebasedata:
