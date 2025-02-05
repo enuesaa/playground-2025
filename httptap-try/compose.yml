@@ -1,0 +1,9 @@
+services:
+  app:
+    image: golang:latest
+    tty: true
+    # see https://github.com/monasticacademy/httptap/issues/14
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
