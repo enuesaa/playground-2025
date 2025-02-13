@@ -22,3 +22,11 @@
 ## Links
 - https://manual.sakura.ad.jp/cloud/manual-sakura-apprun.html
 - https://zenn.dev/fujiwara/scraps/08982e9a66c83c
+
+## Commands
+```bash
+docker login xxx.sakuracr.jp
+docker build -t appruntest .
+docker tag appruntest xxx.sakuracr.jp/appruntest:latest
+docker push xxx.sakuracr.jp/appruntest:latest
+```
