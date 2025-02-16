@@ -8,4 +8,5 @@ return [
     \Nuwave\Lighthouse\Pagination\PaginationServiceProvider::class,
     \Nuwave\Lighthouse\Validation\ValidationServiceProvider::class,
     \Laravel\Pail\PailServiceProvider::class,
+    \MLL\GraphiQL\GraphiQLServiceProvider::class,
 ];

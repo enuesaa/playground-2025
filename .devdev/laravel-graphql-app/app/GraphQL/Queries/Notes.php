@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\GraphQL\Queries;
 
-final readonly class Notes
+final class Notes
 {
-    /** @param  array{}  $args */
-    public function __invoke(null $_, array $args)
+    public function __invoke(mixed $root, array $args): array
     {
+        logger($args);
+
         $note = ['name' => 'aa', 'hey' => 'hello'];
 
         return [$note];
