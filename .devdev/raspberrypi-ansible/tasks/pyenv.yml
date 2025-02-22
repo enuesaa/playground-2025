@@ -12,7 +12,9 @@
       eval "$(pyenv init --path)"
     state: present
     marker: "# {mark} ANSIBLE PYENV BLOCK"
+  register: pyenv_bashrc
 
 - ansible.builtin.shell:
     cmd: source ~/.bashrc
     executable: /bin/bash
+  when: pyenv_bashrc.changed

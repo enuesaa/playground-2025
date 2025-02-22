@@ -12,7 +12,9 @@
       eval "$(goenv init -)"
     state: present
     marker: "# {mark} ANSIBLE GOENV BLOCK"
+  register: goenv_bashrc
 
 - ansible.builtin.shell:
     cmd: source ~/.bashrc
     executable: /bin/bash
+  when: goenv_bashrc.changed
