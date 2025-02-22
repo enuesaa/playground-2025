@@ -2,39 +2,26 @@ package main
 
 import (
 	"context"
-	"log"
-	"time"
 
+	"github.com/enuesaa/playground-2025/aws-otel-collector-go-try/handle"
+	"github.com/enuesaa/playground-2025/aws-otel-collector-go-try/oteltrace"
 	"github.com/labstack/echo/v4"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 )
 
 func main() {
-	ctx := context.Background()
-	traceProvider, err := setupTracer(ctx)
+	closer, err := oteltrace.Setup(context.Background())
 	if err != nil {
-		log.Fatalf("Error: %s", err.Error())
+		panic(err)
 	}
-	defer traceProvider.Shutdown(ctx)
-	tracer := traceProvider.Tracer("example.example")
+	defer closer()
 
 	app := echo.New()
-	app.Use(otelecho.Middleware("a"))
+	app.Use(otelecho.Middleware("echo"))
 
-	app.GET("/users/:id", func(c echo.Context) error {
-		_, span := tracer.Start(c.Request().Context(), "userlookup")
-		defer span.End()
+	app.GET("/*", handle.Handler)
 
-		return c.String(200, handle())
-	})
-
-	if err := app.Start(":3001"); err != nil {
-		log.Fatalf("Error: %s", err.Error())
+	if err := app.Start(":3000"); err != nil {
+		panic(err)
 	}
-}
-
-func handle() string {
-	time.Sleep(5 * time.Second)
-
-	return "aaa"
 }
