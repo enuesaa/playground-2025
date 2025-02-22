@@ -1,27 +1,31 @@
-- hosts: localhost
+---
+- hosts: all
   become: true
 
   tasks:
     - community.general.timezone:
         name: Asia/Tokyo
 
-    - ansible.builtin.import_tasks:
-        file: ./tasks/apt.yml
+    - name: aptbase
+      ansible.builtin.import_tasks:
+        file: ./tasks/aptbase.yml
 
-    - ansible.builtin.import_tasks:
+    - name: logrotate
+      ansible.builtin.import_tasks:
         file: ./tasks/logrotate.yml
 
-    - ansible.builtin.import_tasks:
+    - name: goenv
+      ansible.builtin.import_tasks:
         file: ./tasks/goenv.yml
 
-    - ansible.builtin.import_tasks:
+    - name: pyenv
+      ansible.builtin.import_tasks:
         file: ./tasks/pyenv.yml
 
-    - ansible.builtin.import_tasks:
+    - name: nvm
+      ansible.builtin.import_tasks:
         file: ./tasks/nvm.yml
 
-    - ansible.builtin.import_tasks:
+    - name: tfenv
+      ansible.builtin.import_tasks:
         file: ./tasks/tfenv.yml
-
-    # - ansible.builtin.import_tasks:
-    #     file: ./tasks/cywagon.yml
