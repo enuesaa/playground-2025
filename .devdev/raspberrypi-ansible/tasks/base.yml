@@ -1,0 +1,19 @@
+---
+- name: base ... timezone
+  community.general.timezone:
+    name: Asia/Tokyo
+
+- name: base ... apt update
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: base ... apt install
+  ansible.builtin.apt:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - vim
+    - git
+    - curl
+    - make
+    - build-essential

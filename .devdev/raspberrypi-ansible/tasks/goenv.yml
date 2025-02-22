@@ -1,10 +1,12 @@
 ---
-- ansible.builtin.git:
+- name: goenv ... git clone
+  ansible.builtin.git:
     repo: https://github.com/go-nv/goenv.git
     dest: '{{ ansible_env.HOME }}/.goenv'
     version: master
 
-- ansible.builtin.blockinfile:
+- name: goenv ... write bashrc
+  ansible.builtin.blockinfile:
     path: '{{ ansible_env.HOME }}/.bashrc'
     block: |
       export GOENV_ROOT="${HOME}/.goenv"
@@ -12,9 +14,14 @@
       eval "$(goenv init -)"
     state: present
     marker: "# {mark} ANSIBLE GOENV BLOCK"
-  register: goenv_bashrc
 
-- ansible.builtin.shell:
+- name: goenv ... source bashrc
+  ansible.builtin.shell:
     cmd: source ~/.bashrc
     executable: /bin/bash
-  when: goenv_bashrc.changed
+
+- name: goenv ... install go
+  ansible.builtin.shell:
+    cmd: goenv install 1.24.0 && goenv global 1.24.0
+    executable: /bin/bash
+    creates: '{{ ansible_env.HOME }}/.goenv/versions/1.24.0'

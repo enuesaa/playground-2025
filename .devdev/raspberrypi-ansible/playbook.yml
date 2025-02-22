@@ -9,12 +9,9 @@
         gather_subset:
           - min
 
-    - community.general.timezone:
-        name: Asia/Tokyo
-
-    - name: aptbase
+    - name: base
       ansible.builtin.import_tasks:
-        file: ./tasks/aptbase.yml
+        file: ./tasks/base.yml
 
     - name: logrotate
       ansible.builtin.import_tasks:
