@@ -1,0 +1,19 @@
+services:
+  trino:
+    image: trinodb/trino:latest
+    platform: linux/amd64
+    ports:
+      - 8080:8080
+    volumes:
+      - ./catalog:/etc/trino/catalog
+    depends_on:
+      - hive
+
+  hive:
+    image: apache/hive:4.0.1
+    ports:
+      - 9083:9083
+    environment:
+      - SERVICE_NAME=hive
+      - HIVE_METASTORE_URIS=thrift://0.0.0.0:9083
+    tty: true

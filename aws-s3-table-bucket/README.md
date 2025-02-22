@@ -11,3 +11,6 @@
 - まだ実用的ではない
   - バケットを作ったら EMR でデータ作成して！って表示されてびっくり
   - バケットの削除も CLI からでしかできない
+
+## Links
+- https://speakerdeck.com/handy/s3-tableswosqldeshi-itaihua
