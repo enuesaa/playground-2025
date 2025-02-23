@@ -8,3 +8,4 @@
 
 ## Links
 - https://speakerdeck.com/kamijin_fanta/2023-10-05-trino-presto-meetup
+- https://zenn.dev/loglass/articles/822aabcf2666f3
