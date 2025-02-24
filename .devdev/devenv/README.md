@@ -3,9 +3,12 @@ Ansible playbook for my dev env.
 
 ### Commands
 ```bash
+git clone https://github.com/enuesaa/playground-2025
+
 apt update
 apt install ansible
-git clone https://github.com/enuesaa/playground-2025
-cd .devdev/raspberrypi-ansible
+
+cd .devdev/devenv
+
 ansible-playbook playbook.yml
 ```

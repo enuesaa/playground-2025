@@ -18,4 +18,3 @@
 - name: pyenv ... source bashrc
   ansible.builtin.shell:
     cmd: source ~/.bashrc
-    executable: /bin/bash
