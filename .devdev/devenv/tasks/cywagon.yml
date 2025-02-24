@@ -7,7 +7,9 @@
   ansible.builtin.shell:
     cmd: go install github.com/enuesaa/cywagon@latest
     creates: /root/.goenv/shims/cywagon
+    executable: /usr/bin/bash
 
 - name: cywagon ... source bashrc
   ansible.builtin.shell:
     cmd: source ~/.bashrc
+    executable: /usr/bin/bash

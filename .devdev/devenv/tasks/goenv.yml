@@ -18,8 +18,10 @@
 - name: goenv ... source bashrc
   ansible.builtin.shell:
     cmd: source ~/.bashrc
+    executable: /usr/bin/bash
 
 - name: goenv ... install go
   ansible.builtin.shell:
     cmd: goenv install 1.24.0 && goenv global 1.24.0
     creates: '{{ ansible_env.HOME }}/.goenv/versions/1.24.0'
+    executable: /usr/bin/bash

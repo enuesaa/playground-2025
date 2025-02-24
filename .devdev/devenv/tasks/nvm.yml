@@ -3,7 +3,9 @@
   ansible.builtin.shell:
     cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    executable: /usr/bin/bash
 
 - name: nvm ... source bashrc
   ansible.builtin.shell:
     cmd: source ~/.bashrc
+    executable: /usr/bin/bash
