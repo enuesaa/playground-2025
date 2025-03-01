@@ -2,10 +2,11 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
-      - 3000:3000
+      - 3030:3000
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=password
     volumes:
+      - ./docker/grafana/datasources:/etc/grafana/provisioning/datasources
       - grafanadata:/var/lib/grafana
     depends_on:
       - tempo
@@ -14,7 +15,7 @@ services:
     image: grafana/tempo:latest
     command: [--config.file=/etc/tempo.yml]
     volumes:
-      - ./tempo.yml:/etc/tempo.yml
+      - ./docker/tempo/tempo.yml:/etc/tempo.yml
     ports:
       - 3200:3200
       - 4318:4318
