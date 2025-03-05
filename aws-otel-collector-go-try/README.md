@@ -17,3 +17,5 @@
 - https://aws-otel.github.io/docs/getting-started/x-ray
 - https://jedipunkz.github.io/post/opentelemetry-aws/
 - https://zenn.dev/hkdord/articles/aws-open-distro-for-opentelemetry-xray
+
+- kinesis data stream に送る手もある。https://speakerdeck.com/ymotongpoo/aws-from-observability-perspective?slide=25
