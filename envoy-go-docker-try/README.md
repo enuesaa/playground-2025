@@ -20,6 +20,15 @@ curl http://localhost:8080/
 - UI は簡易的なもの
 - ログとか簡易的なもの
 
+## Istio
+- Istio はサービスメッシュ
+- AWS App Mesh と同じ立ち位置？
+- envoy をサイドカーに入れたとき、全体をコントロールするものらしい
+  - データプレーンやコントロールプレーンという役割がある
+  - データプレーン ... サイドカーのこと。envoy を採用することが多そう？
+  - コントロールプレーン ... istiod. ルーティングだとかサーキットブレーカーだとか
+- k8s でよく使われる？
+
 ## Links
 - https://qiita.com/tomozo6/items/837bc53989e3f0b99915
 - https://writerman.hatenablog.jp/entry/2022/09/03/173821
