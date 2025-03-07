@@ -14,3 +14,4 @@
 
 ## Links
 - https://speakerdeck.com/handy/s3-tableswosqldeshi-itaihua
+- https://speakerdeck.com/bering/apache-iceberg-woxue-bi-amazon-s3-tables-wohuo-yong-siyou
