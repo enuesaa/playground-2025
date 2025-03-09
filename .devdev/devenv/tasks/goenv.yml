@@ -5,9 +5,9 @@
     dest: '{{ ansible_env.HOME }}/.goenv'
     version: master
 
-- name: goenv ... write bashrc
+- name: goenv ... write bash_profile
   ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.bashrc'
+    path: '{{ ansible_env.HOME }}/.bash_profile'
     block: |
       export GOENV_ROOT="${HOME}/.goenv"
       export PATH="${GOENV_ROOT}/bin:${PATH}"
@@ -17,6 +17,6 @@
 
 - name: goenv ... install go
   ansible.builtin.shell:
-    cmd: source /root/.bashrc && goenv install 1.24.0 && goenv global 1.24.0
+    cmd: source /root/.bash_profile && goenv install 1.24.0 && goenv global 1.24.0
     creates: '{{ ansible_env.HOME }}/.goenv/versions/1.24.0'
     executable: /usr/bin/bash
