@@ -24,3 +24,10 @@
 - CS Fixer を内包しているらしい
 - see https://qiita.com/ucan-lab/items/8807a092eb6d87ddfe34
 - run `composer run format`
+
+## Future plan
+- 映画情報の GraphQL API
+- 基本的に PHP のスキルを維持するために開発する。そのため運用負荷が最小限になるよう構成
+- どこかの映画APIから映画情報を取得し、毎週のランキング（もしくは何か）を DB へ保存する
+- ランキングの推移を確認できる、すごくシンプルなアプリ
+- なんの役にも立たないが、ほんの少し興味ある
