@@ -12,10 +12,9 @@ def main():
         messages=[
             {
                 "role": "user",
-                "content": "記事の概要と、反応(コメント)をまとめて。",
+                "content": "記事の概要と、反応(コメント)をまとめて。反応は、できるだけそのまま文字を書き起こして。反応は3件くらいでいい。",
             }
         ],
     )
     print(completion)
     print(completion.choices[0].message.content)
-
