@@ -1,0 +1,10 @@
+services:
+  app:
+    image: golang:1.23
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    stop_signal: SIGKILL
+    stdin_open: true
+    command: go test ./... -v

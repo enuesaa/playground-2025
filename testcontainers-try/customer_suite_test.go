@@ -1,4 +1,4 @@
-package customer
+package main
 
 import (
 	"context"
@@ -10,7 +10,11 @@ import (
 	"github.com/enuesaa/playground-2025/testcontainers-try/testhelpers"
 )
 
-// suite.TestingSuite
+func TestCustomerRepoTestSuite(t *testing.T) {
+	// suite.TestingSuite
+	suite.Run(t, new(CustomerRepoTestSuite))
+}
+
 type CustomerRepoTestSuite struct {
 	suite.Suite
 	pgContainer *testhelpers.PostgresContainer
@@ -20,6 +24,7 @@ type CustomerRepoTestSuite struct {
 
 func (suite *CustomerRepoTestSuite) SetupSuite() {
 	suite.ctx = context.Background()
+
 	pgContainer, err := testhelpers.CreatePostgresContainer(suite.ctx)
 	if err != nil {
 		log.Fatal(err)
@@ -57,8 +62,4 @@ func (suite *CustomerRepoTestSuite) TestGetCustomerByEmail() {
 	assert.NotNil(t, customer)
 	assert.Equal(t, "John", customer.Name)
 	assert.Equal(t, "john@example.com", customer.Email)
-}
-
-func TestCustomerRepoTestSuite(t *testing.T) {
-	suite.Run(t, new(CustomerRepoTestSuite))
 }

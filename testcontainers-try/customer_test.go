@@ -1,4 +1,4 @@
-package customer
+package main
 
 import (
 	"context"
@@ -17,7 +17,7 @@ func TestCustomerRepository(t *testing.T) {
 
 	pgContainer, err := postgres.Run(ctx,
 		"postgres:15.3-alpine",
-		postgres.WithInitScripts(filepath.Join("..", "testdata", "init-db.sql")),
+		postgres.WithInitScripts(filepath.Join("testdata", "init-db.sql")),
 		postgres.WithDatabase("test-db"),
 		postgres.WithUsername("postgres"),
 		postgres.WithPassword("postgres"),
@@ -38,6 +38,7 @@ func TestCustomerRepository(t *testing.T) {
 	connStr, err := pgContainer.ConnectionString(ctx, "sslmode=disable")
 	assert.NoError(t, err)
 
+	// real test
 	customerRepo, err := NewRepository(ctx, connStr)
 	assert.NoError(t, err)
 
