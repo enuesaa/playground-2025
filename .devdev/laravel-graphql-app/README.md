@@ -26,8 +26,16 @@
 - run `composer run format`
 
 ## Future plan
-- 映画情報の GraphQL API
+- NASA Open API を呼ぶ
+- 何も検討ついてないが何か面白そうなリソースを見つけて、DB に保存したり返せるようにしたい
+
+```console
+$ curl "https://api.nasa.gov/planetary/apod?api_key="
+{
+  "copyright": "",
+  "date":"2025-03-20",
+  ...
+}
+```
+
 - 基本的に PHP のスキルを維持するために開発する。そのため運用負荷が最小限になるよう構成
-- どこかの映画APIから映画情報を取得し、毎週のランキング（もしくは何か）を DB へ保存する
-- ランキングの推移を確認できる、すごくシンプルなアプリ
-- なんの役にも立たないが、ほんの少し興味ある
