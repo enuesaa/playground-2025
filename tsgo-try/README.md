@@ -23,3 +23,10 @@ npm run build
 ## Links
 - https://github.com/microsoft/typescript-go
 - https://zenn.dev/dinii/articles/typescript-go
+
+## コード
+- まだ TODO っぽいのが見受けられる
+- この vfs は自分も同じようなものを用意することあるから興味深い。これ参考にしたいなあ。
+  - https://github.com/microsoft/typescript-go/blob/main/internal/vfs/vfs.go
+- 当たり前だがコード量が多く、何やってるかさっぱり分からない
+- 一つのパッケージだけでみると、意外にも分量は少なめ。見ようと思ったら見れる
