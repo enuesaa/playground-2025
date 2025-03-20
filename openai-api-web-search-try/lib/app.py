@@ -5,6 +5,8 @@ APIKEY=''
 def main():
     print('a')
 
+    # 記事の概要を出力するよう書いているが、これでは記事の面白い部分を拾えず、丸められてしまい、モチベーション維持できないと感じた
+
     client = OpenAI(api_key=APIKEY)
     completion = client.chat.completions.create(
         model="gpt-4o-mini-search-preview",
