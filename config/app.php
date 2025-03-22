@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'laravel-graphql-app'),
+    'name' => env('APP_NAME', 'aero-toyapp'),
 
     /*
     |--------------------------------------------------------------------------

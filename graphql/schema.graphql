@@ -1,7 +1,0 @@
-type Query {
-  notes: [Note!]!
-}
-
-type Note {
-  name: String!
-}
