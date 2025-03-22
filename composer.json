@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "enuesaa/laravel-sample-app",
+    "name": "enuesaa/aero-toyapp",
     "type": "project",
     "description": "",
     "license": "MIT",

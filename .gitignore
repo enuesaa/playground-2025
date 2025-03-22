@@ -1,3 +1,9 @@
+# misc
+.DS_Store
+
+# editor
+.vscode
+
 # php
 /vendor
 
@@ -8,10 +14,8 @@
 /public/storage
 /storage/*.key
 /storage/pail
+/database/*.sqlite*
 
 # phpunit
 .phpunit.cache
 .phpunit.result.cache
-
-# editor
-.vscode
