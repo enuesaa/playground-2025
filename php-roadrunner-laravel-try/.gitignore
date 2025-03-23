@@ -1,0 +1,25 @@
+# misc
+.DS_Store
+
+# editor
+.vscode
+
+# php
+/vendor
+
+# laravel
+.env
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/database/*.sqlite*
+
+# phpunit
+.phpunit.cache
+.phpunit.result.cache
+
+# roadrunner
+rr
+.rr.yaml

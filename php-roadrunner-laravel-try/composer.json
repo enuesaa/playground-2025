@@ -1,0 +1,59 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "enuesaa/aero-toyapp",
+    "type": "project",
+    "description": "",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.9",
+        "laravel/framework": "^11.31",
+        "laravel/octane": "^2.8",
+        "spiral/roadrunner-cli": "^2.6.0",
+        "spiral/roadrunner-http": "^3.3.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2",
+        "laravel/pint": "^1.13",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "phpunit/phpunit": "^11.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "format": "pint --preset psr12",
+        "tailog": "php artisan pail",
+        "clear": "php artisan optimize:clear",
+        "post-install-cmd": [
+            "cp .env.example .env",
+            "@rr-install"
+        ],
+        "post-autoload-dump": "@clear",
+        "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+        "rr-install": "@php artisan octane:install --server=roadrunner --no-interaction",
+        "rr-start": "@php artisan octane:start --server=roadrunner --host=0.0.0.0 --rpc-port=6001 --port=80"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
