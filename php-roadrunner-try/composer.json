@@ -1,0 +1,13 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "enuesaa/php-roadrunner-try",
+    "type": "project",
+    "description": "",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "spiral/roadrunner-cli": "^2.7",
+        "nyholm/psr7": "^1.8",
+        "spiral/roadrunner-http": "^3.5"
+    }
+}
