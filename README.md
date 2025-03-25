@@ -6,5 +6,5 @@ A toy app to keep learning PHP
   - スキルをつけたい
   - PHP + postgresql の組み合わせをあまり聞かないので興味ある
 - runtime
-  - RoadRunner か Swole, FrankenPHP のどれかを使いたい
-  - 個人的には RoadRunner が興味ある
+  - FrankenPHP を採用
+  - Caddy ベースで embed するらしく興味ある
