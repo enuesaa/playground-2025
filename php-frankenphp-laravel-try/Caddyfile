@@ -1,0 +1,48 @@
+{
+	{$CADDY_GLOBAL_OPTIONS}
+
+	admin {$CADDY_SERVER_ADMIN_HOST}:{$CADDY_SERVER_ADMIN_PORT}
+
+	frankenphp {
+		worker {
+			file "{$APP_PUBLIC_PATH}/frankenphp-worker.php"
+			watch "{$APP_BASE_PATH}/app"
+			watch "{$APP_BASE_PATH}/bootstrap"
+			watch "{$APP_BASE_PATH}/config/**/*.php"
+			watch "{$APP_BASE_PATH}/database/**/*.php"
+			watch "{$APP_BASE_PATH}/public/**/*.php"
+			watch "{$APP_BASE_PATH}/resources/**/*.php"
+			watch "{$APP_BASE_PATH}/routes"
+			watch "{$APP_BASE_PATH}/composer.lock"
+			watch "{$APP_BASE_PATH}/.env"
+		}
+	}
+}
+
+{$CADDY_SERVER_SERVER_NAME} {
+	log {
+		level {$CADDY_SERVER_LOG_LEVEL}
+
+		format filter {
+			wrap {$CADDY_SERVER_LOGGER}
+			fields {
+				uri query {
+					replace authorization REDACTED
+				}
+			}
+		}
+	}
+
+	route {
+		root * "{$APP_PUBLIC_PATH}"
+		encode zstd br gzip
+
+		{$CADDY_SERVER_EXTRA_DIRECTIVES}
+
+		php_server {
+			index frankenphp-worker.php
+			try_files {path} frankenphp-worker.php
+			resolve_root_symlink
+		}
+	}
+}

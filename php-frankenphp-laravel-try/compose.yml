@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # command: bash -c 'composer install && php artisan octane:frankenphp --watch'
+    command: bash -c 'composer install && php artisan octane:frankenphp --caddyfile Caddyfile'
     ports:
       - 8080:8000
     volumes:
