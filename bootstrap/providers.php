@@ -1,8 +1,7 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     App\Providers\AppServiceProvider::class,
-    \Laravel\Pail\PailServiceProvider::class,
+    App\Providers\NasaServiceProvider::class,
+    Laravel\Pail\PailServiceProvider::class,
 ];
