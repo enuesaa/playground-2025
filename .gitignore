@@ -19,3 +19,8 @@
 # phpunit
 .phpunit.cache
 .phpunit.result.cache
+
+# frankenphp
+**/caddy
+frankenphp
+frankenphp-worker.php
