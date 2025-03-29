@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Services\Nasa\NasaClient;
-use GuzzleHttp\Client;
+use App\UseCases\ListUseCase;
 
 class ProtoController extends Controller
 {
@@ -17,7 +17,9 @@ class ProtoController extends Controller
         // Asteroids - NeoWs を見ようかな
         // https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY
         // たぶん日単位でデータが変わるので、面白そう？
-        var_dump($this->nasa->hello());
+
+        $usecase = new ListUseCase($this->nasa);
+        var_dump($usecase->list());
         exit();
 
         // $apikey = config('aero.nasa.apikey');
