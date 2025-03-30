@@ -11,6 +11,7 @@
         "laravel/octane": "^2.8"
     },
     "require-dev": {
+        "composer/composer": "^2.8",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2",
         "laravel/pint": "^1.13",
@@ -34,6 +35,7 @@
         "format": "pint --preset psr12",
         "tailog": "php artisan pail",
         "clear": "php artisan optimize:clear",
+        "post-install-cmd": "App\\Support\\ComposerScripts::postInstall",
         "post-autoload-dump": "@clear",
         "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
     },
