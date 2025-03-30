@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\Nasa\NasaClient;
+use App\Services\Nasa\ApiClient;
+use App\Services\Nasa\Nasa;
 use Illuminate\Support\ServiceProvider;
 
 class NasaServiceProvider extends ServiceProvider
@@ -12,8 +13,10 @@ class NasaServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(NasaClient::class, function () {
-            return new NasaClient();
+        $this->app->singleton(Nasa::class, function () {
+            $apikey = config('aero.nasa.apikey');
+            $client = new ApiClient(apikey: $apikey);
+            return new Nasa($client);
         });
     }
 

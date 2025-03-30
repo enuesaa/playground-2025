@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Services\Nasa\NasaClient;
+use App\Services\Nasa\Nasa;
 use App\UseCases\ListUseCase;
 
 class ProtoController extends Controller
 {
     public function __construct(
-        protected NasaClient $nasa,
+        protected Nasa $nasa,
     ) {}
 
     public function index()

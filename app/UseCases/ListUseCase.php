@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\UseCases;
 
-use App\Services\Nasa\NasaClient;
+use App\Services\Nasa\Nasa;
 
 class ListUseCase
 {
     public function __construct(
-        protected NasaClient $nasa,
+        protected Nasa $nasa,
     ) {}
 
     public function list(): array
