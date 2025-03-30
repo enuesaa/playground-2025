@@ -12,8 +12,8 @@ class ListUseCase
         protected NasaClient $nasa,
     ) {}
 
-    public function list(): string
+    public function list(): array
     {
-        return $this->nasa->hello();
+        return $this->nasa->listPlanetaryApod();
     }
 }

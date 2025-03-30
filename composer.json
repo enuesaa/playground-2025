@@ -34,7 +34,6 @@
         "format": "pint --preset psr12",
         "tailog": "php artisan pail",
         "clear": "php artisan optimize:clear",
-        "post-install-cmd": "cp .env.example .env",
         "post-autoload-dump": "@clear",
         "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
     },
