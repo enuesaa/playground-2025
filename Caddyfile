@@ -8,10 +8,9 @@
 			file "{$APP_PUBLIC_PATH}/frankenphp-worker.php"
 			watch "{$APP_BASE_PATH}/app"
 			watch "{$APP_BASE_PATH}/bootstrap"
-			watch "{$APP_BASE_PATH}/config/**/*.php"
+			watch "{$APP_BASE_PATH}/config"
 			watch "{$APP_BASE_PATH}/database/**/*.php"
 			watch "{$APP_BASE_PATH}/public/**/*.php"
-			watch "{$APP_BASE_PATH}/resources/**/*.php"
 			watch "{$APP_BASE_PATH}/routes"
 			watch "{$APP_BASE_PATH}/composer.lock"
 			watch "{$APP_BASE_PATH}/.env"
@@ -35,7 +34,7 @@
 
 	route {
 		root * "{$APP_PUBLIC_PATH}"
-		encode zstd br gzip
+		encode zstd br gzip 
 
 		{$CADDY_SERVER_EXTRA_DIRECTIVES}
 

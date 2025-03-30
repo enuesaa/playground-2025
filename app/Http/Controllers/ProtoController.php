@@ -17,10 +17,5 @@ class ProtoController extends Controller
         $usecase = new ListUseCase($this->nasa);
         var_dump($usecase->list());
         exit();
-
-        // $client = new Client();
-        // $res = $client->get("https://api.nasa.gov/planetary/apod?api_key={$apikey}");
-        // $resbody = json_decode($res->getBody()->getContents(), associative: true);
-        // var_dump($resbody);
     }
 }
