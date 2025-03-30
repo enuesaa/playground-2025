@@ -185,7 +185,7 @@ return [
 
     /**
      * DO NOT Use this
-     * 
+     *
      * Instead write watch settings in Caddyfile.
      */
     'watch' => [],

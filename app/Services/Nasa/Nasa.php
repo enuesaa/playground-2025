@@ -7,7 +7,7 @@ namespace App\Services\Nasa;
 /**
  * Asteroids - NeoWs を見ようかな
  * たぶん日単位でデータが変わるので、面白そう？
- * 
+ *
  * @see https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY
  */
 class Nasa

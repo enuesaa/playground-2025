@@ -14,14 +14,16 @@ use Psr\Http\Message\RequestInterface;
 class ApiClient
 {
     protected Client $client;
+
     protected string $baseurl;
+
     protected string $apikey;
 
     public function __construct(string $apikey)
     {
         $this->baseurl = 'https://api.nasa.gov';
         $this->apikey = $apikey;
-    
+
         $this->client = $this->createClient();
     }
 
@@ -44,7 +46,7 @@ class ApiClient
     }
 
     /**
-     * @param string $path starts with '/'
+     * @param  string  $path  starts with '/'
      */
     public function calcUrl(string $endpoint): string
     {

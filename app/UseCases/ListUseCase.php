@@ -10,7 +10,8 @@ class ListUseCase
 {
     public function __construct(
         protected Nasa $nasa,
-    ) {}
+    ) {
+    }
 
     public function list(): array
     {

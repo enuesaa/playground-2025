@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use Illuminate\Foundation\ComposerScripts as LaravelComposerScripts;
 use Composer\Script\Event;
+use Illuminate\Foundation\ComposerScripts as LaravelComposerScripts;
 
 class ComposerScripts extends LaravelComposerScripts
 {
@@ -16,7 +16,7 @@ class ComposerScripts extends LaravelComposerScripts
         $env = base_path('.env');
         $envExample = base_path('.env.example');
 
-        if (!file_exists($env)) {
+        if (! file_exists($env)) {
             copy($envExample, $env);
         }
     }

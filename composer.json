@@ -32,12 +32,12 @@
         }
     },
     "scripts": {
-        "format": "pint --preset psr12",
-        "tailog": "php artisan pail",
-        "clear": "php artisan optimize:clear",
         "post-install-cmd": "App\\Support\\ComposerScripts::postInstall",
         "post-autoload-dump": "@clear",
-        "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        "post-update-cmd": "./artisan vendor:publish --tag=laravel-assets --ansi --force",
+        "format": "pint --preset psr12",
+        "tailog": "./artisan pail",
+        "clear": "./artisan optimize:clear"
     },
     "config": {
         "optimize-autoloader": true,

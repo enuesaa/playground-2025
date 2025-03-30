@@ -16,6 +16,7 @@ class NasaServiceProvider extends ServiceProvider
         $this->app->singleton(Nasa::class, function () {
             $apikey = config('aero.nasa.apikey');
             $client = new ApiClient(apikey: $apikey);
+
             return new Nasa($client);
         });
     }
