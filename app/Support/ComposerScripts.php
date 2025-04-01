@@ -7,7 +7,7 @@ namespace App\Support;
 use Composer\Script\Event;
 use Illuminate\Foundation\ComposerScripts as LaravelComposerScripts;
 
-class ComposerScripts extends LaravelComposerScripts
+final class ComposerScripts extends LaravelComposerScripts
 {
     public static function postInstall(Event $event)
     {

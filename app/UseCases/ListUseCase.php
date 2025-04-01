@@ -6,7 +6,7 @@ namespace App\UseCases;
 
 use App\Services\Nasa\Nasa;
 
-class ListUseCase
+final class ListUseCase
 {
     public function __construct(
         protected Nasa $nasa,

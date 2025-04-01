@@ -8,9 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class NasaServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->app->singleton(Nasa::class, function () {
@@ -21,11 +18,7 @@ class NasaServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
-        //
     }
 }

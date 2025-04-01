@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Services\Nasa\Nasa;
 use App\UseCases\ListUseCase;
 
-class ProtoController extends Controller
+final class ProtoController extends Controller
 {
     public function __construct(
         protected Nasa $nasa,
