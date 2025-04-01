@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Nasa\Nasa;
 use App\UseCases\ListUseCase;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ProtoController extends Controller
 {
@@ -14,10 +16,10 @@ final class ProtoController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(): Response
     {
         $usecase = new ListUseCase($this->nasa);
-        var_dump($usecase->list());
-        exit();
+
+        return new JsonResponse($usecase->list());
     }
 }

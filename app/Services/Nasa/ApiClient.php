@@ -10,6 +10,7 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class ApiClient
 {
@@ -56,12 +57,11 @@ class ApiClient
     /**
      * TODO use PSR Message Interface
      */
-    public function get(string $endpoint): array
+    public function get(string $endpoint): ResponseInterface
     {
         $url = $this->calcUrl($endpoint);
         $res = $this->client->get($url);
-        $resbody = json_decode($res->getBody()->getContents(), associative: true);
 
-        return $resbody;
+        return $res;
     }
 }

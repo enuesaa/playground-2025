@@ -24,6 +24,9 @@ class Nasa
      */
     public function listPlanetaryApod(): array
     {
-        return $this->client->get('/planetary/apod');
+        $res = $this->client->get('/planetary/apod');
+        $resbody = json_decode($res->getBody()->getContents(), associative: true);
+
+        return $resbody;
     }
 }

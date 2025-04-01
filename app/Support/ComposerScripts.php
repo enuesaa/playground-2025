@@ -9,7 +9,7 @@ use Illuminate\Foundation\ComposerScripts as LaravelComposerScripts;
 
 final class ComposerScripts extends LaravelComposerScripts
 {
-    public static function postInstall(Event $event)
+    public static function postInstall(Event $event): void
     {
         parent::postInstall($event);
 
