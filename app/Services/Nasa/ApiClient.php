@@ -45,7 +45,7 @@ class ApiClient
     }
 
     /**
-     * @param  string  $path  starts with '/'
+     * @param string $endpoint starts with '/'
      */
     public function calcUrl(string $endpoint): string
     {
