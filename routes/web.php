@@ -2,11 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\ProtoController;
+use App\Http\Controllers\PictureController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'a';
-});
-
-Route::get('/proto', [ProtoController::class, 'index']);
+Route::get('/picture', [PictureController::class, 'view']);

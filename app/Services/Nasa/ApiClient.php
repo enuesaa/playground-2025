@@ -32,9 +32,7 @@ class ApiClient
     {
         $stack = new HandlerStack();
 
-        // TODO: こんなんあったかな
         $stack->setHandler(Utils::chooseHandler());
-
         $stack->push(Middleware::mapRequest(function (RequestInterface $req) {
             $uri = $req->getUri();
             $uri = Uri::withQueryValue($uri, 'api_key', $this->apikey);
@@ -54,9 +52,6 @@ class ApiClient
         return sprintf('%s%s', $this->baseurl, $endpoint);
     }
 
-    /**
-     * TODO use PSR Message Interface
-     */
     public function get(string $endpoint): ResponseInterface
     {
         $url = $this->calcUrl($endpoint);

@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Services\Nasa\Nasa;
-use App\UseCases\ListUseCase;
+use App\UseCases\AstronomyPictureUseCase;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProtoController extends Controller
+final class PictureController extends Controller
 {
     public function __construct(
         protected Nasa $nasa,
     ) {
     }
 
-    public function index(): Response
+    public function view(): Response
     {
-        $usecase = new ListUseCase($this->nasa);
+        $usecase = new AstronomyPictureUseCase($this->nasa);
 
-        return new JsonResponse($usecase->list());
+        return new JsonResponse($usecase->get());
     }
 }

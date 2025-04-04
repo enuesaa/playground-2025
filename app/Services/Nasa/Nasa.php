@@ -19,10 +19,7 @@ class Nasa
         $this->client = $client;
     }
 
-    /**
-     * TODO: 正式名称がわかってないから変なメソッド名になっている
-     */
-    public function listPlanetaryApod(): array
+    public function getAstronomyPictureOfTheDay(): array
     {
         $res = $this->client->get('/planetary/apod');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);

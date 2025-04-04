@@ -6,15 +6,15 @@ namespace App\UseCases;
 
 use App\Services\Nasa\Nasa;
 
-final class ListUseCase
+final class AstronomyPictureUseCase
 {
     public function __construct(
         protected Nasa $nasa,
     ) {
     }
 
-    public function list(): array
+    public function get(): array
     {
-        return $this->nasa->listPlanetaryApod();
+        return $this->nasa->getAstronomyPictureOfTheDay();
     }
 }
