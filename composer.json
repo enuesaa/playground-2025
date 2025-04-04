@@ -13,6 +13,7 @@
     "require-dev": {
         "composer/composer": "^2.8",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2",
         "laravel/pint": "^1.13",
         "mockery/mockery": "^1.6",
@@ -36,6 +37,7 @@
         "post-autoload-dump": "@clear",
         "post-update-cmd": "./artisan vendor:publish --tag=laravel-assets --ansi --force",
         "format": "pint --preset psr12",
+        "stan": "phpstan analyse",
         "tailog": "./artisan pail",
         "clear": "./artisan optimize:clear"
     },
