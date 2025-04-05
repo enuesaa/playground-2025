@@ -8,6 +8,7 @@ import threading
 
 def search_sonos() -> Optional[SoCo]:
     for zone in discover() or []:
+        print(zone.ip_address)
         return zone
     return None
 
