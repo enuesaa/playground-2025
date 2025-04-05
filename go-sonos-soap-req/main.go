@@ -1,27 +1,24 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"io"
 	"net/http"
 	"strings"
 )
 
-var sonosIP = flag.String("ip", "", "sonos ip")
 var streamURL = "" // something mp3 url
 var client = &http.Client{}
 
 func main() {
-    flag.Parse()
+	sonosIP := discover()
+	fmt.Println(sonosIP)
 
-	fmt.Println(*sonosIP)
-
-	makeSetUriRequest()
-	makePlayRequest()
+	makeSetUriRequest(sonosIP)
+	makePlayRequest(sonosIP)
 }
 
-func makeSetUriRequest() {
+func makeSetUriRequest(sonosIP string) {
 	body := fmt.Sprintf(`
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <s:Body>
@@ -33,7 +30,7 @@ func makeSetUriRequest() {
   </s:Body>
 </s:Envelope>`, streamURL)
 
-	req, _ := http.NewRequest("POST", fmt.Sprintf("http://%s:1400/MediaRenderer/AVTransport/Control", *sonosIP), strings.NewReader(body))
+	req, _ := http.NewRequest("POST", fmt.Sprintf("http://%s:1400/MediaRenderer/AVTransport/Control", sonosIP), strings.NewReader(body))
 	req.Header.Set("SOAPACTION", `"urn:schemas-upnp-org:service:AVTransport:1#SetAVTransportURI"`)
 
 	res, err := client.Do(req)
@@ -47,7 +44,7 @@ func makeSetUriRequest() {
 	fmt.Printf("resbody: %s\n", string(resbody))
 }
 
-func makePlayRequest() {
+func makePlayRequest(sonosIP string) {
 	body := `
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
   <s:Body>
@@ -58,7 +55,7 @@ func makePlayRequest() {
   </s:Body>
 </s:Envelope>`
 
-	req, _ := http.NewRequest("POST", fmt.Sprintf("http://%s:1400/MediaRenderer/AVTransport/Control", *sonosIP), strings.NewReader(body))
+	req, _ := http.NewRequest("POST", fmt.Sprintf("http://%s:1400/MediaRenderer/AVTransport/Control", sonosIP), strings.NewReader(body))
 	req.Header.Set("SOAPACTION", `"urn:schemas-upnp-org:service:AVTransport:1#Play"`)
 
 	client := &http.Client{}
