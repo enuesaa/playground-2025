@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  stan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,3 +19,10 @@ jobs:
 
       - run: composer install
       - run: composer stan
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose build
+      - run: docker compose up -d --wait
