@@ -10,8 +10,14 @@ namespace App\Services\Nasa\DataModels;
  */
 class DataModel
 {
+    /**
+     * @var array<mixed> $data
+     */
     protected array $data = [];
 
+    /**
+     * @param array<mixed> $data
+     */
     public function __construct(array $data)
     {
         $this->data = $data;
