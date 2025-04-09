@@ -13,6 +13,9 @@ final class AstronomyPictureUseCase
     ) {
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function get(): array
     {
         return $this->nasa->getAstronomyPictureOfTheDay();

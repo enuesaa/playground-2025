@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Picture extends Model
 {
+    /** @use HasFactory<\Database\Factories\PictureFactory> */
     use HasFactory;
 
     /**

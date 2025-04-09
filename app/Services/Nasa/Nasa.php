@@ -19,6 +19,9 @@ class Nasa
         $this->client = $client;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getAstronomyPictureOfTheDay(): array
     {
         $res = $this->client->get('/planetary/apod');
