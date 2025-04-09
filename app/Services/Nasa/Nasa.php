@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Nasa;
 
+use App\Services\Nasa\DataModels\AstronomyPictureDataModel;
+
 /**
  * Asteroids - NeoWs を見ようかな
  * たぶん日単位でデータが変わるので、面白そう？
@@ -19,14 +21,12 @@ class Nasa
         $this->client = $client;
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function getAstronomyPictureOfTheDay(): array
+    public function getAstronomyPictureOfTheDay(): AstronomyPictureDataModel
     {
         $res = $this->client->get('/planetary/apod');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);
+        $model = new AstronomyPictureDataModel($resbody);
 
-        return $resbody;
+        return $model;
     }
 }

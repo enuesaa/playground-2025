@@ -19,7 +19,13 @@ final class PictureController extends Controller
     public function view(): Response
     {
         $usecase = new AstronomyPictureUseCase($this->nasa);
+        $picture = $usecase->get();
 
-        return new JsonResponse($usecase->get());
+        $data = [
+            'title' => $picture->title(),
+            'url' => $picture->url(),
+        ];
+
+        return new JsonResponse($data);
     }
 }
