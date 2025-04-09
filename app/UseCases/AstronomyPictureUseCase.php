@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UseCases;
 
 use App\Services\Nasa\Nasa;
-use App\Services\Nasa\DataModels\AstronomyPictureDataModel;
+use App\Services\Nasa\DataModels\AstronomyPicture;
 
 final class AstronomyPictureUseCase
 {
@@ -14,7 +14,7 @@ final class AstronomyPictureUseCase
     ) {
     }
 
-    public function get(): AstronomyPictureDataModel
+    public function get(): AstronomyPicture
     {
         return $this->nasa->getAstronomyPictureOfTheDay();
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Nasa;
 
-use App\Services\Nasa\DataModels\AstronomyPictureDataModel;
+use App\Services\Nasa\DataModels\AstronomyPicture;
 
 /**
  * Asteroids - NeoWs を見ようかな
@@ -21,12 +21,11 @@ class Nasa
         $this->client = $client;
     }
 
-    public function getAstronomyPictureOfTheDay(): AstronomyPictureDataModel
+    public function getAstronomyPictureOfTheDay(): AstronomyPicture
     {
         $res = $this->client->get('/planetary/apod');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);
-        $model = new AstronomyPictureDataModel($resbody);
 
-        return $model;
+        return new AstronomyPicture($resbody);
     }
 }
