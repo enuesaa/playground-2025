@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PictureResource;
 use App\Services\Nasa\Nasa;
 use App\UseCases\AstronomyPictureUseCase;
-use Illuminate\Http\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\Support\Responsable;
 
 final class PictureController extends Controller
 {
@@ -16,16 +16,11 @@ final class PictureController extends Controller
     ) {
     }
 
-    public function view(): Response
+    public function view(): Responsable
     {
         $usecase = new AstronomyPictureUseCase($this->nasa);
         $picture = $usecase->get();
 
-        $data = [
-            'title' => $picture->title(),
-            'url' => $picture->url(),
-        ];
-
-        return new JsonResponse($data);
+        return new PictureResource($picture);
     }
 }
