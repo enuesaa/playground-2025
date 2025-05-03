@@ -7,6 +7,28 @@ import (
 	"github.com/holoplot/go-evdev"
 )
 
+// 8bitdo
+var keymap = map[int]string{
+	304: "A",
+	305: "B",
+	307: "X",
+	308: "Y",
+	310: "L",
+	311: "R",
+	312: "2L",
+	313: "2R",
+}
+
+var verticalmap = map[int]string{
+	0: "UP",
+	255: "DOWN",
+}
+
+var horizontalmap = map[int]string{
+	0: "LEFT",
+	255: "RIGHT",
+}
+
 func main() {
 	devpath, err := find()
 	if err != nil {
@@ -28,9 +50,30 @@ func main() {
 
 		switch event.Type {
 		case evdev.EV_KEY:
-			fmt.Printf("[KEY] %d ... %d\n", event.Code, event.Value)
+			// fmt.Printf("[KEY] %d ... %d\n", event.Code, event.Value)
+			if event.Value == 1 {
+				value, ok := keymap[int(event.Code)]
+				if ok {
+					fmt.Printf("clicked: %s\n", value)
+					continue
+				}
+			}
+			// ignore event.Value == 0 as this seems `after-clicked` event
 		case evdev.EV_ABS:
-			fmt.Printf("[ABS] %d ... %d\n", event.Code, event.Value)
+			if event.Code == 1 {
+				value, ok := verticalmap[int(event.Value)]
+				if ok {
+					fmt.Printf("clicked: %s\n", value)
+					continue
+				}
+			}
+			if event.Code == 0 {
+				value, ok := horizontalmap[int(event.Value)]
+				if ok {
+					fmt.Printf("clicked: %s\n", value)
+					continue
+				}
+			}
 		}
 	}
 }
