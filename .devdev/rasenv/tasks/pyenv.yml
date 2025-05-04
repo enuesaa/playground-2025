@@ -1,0 +1,16 @@
+---
+- name: pyenv ... git clone
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ ansible_env.HOME }}/.pyenv"
+    version: master
+
+- name: pyenv ... write bash_profile
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bash_profile"
+    block: |
+      export PYENV_ROOT="${HOME}/.pyenv"
+      export PATH="${PYENV_ROOT}/bin:${PATH}"
+      eval "$(pyenv init --path)"
+    state: present
+    marker: "# {mark} ANSIBLE PYENV BLOCK"

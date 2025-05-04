@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  gather_facts: false
+
+  tasks:
+    - ansible.builtin.setup:
+        gather_subset:
+          - min
+
+    - name: base
+      ansible.builtin.import_tasks:
+        file: ./tasks/base.yml
+
+    - name: goenv
+      ansible.builtin.import_tasks:
+        file: ./tasks/goenv.yml
+
+    - name: pyenv
+      ansible.builtin.import_tasks:
+        file: ./tasks/pyenv.yml
+
+    - name: nvm
+      ansible.builtin.import_tasks:
+        file: ./tasks/nvm.yml

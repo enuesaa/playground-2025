@@ -1,0 +1,26 @@
+---
+- name: base ... timezone
+  community.general.timezone:
+    name: Asia/Tokyo
+
+- name: base ... apt update
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: base ... apt install
+  ansible.builtin.apt:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - vim
+    - git
+    - curl
+    - make
+    - build-essential
+    - libssl-dev
+
+- name: base ... create bash_profile
+  ansible.builtin.file:
+    path: '{{ ansible_env.HOME }}/.bash_profile'
+    state: touch
+    mode: '0644'
