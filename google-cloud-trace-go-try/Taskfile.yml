@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: dev
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ./tmp/cred.json
+    cmds:
+      - go run .
