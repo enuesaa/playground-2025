@@ -26,3 +26,19 @@ jobs:
       - uses: actions/checkout@v4
       - run: docker compose build
       - run: docker compose up -d --wait
+
+  ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, dom, pdo, pdo_mysql
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: composer install
+      - run: composer run buildui

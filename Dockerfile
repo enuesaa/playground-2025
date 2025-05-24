@@ -14,7 +14,7 @@ CMD ["php", "artisan", "octane:frankenphp"]
 FROM dev AS real
 
 # nodejs
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && apt-get install -y nodejs
 
 RUN composer install
 RUN composer buildui
