@@ -15,5 +15,5 @@
     "baseUrl": "."
   },
   "include": ["resources/js/**/*.{ts,vue}", "vite.config.ts"],
-	"exclude": ["node_modules"],
+	"exclude": ["node_modules"]
 }
