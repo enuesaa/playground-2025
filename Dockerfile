@@ -6,26 +6,26 @@ RUN apt-get update && apt-get install -y unzip curl
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN install-php-extensions pcntl pdo_mysql gd intl zip opcache
 
+# nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+
+# app
 COPY . /app
+RUN composer install
+RUN composer buildui
 
 CMD ["php", "artisan", "octane:frankenphp"]
 
 
 
-# FROM dunglas/frankenphp:static-builder AS builder
+FROM dunglas/frankenphp:static-builder AS builder
 
-# RUN apt-get update && apt-get install -y unzip curl
+WORKDIR /go/src/app/dist/app
+COPY --from=dev /app .
 
-# # php
-# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-# RUN install-php-extensions pcntl pdo_mysql gd intl zip opcache
+RUN sed -i'' -e 's/^APP_ENV=.*/APP_ENV=production/' -e 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env
 
-# # nodejs
-# RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+WORKDIR /go/src/app
+RUN EMBED=dist/app/ ./build-static.sh
 
-# COPY . /app
-
-# RUN sed -i'' -e 's/^APP_ENV=.*/APP_ENV=production/' -e 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env
-# RUN composer install
-# RUN composer run buildui
-# RUN EMBED=dist/ ./build-static.sh
+CMD ["sleep", "1000"]
