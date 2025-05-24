@@ -12,10 +12,8 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["resources/js/*"]
-    },
+    "baseUrl": "."
   },
-  "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.vue"]
+  "include": ["resources/js/**/*.{ts,vue}", "vite.config.ts"],
+	"exclude": ["node_modules"],
 }

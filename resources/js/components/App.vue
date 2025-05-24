@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <h1>Welcome to Laravel 12 with Vue 3</h1>
-    <router-view />
-  </div>
+  <h1>a</h1>
+  <router-view />
 </template>
