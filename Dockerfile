@@ -1,21 +1,31 @@
-FROM dunglas/frankenphp
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+FROM dunglas/frankenphp AS dev
 
 RUN apt-get update && apt-get install -y unzip curl
 
-RUN install-php-extensions \
-    pcntl \
-    pdo_mysql \
-    gd \
-    intl \
-    zip \
-    opcache
-
-# node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# php
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN install-php-extensions pcntl pdo_mysql gd intl zip opcache
 
 COPY . /app
 
 CMD ["php", "artisan", "octane:frankenphp"]
+
+
+
+# FROM dunglas/frankenphp:static-builder AS builder
+
+# RUN apt-get update && apt-get install -y unzip curl
+
+# # php
+# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# RUN install-php-extensions pcntl pdo_mysql gd intl zip opcache
+
+# # nodejs
+# RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
+
+# COPY . /app
+
+# RUN sed -i'' -e 's/^APP_ENV=.*/APP_ENV=production/' -e 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env
+# RUN composer install
+# RUN composer run buildui
+# RUN EMBED=dist/ ./build-static.sh
