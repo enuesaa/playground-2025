@@ -12,6 +12,10 @@ RUN install-php-extensions \
     zip \
     opcache
 
+# node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
+
 COPY . /app
 
 CMD ["php", "artisan", "octane:frankenphp"]
