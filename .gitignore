@@ -24,3 +24,6 @@
 **/caddy
 frankenphp
 frankenphp-worker.php
+
+# frontend
+node_modules
