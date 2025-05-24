@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  dev:
+    env:
+      INFLUXDB_TOKEN: 
+    cmds:
+      - go run .
