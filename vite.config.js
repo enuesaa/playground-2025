@@ -9,25 +9,25 @@ export default defineConfig({
       refresh: true,
     }),
     vue({
-      template: {
-        transformAssetUrls: {
-          base: null,
-          includeAbsolute: false,
-        },
-      },
+      // template: {
+      //   transformAssetUrls: {
+      //     base: null,
+      //     includeAbsolute: false,
+      //   },
+      // },
     }),
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './resources/js'),
-    },
-  },
-  server: {
-    hmr: {
-      host: 'localhost',
-    },
-    watch: {
-      usePolling: true,
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     '@': path.resolve(__dirname, './resources/js'),
+  //   },
+  // },
+  // server: {
+  //   hmr: {
+  //     host: 'localhost',
+  //   },
+  //   watch: {
+  //     usePolling: true,
+  //   },
+  // },
 })
