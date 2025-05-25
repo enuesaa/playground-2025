@@ -13,7 +13,7 @@ const { isPending, isError, data, error } = useQuery({
 </script>
 
 <template>
-  <h2>This is the About Page</h2>
+  <h2 class="block bg-orange-800">This is the About Page</h2>
   <span v-if="isPending">Loading...</span>
   <span v-else-if="isError">Error: {{ error.message }}</span>
   <ul v-else>

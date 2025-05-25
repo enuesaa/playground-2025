@@ -3,9 +3,8 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "strict": true,
-    "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -14,6 +13,6 @@
     "skipLibCheck": true,
     "baseUrl": "."
   },
-  "include": ["resources/js/**/*.{ts,vue}", "vite.config.ts"],
+  "include": ["resources/**/*.{ts,vue}", "vite.config.ts"],
 	"exclude": ["node_modules"]
 }
