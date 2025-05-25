@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import router from './router'
-import App from './components/App.vue'
+import { router } from './router'
+import App from './App.vue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import './css/app.css'
 
