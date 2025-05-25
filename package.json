@@ -1,4 +1,5 @@
 {
+  "name": "@enuesaa/aeroview-ui",
   "private": true,
   "type": "module",
   "scripts": {

@@ -1,4 +1,4 @@
-# aero-toyapp
+# aeroview
 A toy app to keep learning PHP
 
 ## Future Plan

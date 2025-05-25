@@ -11,7 +11,7 @@ class NasaServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Nasa::class, function () {
-            $apikey = config('aero.nasa.apikey');
+            $apikey = config('aeroview.nasa.apikey');
             $client = new ApiClient(apikey: $apikey);
 
             return new Nasa($client);
