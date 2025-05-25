@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^5.77.0",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1"
   },
