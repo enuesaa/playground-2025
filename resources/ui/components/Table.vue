@@ -1,21 +1,27 @@
 <script setup>
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
+import { useQuery } from '@tanstack/vue-query'
 
-const products = [
-    {code: 'a', name: 'name', category: 'cat', quantity: 'q'},
-    {code: 'b', name: 'name', category: 'cat', quantity: 'q'},
-    {code: 'c', name: 'name', category: 'cat', quantity: 'q'},
-]
+const queryFn = async () => {
+  const res = await fetch('https://httpbin.org/json')
+  return await res.json()
+}
+
+const { isPending, isError, data, error } = useQuery({
+  queryKey: ['todos'],
+  queryFn,
+})
 </script>
 
 <template>
-    <div class="card">
-        <DataTable :value="products" tableStyle="min-width: 50rem">
-            <Column field="code" header="Code"></Column>
-            <Column field="name" header="Name"></Column>
-            <Column field="category" header="Category"></Column>
-            <Column field="quantity" header="Quantity"></Column>
-        </DataTable>
-    </div>
+  <span v-if="isPending"></span>
+  <span v-else-if="isError">Error: {{ error.message }}</span>
+  <ul v-else>
+    <DataTable :value="data" tableStyle="min-width: 50rem">
+      <Column field="title" header="Title"></Column>
+      <Column field="date" header="Date"></Column>
+      <Column field="author" header="Author"></Column>
+    </DataTable>
+  </ul>
 </template>
