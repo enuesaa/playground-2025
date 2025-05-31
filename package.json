@@ -8,6 +8,7 @@
     "format": "biome format --write ./resources"
   },
   "dependencies": {
+    "@primeuix/themes": "^1.1.1",
     "@tanstack/vue-query": "^5.77.0",
     "primevue": "^4.3.4",
     "tailwind-merge": "^3.3.0",
