@@ -1,4 +1,6 @@
 <script setup>
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
 import { useQuery } from '@tanstack/vue-query'
 
 const queryFn = async () => {
@@ -13,9 +15,13 @@ const { isPending, isError, data, error } = useQuery({
 </script>
 
 <template>
-  <span v-if="isPending">Loading...</span>
+  <span v-if="isPending"></span>
   <span v-else-if="isError">Error: {{ error.message }}</span>
   <ul v-else>
-    <li v-for="todo in data" :key="todo.id">{{ todo.title }}</li>
+    <DataTable :value="data" tableStyle="min-width: 50rem">
+      <Column field="title" header="Title"></Column>
+      <Column field="date" header="Date"></Column>
+      <Column field="author" header="Author"></Column>
+    </DataTable>
   </ul>
 </template>

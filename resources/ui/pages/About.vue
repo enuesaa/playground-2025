@@ -1,8 +1,8 @@
 <script setup>
-import ListItems from '../components/ListItems.vue'
+import Table from '../components/Table.vue'
 </script>
 
 <template>
   <h2>about page</h2>
-  <ListItems />
+  <Table />
 </template>
