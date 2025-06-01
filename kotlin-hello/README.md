@@ -40,6 +40,8 @@ Hello World
 - JetBrain が作った言語だから IDEA で開発したくなる
   - VS Code にプラグインを入れるのもな〜と思って入れなかった。
   - 次からは IDEA で開発する
+  - IDEA って community edition があるらしい
+    - なんか IDEA Ultimate が多機能でお金かかり、community edition は無料？
 - 分からないことだらけ
 - Docker にしたい
 
