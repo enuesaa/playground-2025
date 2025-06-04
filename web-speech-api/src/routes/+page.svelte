@@ -2,16 +2,13 @@
 	import { browser } from '$app/environment'
 
 	let transcript = ''
-	// @ts-ignore
 	let recognition: SpeechRecognition
 
 	if (browser) {
-		// @ts-ignore
 		recognition = new window.webkitSpeechRecognition()
 		recognition.lang = 'ja'
 		recognition.continuous = true
 
-		// @ts-ignore
 		recognition.onresult = ({ results }) => {
 			transcript = results[0][0].transcript
 		}
