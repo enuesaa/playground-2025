@@ -9,6 +9,7 @@ exporters:
     indexed_attributes:
       - resolver
     region: ap-northeast-1
+    aws_log_groups: ["/test"]
 
 service:
   telemetry:

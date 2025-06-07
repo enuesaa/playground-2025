@@ -23,17 +23,11 @@ func Setup(ctx context.Context) (Closer, error) {
 		return nil, err
 	}
 
-	var LogGroupNames [1]string
-	LogGroupNames[0] = "/test"
-
 	resources, err := resource.New(
 		ctx,
 		resource.WithHost(),
 		resource.WithAttributes(
 			semconv.ServiceName("localhost:3000"),
-		),
-		resource.WithAttributes(
-			semconv.AWSLogGroupNamesKey.StringSlice(LogGroupNames[:]),
 		),
 	)
 	if err != nil {
