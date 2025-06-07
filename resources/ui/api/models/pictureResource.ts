@@ -10,7 +10,7 @@
  */
 export interface PictureResource {
   /** title */
-  title?: string;
+  title?: string
   /** url */
-  url?: string;
+  url?: string
 }

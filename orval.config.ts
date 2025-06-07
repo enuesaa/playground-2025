@@ -4,16 +4,14 @@ export default defineConfig({
   api: {
     output: {
       mode: 'split',
-      target: './resources/ui/openapi.ts',
-      schemas: './resources/ui/models',
+      target: './resources/ui/api/use.ts',
+      schemas: './resources/ui/api/models',
       client: 'vue-query',
       httpClient: 'fetch',
-      prettier: true,
+      biome: true,
       override: {
         query: {
           useQuery: true,
-          useInfinite: true,
-          useInfiniteQueryParam: 'limit',
         },
       }
     },
