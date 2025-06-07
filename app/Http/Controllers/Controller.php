@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use OpenApi\Attributes as OA;
 
-#[OA\Info(title: 'My First API', version: '0.1')]
+#[OA\Info(title: 'aeroview', version: '0.1.0')]
 abstract class Controller
 {
 }
