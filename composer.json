@@ -40,7 +40,7 @@
         "stan": "phpstan analyse",
         "tailog": "./artisan pail",
         "clear": "./artisan optimize:clear",
-        "openapi": "openapi app -o openapi.yaml"
+        "openapi": "./artisan app:openapi"
     },
     "config": {
         "optimize-autoloader": true,
