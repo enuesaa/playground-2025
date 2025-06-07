@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "format": "biome format --write ./resources"
+    "format": "biome format --write ./resources",
+    "orval": "orval"
   },
   "dependencies": {
     "@primeuix/themes": "^1.1.1",
@@ -23,6 +24,7 @@
     "@vitejs/plugin-vue": "^5.2.4",
     "concurrently": "^9.0.1",
     "laravel-vite-plugin": "^1.2.0",
+    "orval": "^7.9.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
     "vite": "^6.2.4"
