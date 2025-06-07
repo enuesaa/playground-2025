@@ -17,7 +17,7 @@ final class PictureController extends Controller
     ) {
     }
 
-    #[OA\Get(path: '/picture', operationId: 'getPicture')]
+    #[OA\Get(path: '/api/picture', operationId: 'getPicture')]
     #[OA\Response(
         response: 200,
         description: 'getPicture',
