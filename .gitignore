@@ -27,4 +27,4 @@ frankenphp-worker.php
 
 # frontend
 node_modules
-resources/ui/openapi.yml
+openapi.json

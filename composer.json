@@ -39,8 +39,7 @@
         "format": "pint --preset psr12",
         "stan": "phpstan analyse",
         "tailog": "./artisan pail",
-        "clear": "./artisan optimize:clear",
-        "openapi": "./artisan app:openapi > ./resources/ui/openapi.yml"
+        "clear": "./artisan optimize:clear"
     },
     "config": {
         "optimize-autoloader": true,

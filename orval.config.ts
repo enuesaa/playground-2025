@@ -20,7 +20,7 @@ export default defineConfig({
       },
     },
     input: {
-      target: './resources/ui/openapi.yml',
+      target: 'http://localhost:8080/dev/openapi.json',
     },
   },
 })
