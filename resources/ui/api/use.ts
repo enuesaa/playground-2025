@@ -18,6 +18,10 @@ import { unref } from 'vue'
 
 import type { PictureResource } from './models'
 
+import { fetcher } from './client'
+
+type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1]
+
 export type getPictureResponse200 = {
   data: PictureResource
   status: 200
@@ -36,19 +40,10 @@ export const getGetPictureUrl = () => {
 export const getPicture = async (
   options?: RequestInit,
 ): Promise<getPictureResponse> => {
-  const res = await fetch(getGetPictureUrl(), {
+  return fetcher<getPictureResponse>(getGetPictureUrl(), {
     ...options,
     method: 'GET',
   })
-
-  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: getPictureResponse['data'] = body ? JSON.parse(body) : {}
-
-  return {
-    data,
-    status: res.status,
-    headers: res.headers,
-  } as getPictureResponse
 }
 
 export const getGetPictureQueryKey = () => {
@@ -62,15 +57,15 @@ export const getGetPictureQueryOptions = <
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getPicture>>, TError, TData>
   >
-  fetch?: RequestInit
+  request?: SecondParameter<typeof fetcher>
 }) => {
-  const { query: queryOptions, fetch: fetchOptions } = options ?? {}
+  const { query: queryOptions, request: requestOptions } = options ?? {}
 
   const queryKey = getGetPictureQueryKey()
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getPicture>>> = ({
     signal,
-  }) => getPicture({ signal, ...fetchOptions })
+  }) => getPicture({ signal, ...requestOptions })
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getPicture>>,
@@ -92,7 +87,7 @@ export function useGetPicture<
     query?: Partial<
       UseQueryOptions<Awaited<ReturnType<typeof getPicture>>, TError, TData>
     >
-    fetch?: RequestInit
+    request?: SecondParameter<typeof fetcher>
   },
   queryClient?: QueryClient,
 ): UseQueryReturnType<TData, TError> & {

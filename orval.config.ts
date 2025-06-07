@@ -13,7 +13,11 @@ export default defineConfig({
         query: {
           useQuery: true,
         },
-      }
+        mutator: {
+          path: './resources/ui/api/client.ts',
+          name: 'fetcher',
+        }
+      },
     },
     input: {
       target: './resources/ui/openapi.yml',
