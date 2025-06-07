@@ -4,13 +4,11 @@
  * My First API
  * OpenAPI spec version: 0.1
  */
+import type { PictureResourceData } from './pictureResourceData'
 
 /**
  * A Picture
  */
 export interface PictureResource {
-  /** title */
-  title?: string
-  /** url */
-  url?: string
+  data?: PictureResourceData
 }

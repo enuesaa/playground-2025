@@ -27,8 +27,10 @@ class PictureResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    #[OA\Property(property: 'title', type: 'string', description: 'title')]
-    #[OA\Property(property: 'url', type: 'string', description: 'url', format: 'url')]
+    #[OA\Property(property: 'data', type: 'object', properties: [
+        new OA\Property(property: 'title', type: 'string', description: 'title'),
+        new OA\Property(property: 'url', type: 'string', description: 'url', format: 'url'),
+    ])]
     public function toArray(Request $request): array
     {
         $data = [

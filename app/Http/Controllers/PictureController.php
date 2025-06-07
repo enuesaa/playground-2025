@@ -27,7 +27,6 @@ final class PictureController extends Controller
     {
         $usecase = new AstronomyPictureUseCase($this->nasa);
         $picture = $usecase->get();
-        logger('a', ['a' =>$picture]);
 
         return new PictureResource($picture);
     }

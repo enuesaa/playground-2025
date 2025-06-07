@@ -5,5 +5,9 @@
  * OpenAPI spec version: 0.1
  */
 
-export * from './pictureResource'
-export * from './pictureResourceData'
+export type PictureResourceData = {
+  /** title */
+  title?: string
+  /** url */
+  url?: string
+}
