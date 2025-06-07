@@ -19,8 +19,9 @@ final class PictureController extends Controller
 
     #[OA\Get(path: '/picture', operationId: 'getPicture')]
     #[OA\Response(
-        response: '200',
-        description: 'The data',
+        response: 200,
+        description: 'getPicture',
+        content: new OA\JsonContent(ref: PictureResource::class),
     )]
     public function view(): Responsable
     {

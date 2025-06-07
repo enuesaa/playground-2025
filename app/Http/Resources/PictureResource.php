@@ -7,7 +7,9 @@ namespace App\Http\Resources;
 use App\Services\Nasa\DataModels\AstronomyPicture;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes as OA;
 
+#[OA\Schema(title: 'Picture', description: 'A Picture')]
 class PictureResource extends JsonResource
 {
     /**
@@ -19,11 +21,14 @@ class PictureResource extends JsonResource
     {
         $this->resource = $resource;
     }
+
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
+    #[OA\Property(property: 'title', type: 'string', description: 'title')]
+    #[OA\Property(property: 'url', type: 'string', description: 'url', format: 'url')]
     public function toArray(Request $request): array
     {
         $data = [
