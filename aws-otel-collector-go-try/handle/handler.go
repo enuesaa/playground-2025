@@ -1,6 +1,7 @@
 package handle
 
 import (
+	"github.com/enuesaa/playground-2025/aws-otel-collector-go-try/logging"
 	"github.com/labstack/echo/v4"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -18,6 +19,8 @@ func Handler(c echo.Context) error {
 	// 	attribute.String("request.method", c.Request().Method),
 	// 	attribute.String("request.path", c.Request().URL.Path),
 	// )
+
+	logging.Info(c.Request().Context(), "logloglog")
 
 	Wait(spanctx)
 

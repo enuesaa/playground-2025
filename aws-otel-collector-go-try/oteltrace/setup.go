@@ -23,11 +23,17 @@ func Setup(ctx context.Context) (Closer, error) {
 		return nil, err
 	}
 
+	var LogGroupNames [1]string
+	LogGroupNames[0] = "/test"
+
 	resources, err := resource.New(
 		ctx,
 		resource.WithHost(),
 		resource.WithAttributes(
 			semconv.ServiceName("localhost:3000"),
+		),
+		resource.WithAttributes(
+			semconv.AWSLogGroupNamesKey.StringSlice(LogGroupNames[:]),
 		),
 	)
 	if err != nil {
@@ -39,9 +45,13 @@ func Setup(ctx context.Context) (Closer, error) {
 	)
 	otel.SetTracerProvider(tp)
 
+	// これはリクエストヘッダを読み取って trace id を決定するために使うみたい。分散システム用
+	// propagation というらしい
+	// see https://zenn.dev/vaxila_labs/articles/a91f3a2af2f365
+	// otel.SetTextMapPropagator(propagation.TraceContext{})
+
 	closer := func ()  {
 		tp.Shutdown(ctx)
 	}
-
 	return closer, nil
 }
