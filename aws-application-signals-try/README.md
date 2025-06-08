@@ -46,7 +46,7 @@ pip3.12 --version
 OTEL_AWS_APPLICATION_SIGNALS_ENABLED=true opentelemetry-instrument python3.12 main.py
 ```
 
-これ実行したら trace を送信できないというエラーが表示されたので、ec2 に adot も入れてみた。これが良かったから動いたのかは不明。
+これ実行したら trace を送信できないというエラーが表示されたので、ec2 に adot も入れてみた
 
 ```bash
 wget https://aws-otel-collector.s3.amazonaws.com/amazon_linux/amd64/latest/aws-otel-collector.rpm
@@ -56,6 +56,20 @@ rpm -Uvh  ./aws-otel-collector.rpm
 
 - https://aws-otel.github.io/docs/setup/build-collector-as-rpm
 
+が adot はなくても動いた。トレースを直接 cloudwatch へ送れる。
+
+```
+OTEL_METRICS_EXPORTER=none \
+OTEL_LOGS_EXPORTER=none \
+OTEL_AWS_APPLICATION_SIGNALS_ENABLED=true \
+OTEL_AWS_APPLICATION_SIGNALS_EXPORTER_ENDPOINT=http://localhost:4316/v1/metrics \
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://localhost:4316/v1/traces \
+opentelemetry-instrument python3.12 main.py
+```
+
+## Python
 下記のページに python セクションがあるので、この通りにトライするのがいい
 
 - https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Application-Signals-Enable-EC2Main.html
+
+
