@@ -1,5 +1,7 @@
 # zig cli
 
+- 依存関係に問題があるようで、動かない
+
 ## Commands
 ```bash
 # create project

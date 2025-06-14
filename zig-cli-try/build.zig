@@ -4,7 +4,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const zigcli_dep = b.dependency("cli", .{ .target = target });
+    const zigcli_dep = b.dependency("cli", .{ .target = target, .optimize = optimize });
     const zigcli_mod = zigcli_dep.module("zig-cli");
 
     const exe = b.addExecutable(.{
