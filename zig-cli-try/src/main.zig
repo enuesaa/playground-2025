@@ -1,31 +1,45 @@
+const std = @import("std");
+const cli = @import("zig-cli");
+
+var config = struct {
+    host: []const u8 = "localhost",
+    port: u16 = undefined,
+}{};
+
 pub fn main() !void {
-    std.debug.print("All your {s} are belong to us.\n", .{"codebase"});
+    var r = try cli.AppRunner.init(std.heap.page_allocator);
 
-    const stdout_file = std.io.getStdOut().writer();
-    var bw = std.io.bufferedWriter(stdout_file);
-    const stdout = bw.writer();
+    const app = cli.App{
+        .command = cli.Command{
+            .name = "short",
+            .options = try r.allocOptions(&.{
+                .{
+                    .long_name = "host",
+                    .help = "host to listen on",
+                    .value_ref = r.mkRef(&config.host),
+                },
+                .{
+                    .long_name = "port",
+                    .help = "port to bind to",
+                    .required = true,
+                    .value_ref = r.mkRef(&config.port),
+                },
+            }),
+            .target = cli.CommandTarget{
+                .action = cli.CommandAction{ .exec = run_server },
+            },
+        },
+    };
+    return r.run(&app);
+}
 
-    try stdout.print("Run `zig build test` to run the tests.\n", .{});
-
-    try bw.flush();
+fn run_server() !void {
+    std.log.debug("server is listening on {s}:{d}", .{ config.host, config.port });
 }
 
 test "simple test" {
     var list = std.ArrayList(i32).init(std.testing.allocator);
-    defer list.deinit(); // Try commenting this out and see if zig detects the memory leak!
+    defer list.deinit();
     try list.append(42);
     try std.testing.expectEqual(@as(i32, 42), list.pop());
 }
-
-test "fuzz example" {
-    const Context = struct {
-        fn testOne(context: @This(), input: []const u8) anyerror!void {
-            _ = context;
-            // Try passing `--fuzz` to `zig build test` and see if it manages to fail this test case!
-            try std.testing.expect(!std.mem.eql(u8, "canyoufindme", input));
-        }
-    };
-    try std.testing.fuzz(Context{}, Context.testOne, .{});
-}
-
-const std = @import("std");
