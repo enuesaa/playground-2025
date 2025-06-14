@@ -1,23 +1,21 @@
-<template>
-  <component :is="layout">
-    <router-view />
-  </component>
-</template>
-
 <script setup>
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import DefaultLayout from './layouts/Default.vue'
 import NoneLayout from './layouts/None.vue'
 
 const route = useRoute()
+const name = route.meta.layout || 'default'
 
-const layout = computed(() => {
-  const name = route.meta.layout || 'default'
-  return {
-    default: DefaultLayout,
-    none: NoneLayout,
-  }[name]
-})
+const layouts = {
+  default: DefaultLayout,
+  none: NoneLayout,
+}
+const layout = layouts[name]
 </script>
+
+<template>
+  <component :is="layout">
+    <router-view />
+  </component>
+</template>
