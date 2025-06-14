@@ -3,8 +3,8 @@ import TopPage from './pages/Top.vue'
 import AboutPage from './pages/About.vue'
 
 const routes = [
-  { path: '/', component: TopPage },
-  { path: '/about', component: AboutPage },
+  { path: '/', component: TopPage, meta: { layout: 'default' } },
+  { path: '/about', component: AboutPage, meta: { layout: 'default' } },
 ]
 
 export const router = createRouter({
