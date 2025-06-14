@@ -16,7 +16,7 @@ class Picture extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'title',
         'image_url',
         'explanation',
     ];
