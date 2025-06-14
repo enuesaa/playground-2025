@@ -1,11 +1,15 @@
 # aeroview
 A toy app to keep learning PHP
 
-## Future Plan
-- FrankenPHP
-  - Caddy ベース
+## Runtime
+FrankenPHP
 
-## dev commands
+## ライブラリ
+- Laravel
+- Vue
+  - Vue Router
+
+## Commands
 ```bash
 docker compose build
 docker compose up
