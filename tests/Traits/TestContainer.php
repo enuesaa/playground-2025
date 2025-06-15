@@ -32,8 +32,11 @@ trait TestContainer
         config([
             'database.connections.mysql.host' => 'host.docker.internal',
             'database.connections.mysql.port' => $port,
+            'database.connections.mysql.database' => 'test',
+            'database.connections.mysql.username' => 'test',
+            'database.connections.mysql.password' => 'test',
         ]);
-        $this->artisan('migrate:fresh', $this->migrateFreshUsing());
+        $this->artisan('migrate', ['--seeder' => $this->seeder()]);
     }
 
     protected function tearDownTestContainer(): void
