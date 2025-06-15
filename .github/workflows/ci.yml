@@ -23,9 +23,10 @@ jobs:
       - run: composer install
       - run: composer run buildui
 
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: docker compose build
       - run: docker compose up -d --wait
+      - run: docker compose exec app composer test
