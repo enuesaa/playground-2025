@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use Database\Seeders\TestingSeeder;
 use Tests\TestCase;
 
 final class PictureTest extends TestCase
 {
+    protected string $seeder = TestingSeeder::class;
+
     /**
      * A basic test example.
      */
@@ -19,6 +22,6 @@ final class PictureTest extends TestCase
             'title' => 'a',
             'url' => 'b',
         ], strict: true);
-        $response->assetOpenAPI();
+        $response->assertResponseSchema();
     }
 }

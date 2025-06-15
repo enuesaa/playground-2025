@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use Illuminate\Testing\TestResponse as BaseTestResponse;
@@ -19,7 +21,7 @@ class TestResponse extends BaseTestResponse
         return new static($response, $request);
     }
 
-    public function assetOpenAPI(): void
+    public function assertResponseSchema(): void
     {
         $path = sprintf('/%s', $this->baseRequest->path());
         $method = strtolower($this->baseRequest->method());

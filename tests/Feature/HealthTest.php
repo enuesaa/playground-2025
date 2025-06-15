@@ -15,6 +15,6 @@ final class HealthTest extends TestCase
     {
         $response = $this->get('/api/health');
         $response->assertStatus(200);
-        $response->assetOpenAPI();
+        $response->assertResponseSchema();
     }
 }
