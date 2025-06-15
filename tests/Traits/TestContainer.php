@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Traits;
 
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands;
 use Testcontainers\Modules\MySQLContainer;
 use Testcontainers\Container\StartedGenericContainer;
@@ -27,16 +28,16 @@ trait TestContainer
             ->withMySQLDatabase('test')
             ->withMySQLUser('test', 'test')
             ->start();
-        $port = $this->mysql->getMappedPort(3306);
 
         config([
             'database.connections.mysql.host' => 'host.docker.internal',
-            'database.connections.mysql.port' => $port,
+            'database.connections.mysql.port' => $this->mysql->getMappedPort(3306),
             'database.connections.mysql.database' => 'test',
             'database.connections.mysql.username' => 'test',
             'database.connections.mysql.password' => 'test',
         ]);
-        $this->artisan('migrate', ['--seeder' => $this->seeder()]);
+        $this->artisan('migrate');
+        $this->artisan('migrate:fresh', $this->migrateFreshUsing());
     }
 
     protected function tearDownTestContainer(): void
@@ -48,6 +49,6 @@ trait TestContainer
 
     protected function stopTestDatabase(): void
     {
-        $this->mysql->stop();
+        // $this->mysql->stop();
     }
 }
