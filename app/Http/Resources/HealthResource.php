@@ -7,7 +7,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema(title: 'Health', description: 'Health')]
+#[OA\Schema(title: 'Health', description: 'Health', required: ['ok'])]
 class HealthResource extends Resource
 {
     /**
