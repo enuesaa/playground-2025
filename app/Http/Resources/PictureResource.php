@@ -31,8 +31,8 @@ class PictureResource extends Resource
     public function toArray(Request $request): array
     {
         $data = [
-            'title' => $this->resource->title(),
-            'url' => $this->resource->url(),
+            'title' => $this->resource->title,
+            'url' => $this->resource->image_url,
         ];
         return $data;
     }
