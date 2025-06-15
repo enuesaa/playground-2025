@@ -8,6 +8,7 @@ services:
     ports:
       - 8080:8000
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - .:/app
     tty: true
     depends_on:
@@ -18,7 +19,6 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./docker/mysql/init:/docker-entrypoint-initdb.d
       - mysqldata:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
