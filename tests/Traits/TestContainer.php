@@ -14,7 +14,7 @@ trait TestContainer
 
     protected StartedGenericContainer $mysql;
 
-    protected function setUpTestContainerIfNeed(): void
+    protected function setUpTestContainer(): void
     {
         if ($this->seeder() !== false) {
             $this->startTestDatabase();
@@ -36,7 +36,7 @@ trait TestContainer
         $this->artisan('migrate:fresh', $this->migrateFreshUsing());
     }
 
-    protected function tearDownTestContainerIfNeed(): void
+    protected function tearDownTestContainer(): void
     {
         if ($this->seeder() !== false) {
             $this->stopTestDatabase();

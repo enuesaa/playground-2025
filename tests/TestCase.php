@@ -18,14 +18,14 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->setUpTestContainerIfNeed();
+        $this->setUpTestContainer();
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
 
-        $this->tearDownTestContainerIfNeed();
+        $this->tearDownTestContainer();
     }
 
     /**
