@@ -6,7 +6,6 @@ namespace App\UseCases;
 
 use App\Models\Picture;
 use App\Services\Nasa\Nasa;
-use App\Services\Nasa\DataModels\AstronomyPicture;
 
 final class AstronomyPictureUseCase
 {
@@ -15,9 +14,11 @@ final class AstronomyPictureUseCase
     ) {
     }
 
-    public function get(): AstronomyPicture
+    public function get(): Picture
     {
-        return $this->nasa->getAstronomyPictureOfTheDay();
+        $picture = Picture::query()
+            ->firstOrFail();
+        return $picture;
     }
 
     public function flush(): void

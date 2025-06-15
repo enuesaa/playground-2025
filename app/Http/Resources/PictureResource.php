@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Services\Nasa\DataModels\AstronomyPicture;
+use App\Models\Picture;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
@@ -12,11 +12,11 @@ use OpenApi\Attributes as OA;
 class PictureResource extends Resource
 {
     /**
-     * @var AstronomyPicture
+     * @var Picture
      */
     public $resource;
 
-    public function __construct(AstronomyPicture $resource)
+    public function __construct(Picture $resource)
     {
         $this->resource = $resource;
     }
