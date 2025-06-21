@@ -13,8 +13,7 @@ type DaggerGoEchoTry struct{}
 
 // build scratch
 func (m *DaggerGoEchoTry) BuildScratch() *dagger.Container {
-	src := dag.CurrentModule().Source().Directory(".")
-
+	src := dag.CurrentModule().Source().Directory("..")
 	builder := dag.Container().
 		From("golang:1.24").
 		WithMountedDirectory("/app", src).
@@ -31,7 +30,7 @@ func (m *DaggerGoEchoTry) BuildScratch() *dagger.Container {
 }
 
 func (m *DaggerGoEchoTry) Build() *dagger.Container {
-	src := dag.CurrentModule().Source().Directory(".")
+	src := dag.CurrentModule().Source().Directory("..")
 	container := dag.Container().Build(src, dagger.ContainerBuildOpts{
 		Dockerfile: "Dockerfile",
 	})
