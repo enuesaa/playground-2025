@@ -43,28 +43,18 @@ func (m *DaggerGoEchoTry) Publish(ctx context.Context) (string, error) {
 	return m.Build().Publish(ctx, imageName)
 }
 
-// start
-func (m *DaggerGoEchoTry) Start(ctx context.Context, port *int) error {
-	if port == nil {
-		defaultPort := 8080
-		port = &defaultPort
-	}
-	container := m.BuildScratch().WithExposedPort(*port)
+// // start
+// func (m *DaggerGoEchoTry) Start(ctx context.Context, port *int) error {
+// 	if port == nil {
+// 		defaultPort := 8080
+// 		port = &defaultPort
+// 	}
+// 	container := m.BuildScratch().WithExposedPort(*port)
 
-	return container.AsService().Up(ctx)
-}
+// 	return container.AsService().Up(ctx)
+// }
 
 // このコメントがそのまま説明になる
 func (m *DaggerGoEchoTry) Echo(ctx context.Context, stringArg string) (string, error) {
 	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg}).Stdout(ctx)
-}
-
-// grep dir
-func (m *DaggerGoEchoTry) GrepDir(ctx context.Context, directoryArg *dagger.Directory, pattern string) (string, error) {
-	return dag.Container().
-		From("alpine:latest").
-		WithMountedDirectory("/mnt", directoryArg).
-		WithWorkdir("/mnt").
-		WithExec([]string{"grep", "-R", pattern, "."}).
-		Stdout(ctx)
 }

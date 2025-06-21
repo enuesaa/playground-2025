@@ -1,0 +1,13 @@
+# ローカル開発用
+# 頑張れば dagger でローカル開発もまかなえるが、、
+# 例えば「一時的にマウントしたい！」って時に Go のコードを編集しなきゃなのは面倒すぎる
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
