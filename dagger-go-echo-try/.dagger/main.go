@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"dagger/dagger-go-echo-try/internal/dagger"
+	"fmt"
+	"time"
 )
 
 type DaggerGoEchoTry struct{}
@@ -37,7 +39,8 @@ func (m *DaggerGoEchoTry) Build() *dagger.Container {
 }
 
 func (m *DaggerGoEchoTry) Publish(ctx context.Context) (string, error) {
-	return m.Build().Publish(ctx, "ttl.sh/2d4f71dc-16dc-9707-deb7-1c66d7a93378:1h")
+	imageName := fmt.Sprintf("ttl.sh/dagger-go-echo-try-%d:1h", time.Now().Unix())
+	return m.Build().Publish(ctx, imageName)
 }
 
 // start
