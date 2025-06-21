@@ -1,5 +1,9 @@
 # dagger
 
+- dagger は makefile の代わりみたいなもん
+- docker イメージをビルドしたり dockerfile を読み込んでビルドできる
+- ワークフロー
+
 ### Install
 ```
 brew install dagger/tap/dagger

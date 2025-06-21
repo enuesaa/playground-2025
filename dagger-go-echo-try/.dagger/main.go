@@ -9,8 +9,8 @@ type DaggerGoEchoTry struct{}
 
 // これが関数
 
-// build
-func (m *DaggerGoEchoTry) Build() *dagger.Container {
+// build scratch
+func (m *DaggerGoEchoTry) BuildScratch() *dagger.Container {
 	src := dag.CurrentModule().Source().Directory(".")
 
 	builder := dag.Container().
@@ -28,12 +28,16 @@ func (m *DaggerGoEchoTry) Build() *dagger.Container {
 	return container
 }
 
-func (m *DaggerGoEchoTry) BuildDockerfile() *dagger.Container {
+func (m *DaggerGoEchoTry) Build() *dagger.Container {
 	src := dag.CurrentModule().Source().Directory(".")
 	container := dag.Container().Build(src, dagger.ContainerBuildOpts{
 		Dockerfile: "Dockerfile",
 	})
 	return container
+}
+
+func (m *DaggerGoEchoTry) Publish(ctx context.Context) (string, error) {
+	return m.Build().Publish(ctx, "ttl.sh/2d4f71dc-16dc-9707-deb7-1c66d7a93378:1h")
 }
 
 // start
@@ -42,19 +46,14 @@ func (m *DaggerGoEchoTry) Start(ctx context.Context, port *int) error {
 		defaultPort := 8080
 		port = &defaultPort
 	}
-	container := m.Build().WithExposedPort(*port)
+	container := m.BuildScratch().WithExposedPort(*port)
 
 	return container.AsService().Up(ctx)
 }
 
 // このコメントがそのまま説明になる
-func (m *DaggerGoEchoTry) ContainerEcho(stringArg string) *dagger.Container {
-	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg})
-}
-
-// hello
-func (m *DaggerGoEchoTry) Hello(ctx context.Context,) (string, error) {
-	return dag.Container().From("alpine:latest").WithExec([]string{"echo", "hello"}).Stdout(ctx)
+func (m *DaggerGoEchoTry) Echo(ctx context.Context, stringArg string) (string, error) {
+	return dag.Container().From("alpine:latest").WithExec([]string{"echo", stringArg}).Stdout(ctx)
 }
 
 // grep dir
@@ -65,17 +64,4 @@ func (m *DaggerGoEchoTry) GrepDir(ctx context.Context, directoryArg *dagger.Dire
 		WithWorkdir("/mnt").
 		WithExec([]string{"grep", "-R", pattern, "."}).
 		Stdout(ctx)
-}
-
-// 本番用ビルド（最適化フラグ付き）
-func (m *DaggerGoEchoTry) BuildProduction() *dagger.Directory {
-	src := dag.CurrentModule().Source().Directory(".")
-
-	return dag.Container().
-		From("golang:1.21-alpine").
-		WithMountedDirectory("/app", src).
-		WithWorkdir("/app").
-		WithExec([]string{"go", "mod", "download"}).
-		WithExec([]string{"go", "build", "-ldflags", "-s -w", "-o", "build/app"}).
-		Directory("/app/build")
 }
