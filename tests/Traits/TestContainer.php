@@ -30,7 +30,7 @@ trait TestContainer
             ->start();
 
         config([
-            'database.connections.mysql.host' => 'host.docker.internal',
+            'database.connections.mysql.host' => env('DB_HOST', 'host.docker.internal'),
             'database.connections.mysql.port' => $this->mysql->getMappedPort(3306),
             'database.connections.mysql.database' => 'test',
             'database.connections.mysql.username' => 'test',
