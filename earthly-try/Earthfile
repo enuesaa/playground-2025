@@ -1,0 +1,9 @@
+VERSION 0.7
+
+FROM busybox:1.32.0
+
+build:
+    RUN echo "Hello!" > /hello.txt
+    CMD ["cat", "/hello.txt"]
+    SAVE ARTIFACT /hello.txt AS LOCAL hello.txt
+    SAVE IMAGE earthlytest:latest
