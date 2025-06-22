@@ -45,7 +45,7 @@
         "stan": "phpstan analyse",
         "tailog": "./artisan pail",
         "clear": "./artisan optimize:clear",
-        "test": "./artisan test",
+        "test": "./artisan migrate --env=testing && ./artisan test",
         "modeldocgen": "./artisan ide-helper:models --write --no-interaction"
     },
     "config": {
