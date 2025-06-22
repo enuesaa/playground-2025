@@ -1,0 +1,20 @@
+source:
+  connection_uri: postgres://root:password@localhost:5432/app
+  # see https://www.replibyte.com/docs/getting-started/configuration
+  transformers:
+    - database: public
+      table: users
+      columns:
+        - name: email
+          transformer_name: email
+datastore:
+  aws:
+    bucket: test
+    region: us-east-1
+    credentials:
+      access_key_id: admin
+      secret_access_key: password
+    endpoint:
+      custom: http://minio:9000
+destination:
+  connection_uri: postgres://root:password@dest:5432/app
