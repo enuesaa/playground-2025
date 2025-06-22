@@ -2,6 +2,7 @@
 
 - 開発時はどうするのか微妙にわからない
 - プログラムでかけるのでその点はいい
+- https://zenn.dev/kun432/scraps/0a11ae01660805
 
 ## Commands
 ```bash
