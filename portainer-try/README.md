@@ -3,6 +3,8 @@
 - GUI で docker コンテナを立ち上げたりできる
 - ECR とかと接続できる
 - Business Edition (BE) と Community Edition (CE) の2つがある
+- UI は結構いいし、日常使いできると思う
+- Portainer を立ち上げるのに docker が必要だから、たぶん mac で立ち上げるというより EC2 に立ち上げておいて、チームで使う感じだと思う
 
 ## Commands
 ```bash
