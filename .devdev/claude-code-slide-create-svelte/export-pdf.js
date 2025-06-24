@@ -1,5 +1,7 @@
 import { chromium } from 'playwright';
 import { spawn } from 'child_process';
+import { promises as fs } from 'fs';
+import { PDFDocument } from 'pdf-lib';
 
 async function exportToPDF() {
 	console.log('🚀 Starting PDF export...');
@@ -65,37 +67,34 @@ async function exportToPDF() {
 			
 			// Generate PDF for this slide
 			const pdf = await page.pdf({
-				format: 'A4',
-				landscape: true,
+				width: '8.5in',
+				height: '8.5in',
 				printBackground: true,
 				margin: {
 					top: '0.5in',
 					right: '0.5in',
 					bottom: '0.5in',
 					left: '0.5in'
-				}
+				},
+				scale: 0.9
 			});
 			
 			slides.push(pdf);
 		}
 		
-		// For simplicity, just save the last PDF (all slides in one document)
-		// In a real implementation, you'd merge all PDFs or save them separately
-		const fullPdf = await page.pdf({
-			format: 'A4',
-			landscape: true,
-			printBackground: true,
-			margin: {
-				top: '0.5in',
-				right: '0.5in',
-				bottom: '0.5in',
-				left: '0.5in'
-			}
-		});
+		// Merge all slide PDFs into one document
+		console.log('📋 Merging PDFs...');
+		const mergedPdf = await PDFDocument.create();
 		
-		// Save the PDF
-		const fs = await import('fs');
-		fs.writeFileSync('slides.pdf', fullPdf);
+		for (const slidePdf of slides) {
+			const pdf = await PDFDocument.load(slidePdf);
+			const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+			pages.forEach((page) => mergedPdf.addPage(page));
+		}
+		
+		// Save the merged PDF
+		const pdfBytes = await mergedPdf.save();
+		await fs.writeFile('slides.pdf', pdfBytes);
 		
 		console.log('✅ PDF exported successfully as slides.pdf');
 		
