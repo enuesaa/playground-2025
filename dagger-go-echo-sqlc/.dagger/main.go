@@ -17,6 +17,10 @@ func (m *App) Container() *dagger.Container {
 	return container
 }
 
+func (m *App) Dev(ctx context.Context) error {
+	return m.Container().WithExposedPort(8080).AsService().Up(ctx)
+}
+
 // sqlc generate
 func (m *App) Sqlc(ctx context.Context) (string, error) {
 	return m.Container().
@@ -51,7 +55,7 @@ func (m *App) Lint(ctx context.Context) (string, error) {
 		Stdout(ctx)
 }
 
-// test with mysql
+// test
 func (m *App) Test(ctx context.Context) (string, error) {
 	mysql := dag.Container().
 		From("mysql:8.0").
@@ -59,15 +63,10 @@ func (m *App) Test(ctx context.Context) (string, error) {
 		WithEnvVariable("MYSQL_DATABASE", "test").
 		WithExposedPort(3306).
 		AsService()
-	// src := dag.CurrentModule().Source().Directory("..")
 	
 	container := m.Container().
 		WithServiceBinding("mysql", mysql).
-		WithEnvVariable("DB_HOST", "mysql").
-		WithEnvVariable("DB_PORT", "3306").
-		WithEnvVariable("DB_USER", "root").
-		WithEnvVariable("DB_PASSWORD", "password").
-		WithEnvVariable("DB_NAME", "test").
+		WithEnvVariable("DATABASE_URL", "root:password@mysql:3306/test").
 		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
 		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"})
 	
