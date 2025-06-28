@@ -84,3 +84,13 @@ func (m *App) Test(ctx context.Context) (string, error) {
 
 	return app.WithExec([]string{"go", "test", "-v", "./..."}).Stdout(ctx)
 }
+
+func (m *App) Touch(ctx context.Context) (string, error) {
+	return dag.Container().
+		From("alpine").
+		WithExec([]string{"mkdir", "-p", "/bbb"}).
+		WithWorkdir("/bbb").
+		WithExec([]string{"touch", "aaa"}).
+		File("/bbb/aaa").
+		Export(ctx, "aaa")
+}
