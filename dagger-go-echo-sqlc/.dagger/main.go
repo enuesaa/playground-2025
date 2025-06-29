@@ -29,17 +29,17 @@ func (m *App) MySQLContainer() *dagger.Container {
 		WithExposedPort(3306)
 }
 
-// up dev server
-func (m *App) Up(ctx context.Context) error {
-	mysql := m.MySQLContainer().AsService()
-	app := m.AppContainer().
-		WithServiceBinding("mysql", mysql).
-		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").		
-		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
-		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"}).
-		AsService()
-	return app.Up(ctx)
-}
+// // up dev server
+// func (m *App) Up(ctx context.Context) error {
+// 	mysql := m.MySQLContainer().AsService()
+// 	app := m.AppContainer().
+// 		WithServiceBinding("mysql", mysql).
+// 		WithEnvVariable("DATABASE_URL", "root:password@tcp(mysql:3306)/test?parseTime=true").		
+// 		WithExec([]string{"go", "install", "-tags", "mysql", "github.com/golang-migrate/migrate/v4/cmd/migrate@latest"}).
+// 		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"}).
+// 		AsService()
+// 	return app.Up(ctx)
+// }
 
 // sqlc generate
 func (m *App) Sqlc(ctx context.Context) (string, error) {
@@ -83,14 +83,4 @@ func (m *App) Test(ctx context.Context) (string, error) {
 		WithExec([]string{"migrate", "-path", "migrations", "-database", "mysql://root:password@tcp(mysql:3306)/test", "up"})
 
 	return app.WithExec([]string{"go", "test", "-v", "./..."}).Stdout(ctx)
-}
-
-func (m *App) Touch(ctx context.Context) (string, error) {
-	return dag.Container().
-		From("alpine").
-		WithExec([]string{"mkdir", "-p", "/bbb"}).
-		WithWorkdir("/bbb").
-		WithExec([]string{"touch", "aaa"}).
-		File("/bbb/aaa").
-		Export(ctx, "aaa")
 }

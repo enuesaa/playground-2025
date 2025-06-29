@@ -20,3 +20,4 @@ func Open() (*Queries, error) {
 // func Close(q *Queries) {
 // 	q.db.Close()
 // }
+
