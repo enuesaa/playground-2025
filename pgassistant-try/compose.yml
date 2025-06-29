@@ -1,0 +1,26 @@
+services:
+  pgassistant:
+    image: nexsoltech/pgassistant:latest
+    environment:
+      # - OPENAI_API_KEY=nothing
+      # - OPENAI_API_MODEL=codestral:latest
+      # - LOCAL_LLM_URI=http://host.docker.internal:11434/v1/
+      - SECRET_KEY=bertrand
+    ports:
+      - 5005:5005
+    # volumes:
+    #   - ./myqueries.json:/home/pgassistant/myqueries.json
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app
+    ports:
+      - 5432:5432
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    command: postgres -c shared_preload_libraries=pg_stat_statements
