@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       target: dev
     environment:
-      - DATABASE_URL=root:password@tcp(mysql:3306)/test?parseTime=true
+      - DATABASE_URL=root:password@tcp(mysql:3306)/app?parseTime=true
     ports:
       - 8080:8080
     volumes:
