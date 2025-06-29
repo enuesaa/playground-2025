@@ -1,0 +1,28 @@
+[project]
+name = "dagster_try"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "dagster",
+    "dagster-cloud",
+    "dagster-webserver>=1.11.0",
+    "pandas>=2.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "dagster_try.definitions"
+code_location_name = "dagster_try"
+
+[tool.setuptools.packages.find]
+exclude=["dagster_try_tests"]
