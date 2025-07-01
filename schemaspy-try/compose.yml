@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+    ports:
+      - 5432:5432
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+
+  schemaspy:
+    image: schemaspy/schemaspy
+    volumes:
+      - ./schemaspy:/output
+      - ./schemaspy/schemaspy.properties:/schemaspy.properties
+    command: -configFile /schemaspy.properties
+    depends_on:
+      - postgres
