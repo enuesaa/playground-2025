@@ -65,3 +65,6 @@ SUBCOMMANDS:
 ## Links
 - https://coder.com/
 - https://github.com/coder/coder
+- https://sreake.com/blog/platform-engineering-with-cloud-ide-coder/
+
+Coder はググラビリティが低いので Coder IDE でググるのおすすめ
