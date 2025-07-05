@@ -27,8 +27,9 @@
 
 ## Install
 - brew でインストールしたら slim 版になるので注意
-- slim だと coder server を立ち上げられない
-- 多分 EC2 とかで coder をホストする想定だからこうなんだと思う
+  - slim だと coder server を立ち上げられない
+  - 多分 EC2 とかで coder をホストする想定だからこうなんだと思う
+  - 正確には、Coder Server は管理用で、slim では、その Coder Server に接続して workspace を作成とかできる
 - あと純粋に `coder server` を実行すると、postgres を変なところに置かれるから、手元に用意すべし。
   - なんかフロントエンドは localhost:3000 で立ち上がるっぽいが、そこから cloudflare tunnel 的なことをして **.coder.app のリンクが生成される
   - ちょっと面白い
