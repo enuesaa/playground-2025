@@ -41,7 +41,8 @@
       "extensions": [
         "DBCode.dbcode",
         "svelte.svelte-vscode",
-        "ziyasal.vscode-open-in-github"
+        "ziyasal.vscode-open-in-github",
+        "letmaik.git-tree-compare"
       ]
     }
   }
