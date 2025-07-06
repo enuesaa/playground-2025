@@ -1,0 +1,22 @@
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/go:1.21
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace/app
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/mydb?sslmode=disable
+
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ../db-data:/var/lib/postgresql/data
