@@ -40,7 +40,8 @@
       },
       "extensions": [
         "DBCode.dbcode",
-        "svelte.svelte-vscode"
+        "svelte.svelte-vscode",
+        "ziyasal.vscode-open-in-github"
       ]
     }
   }
