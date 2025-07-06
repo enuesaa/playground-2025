@@ -1,8 +1,7 @@
 {
   "name": "dev",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "dockerComposeFile": "../compose.yml",
+  "service": "app",
   "features": {
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.24"
@@ -11,7 +10,8 @@
       "version": "22"
     }
   },
-  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/poststart.sh"
+  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/poststart.sh",
+  "workspaceFolder": "/workspace/devcontainer-multi-try"
   // "remoteEnv": {
   //   "GO_APP_BRANCH": "main",
   //   "NODE_APP_BRANCH": "main"
