@@ -4,11 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../:/workspace
+      - .:/workspace/.devcontainer
     command: sleep infinity
     depends_on:
       - db
-    working_dir: /workspace/devcontainer-multi-try
 
   db:
     image: postgres:16

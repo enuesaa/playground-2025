@@ -1,17 +1,15 @@
 {
   "name": "dev",
-  "dockerComposeFile": "../compose.yml",
+  "dockerComposeFile": "compose.yml",
   "service": "app",
   "features": {
+  "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.24"
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
     }
   },
-  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/poststart.sh",
-  "workspaceFolder": "/workspace/devcontainer-multi-try",
+  "postStartCommand": "bash /workspace/.devcontainer/poststart.sh",
+  "workspaceFolder": "/workspace",
   // "remoteEnv": {
   //   "GO_APP_BRANCH": "main",
   //   "NODE_APP_BRANCH": "main"
