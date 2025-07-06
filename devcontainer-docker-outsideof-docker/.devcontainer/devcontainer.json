@@ -1,0 +1,44 @@
+{
+  "name": "dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.24"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1.6.3": {}
+  },
+  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/poststart.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "workbench.activityBar.location": "default",
+        "dbcode.connections": [
+          {
+            "connectionId": "main",
+            "name": "aaa",
+            "driver": "postgres",
+            "connectionType": "host",
+            "host": "localhost",
+            "port": 5432,
+            "ssl": false,
+            "username": "user",
+            "password": "pass",
+            "savePassword": "yes",
+            "database": "app",
+            "readOnly": false,
+            "connectionTimeout": 30
+          }
+        ]
+      },
+      "extensions": [
+        "DBCode.dbcode"
+      ]
+    }
+  },
+  "forwardPorts": [5432]
+}
