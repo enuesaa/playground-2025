@@ -11,15 +11,36 @@
     }
   },
   "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/poststart.sh",
-  "workspaceFolder": "/workspace/devcontainer-multi-try"
+  "workspaceFolder": "/workspace/devcontainer-multi-try",
   // "remoteEnv": {
   //   "GO_APP_BRANCH": "main",
   //   "NODE_APP_BRANCH": "main"
   // },
-  // "customizations": {
-  //   "vscode": {
-  //     "settings": {},
-  //     "extensions": []
-  //   }
-  // }
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "workbench.activityBar.location": "default",
+        "dbcode.connections": [
+          {
+            "connectionId": "main",
+            "name": "aaa",
+            "driver": "postgres",
+            "connectionType": "host",
+            "host": "db",
+            "port": 5432,
+            "ssl": false,
+            "username": "user",
+            "password": "pass",
+            "savePassword": "yes",
+            "database": "app",
+            "readOnly": false,
+            "connectionTimeout": 30
+          }
+        ]
+      },
+      "extensions": [
+        "DBCode.dbcode"
+      ]
+    }
+  }
 }

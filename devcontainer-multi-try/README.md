@@ -27,3 +27,6 @@
     "dockerfile": "Dockerfile" // 書かない。共存できない
   },
 ```
+
+### devcontainer.json で使える変数
+- https://qiita.com/ShortArrow/items/dc0c8cacd696154510f1
