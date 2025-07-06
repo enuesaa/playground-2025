@@ -3,7 +3,7 @@
   "dockerComposeFile": "compose.yml",
   "service": "app",
   "features": {
-  "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.24"
     }
@@ -14,6 +14,8 @@
   //   "GO_APP_BRANCH": "main",
   //   "NODE_APP_BRANCH": "main"
   // },
+  // "initializeCommand": "bash .devcontainer/init.sh",
+  "remoteUser": "root",
   "customizations": {
     "vscode": {
       "settings": {
@@ -37,7 +39,8 @@
         ]
       },
       "extensions": [
-        "DBCode.dbcode"
+        "DBCode.dbcode",
+        "svelte.svelte-vscode"
       ]
     }
   }
