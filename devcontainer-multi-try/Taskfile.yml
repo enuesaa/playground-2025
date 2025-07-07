@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  setup:
+    cmds:
+      - npm install -g pnpm
+  
+  start:
+    dir: my-svelte-template
+    cmds:
+      - pnpm i
+      - pnpm dev

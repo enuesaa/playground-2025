@@ -6,14 +6,11 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.24"
-    }
+    },
+		"ghcr.io/eitsupi/devcontainer-features/go-task:latest": {}
   },
   "postStartCommand": "bash /workspace/.devcontainer/poststart.sh",
   "workspaceFolder": "/workspace",
-  // "remoteEnv": {
-  //   "GO_APP_BRANCH": "main",
-  //   "NODE_APP_BRANCH": "main"
-  // },
   // "initializeCommand": "bash .devcontainer/init.sh",
   "remoteUser": "root",
   "customizations": {
@@ -42,7 +39,7 @@
         "DBCode.dbcode",
         "svelte.svelte-vscode",
         "ziyasal.vscode-open-in-github",
-        "letmaik.git-tree-compare"
+        "GitHub.vscode-pull-request-github"
       ]
     }
   }
