@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Start pnpm dev",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm vite dev --port 3000 --host",
+      "env": {
+        "VITE_HMR_HOST": "localhost",
+        "VITE_HMR_CLIENT_PORT": "3000"
+      },
+      "cwd": "${workspaceFolder}/my-svelte-template"
+    },
+    {
+      "name": "Start pnpm dev2",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/my-svelte-template"
+    }
+  ]
+}

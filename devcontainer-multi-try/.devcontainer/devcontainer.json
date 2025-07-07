@@ -9,9 +9,10 @@
     },
 		"ghcr.io/eitsupi/devcontainer-features/go-task:latest": {}
   },
-  "postStartCommand": "bash /workspace/.devcontainer/poststart.sh",
+  "postStartCommand": "bash /poststart.sh",
   "workspaceFolder": "/workspace",
   // "initializeCommand": "bash .devcontainer/init.sh",
+  "forwardPorts": [3000],
   "remoteUser": "root",
   "customizations": {
     "vscode": {
