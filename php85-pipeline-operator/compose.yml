@@ -1,0 +1,6 @@
+services:
+  app:
+    image: debian:bullseye
+    tty: true
+    command: sleep infinity
+  
