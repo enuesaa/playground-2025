@@ -15,5 +15,10 @@ coder server --postgres-url "postgres://coder:coderpass@localhost:5432/coder?ssl
 ```bash
 cd templates
 terraform init
+
+# トークンをセット
+echo 'token=""' > terraform.tfvars
+
+# テンプレート登録
 terraform apply
 ```

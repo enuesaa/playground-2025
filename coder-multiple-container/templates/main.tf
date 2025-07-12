@@ -6,9 +6,15 @@ terraform {
   }
 }
 
+variable "token" {
+  description = "Coder authentication token"
+  type        = string
+  sensitive   = true
+}
+
 provider "coderd" {
   url   = "http://127.0.0.1:3000"
-  token = ""
+  token = var.token
 }
 
 resource "coderd_template" "dockermultiple" {
