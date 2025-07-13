@@ -18,5 +18,10 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ['app', 'tools']
 
+[dependency-groups]
+dev = [
+    "watchdog>=6.0.0",
+]
+
 [project.scripts]
 dev = "tools.main:dev"
