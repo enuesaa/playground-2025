@@ -1,0 +1,35 @@
+[project]
+name = "logstat"
+version = "0.1.0"
+description = "logstat"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "altair>=5.5.0",
+    "pandas>=2.3.1",
+    "streamlit>=1.46.1",
+]
+
+# [tool.uv]
+# package = true
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ['app', 'tools']
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.3",
+    "watchdog>=6.0.0",
+]
+
+[project.scripts]
+dev = "tools.main:dev"
+
+[tool.ruff]
+line-length = 200
+format.docstring-code-format = true
+
