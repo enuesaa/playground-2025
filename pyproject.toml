@@ -8,8 +8,15 @@ dependencies = [
     "streamlit>=1.46.1",
 ]
 
-[tool.uv]
-package = true
+# [tool.uv]
+# package = true
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ['app', 'tools']
 
 [project.scripts]
-logstat = "app.main:main"
+dev = "tools.main:dev"
