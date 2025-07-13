@@ -1,0 +1,19 @@
+[project]
+name = "uv-fastmcp-try"
+version = "0.1.0"
+description = "try FastMCP"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.10.5",
+]
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ['app']
+
+[project.scripts]
+start = "app.main:main"
