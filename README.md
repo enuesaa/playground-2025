@@ -13,3 +13,8 @@
 ## ユースケース
 
 EC2 に nginx が稼働しており、そのログを分析するのを想定。Redis を nginx に立てて、ログファイルを定期的にみにいく構成。nginx の設定を変えずにログを分析したい
+
+## Commands
+```bash
+uv run streamlit run app/main.py
+```
