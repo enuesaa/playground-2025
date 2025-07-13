@@ -1,3 +1,5 @@
-import streamlit as st
+# import streamlit as st
 
-st.title("aaa")
+def main():
+    print('a')
+    # st.title("a")
