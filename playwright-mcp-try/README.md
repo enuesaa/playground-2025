@@ -13,6 +13,20 @@
 - claude に投げるプロンプトで、たまにブラウザを開いてくれない時があるが、それはLLMの問題
 - MCP は、いくらでも feature を追加できるので、エンジニアとしては面白い
   - playwright に限らず現場レベルで、うまいこと使えないかな
+- Claude Code でふつうに使えるけど、yahoo.co.jp レベルで最大文字数に達するからスクレイピング用途だと実質使い物にならないかも。他のやつだと引っかからないのかな？
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    }
+  }
+}
+```
 
 ### Links
 - https://github.com/microsoft/playwright-mcp
