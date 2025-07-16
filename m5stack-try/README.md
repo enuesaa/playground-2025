@@ -19,3 +19,7 @@ void setup() {
 void loop() {}
 ```
 https://zenn.dev/nyazuki/articles/ebe56234d81e95
+
+- サウンドもカメラも大丈夫そう。
+- m5stack の git に example が含まれていて、ここのサンプルアプリはふつうに動いた
+- https://github.com/m5stack/M5CoreS3/blob/main/examples/Basic/speaker/speaker.ino
