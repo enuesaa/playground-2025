@@ -1,0 +1,11 @@
+[project]
+name = "aws-s3-vectors"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "boto3>=1.39.8",
+    "langchain-huggingface>=0.3.0",
+    "sentence-transformers>=5.0.0",
+]
