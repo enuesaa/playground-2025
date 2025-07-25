@@ -1,0 +1,70 @@
+desc: user
+
+runners:
+  req: http://localhost:8080
+
+vars:
+  test_name: "John Doe"
+  test_email: "john@example.com"
+  updated_name: "John Smith"
+
+steps:
+  - desc: Create a new user
+    req:
+      /users:
+        post:
+          body:
+            application/json:
+              name: "{{ vars.test_name }}"
+              email: "{{ vars.test_email }}"
+    test: |
+      current.res.status == 201
+      && current.res.body.name == vars.test_name
+      && current.res.body.email == vars.test_email
+      && current.res.body.id != null
+    bind:
+      user_id: current.res.body.id
+
+  - defer: true
+    force: true
+    desc: Delete user
+    req:
+      /users/{{ user_id }}:
+        delete:
+          body: null
+    test: |
+      current.res.status == 200
+
+  - desc: Get user by ID
+    req:
+      /users/{{ user_id }}:
+        get:
+          body: null
+    test: |
+      current.res.status == 200
+      && current.res.body.id == user_id
+      && current.res.body.name == vars.test_name
+      && current.res.body.email == vars.test_email
+    dump: current
+
+  - desc: Get users list with one user
+    req:
+      /users:
+        get:
+          body: null
+    test: |
+      current.res.status == 200
+      && len(current.res.body) == 1
+      && current.res.body[0].id == user_id
+
+  - desc: Update user
+    req:
+      /users/{{ user_id }}:
+        put:
+          body:
+            application/json:
+              name: "{{ vars.updated_name }}"
+    test: |
+      current.res.status == 200
+      && current.res.body.name == vars.updated_name
+      && current.res.body.email == vars.test_email
