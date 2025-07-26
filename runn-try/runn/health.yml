@@ -4,6 +4,10 @@ runners:
   req: http://localhost:8080
 
 steps:
+  - exec:
+      command: pwd
+      liveOutput: true
+
   - desc: check healthy
     req:
       /health:
