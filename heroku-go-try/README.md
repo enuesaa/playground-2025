@@ -28,3 +28,5 @@
   - https://jp.heroku.com/elements/buildpacks
   - 言語別にある
   - Go はこれ https://github.com/heroku/heroku-buildpack-go/blob/main/bin/compile
+- heroku pipeline
+  - https://qiita.com/yo-iida/items/f99566fe4617f848fa39
