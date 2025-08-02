@@ -23,3 +23,8 @@
     - `docker push registry.heroku.com/protected-lake-<appid>/web`
   3. `heroku container:release web`
 - なんか heroku の git repository を git の remote に追加しておくと --app フラグが不要になる
+- buildpack とは
+  - heroku へデプロイするとき便利なツール集
+  - https://jp.heroku.com/elements/buildpacks
+  - 言語別にある
+  - Go はこれ https://github.com/heroku/heroku-buildpack-go/blob/main/bin/compile

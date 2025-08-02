@@ -1,23 +1,20 @@
-FROM heroku/heroku:24-build AS build
+# builder
+FROM heroku/heroku:24-build AS builder
 
 USER root
 
-COPY . /app
 WORKDIR /app
+COPY . /app
 
-# Buildpack
-RUN mkdir -p /tmp/buildpack/heroku/go /tmp/build_cache /tmp/env
-RUN curl https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpack/heroku/go
-RUN STACK=heroku-24 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /tmp/env
+RUN mkdir -p /tmp/buildpackgo \
+    && curl https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpackgo
+RUN /tmp/buildpackgo/bin/compile /app /tmp/buildcache /tmp/env
 
-# Prepare final, minimal image
+
+# release
 FROM heroku/heroku:24
 
-COPY --from=build /app /app
-ENV HOME=/app
-
 WORKDIR /app
-
-USER heroku
+COPY --from=builder /app /app
 
 CMD ["/app/bin/heroku-go-try"]
