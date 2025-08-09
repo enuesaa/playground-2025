@@ -16,8 +16,8 @@
 - name: cywagon ... reload
   command: systemctl daemon-reload
 
-- name: cywagon ... enable
-  systemd:
-    name: cywagon.service
-    enabled: yes
-    state: started
+# - name: cywagon ... enable
+#   systemd:
+#     name: cywagon.service
+#     enabled: yes
+#     state: started

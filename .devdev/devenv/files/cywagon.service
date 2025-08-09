@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=cywagon up --daemon
+ExecStart=cywagon up /var/www/html/server
 PIDFile=/var/run/cywagon.pid
 Restart=always
 
