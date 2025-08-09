@@ -1,4 +1,4 @@
-# DNS まわり
+# Route53 WildCard Record
 
 - Route53 にワイルドカードなAレコードを作成して、EC2 に向けると、そのまま想像通りに EC2 へリクエストが向く
 - https://hit.hateblo.jp/entry/aws/route53/wildcard
