@@ -8,11 +8,14 @@
 - name: nvm ... install node 22
   ansible.builtin.shell:
     cmd: |
-      source ~/.bashrc
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
       nvm install 22
       nvm use 22
       nvm alias default 22
     executable: /usr/bin/bash
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
 
 - name: nvm ... install pnpm
   ansible.builtin.shell:
