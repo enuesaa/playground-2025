@@ -32,3 +32,7 @@
     - name: tfenv
       ansible.builtin.import_tasks:
         file: ./tasks/tfenv.yml
+
+    - name: cywagon
+      ansible.builtin.import_tasks:
+        file: ./tasks/cywagon.yml
