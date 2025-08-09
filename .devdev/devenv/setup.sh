@@ -10,7 +10,7 @@ confirm() {
   if $APPROVE; then
     return 0
   fi
-  read -p "Do you proceed? [y/n]: " yn
+  read -p "Do you proceed? [y/n]: " yn < /dev/tty
   if [ "$yn" = "y" ]; then
     return 0
   else
