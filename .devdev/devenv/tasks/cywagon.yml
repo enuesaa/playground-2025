@@ -16,9 +16,9 @@
 - name: cywagon ... reload
   command: systemctl daemon-reload
 
-- name: Create /var/www/html
+- name: Create /var/www/server
   file:
-    path: /var/www/html
+    path: /var/www/server
     state: directory
     mode: '0777'
     owner: root
