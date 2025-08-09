@@ -28,6 +28,7 @@ apt install -y ansible
 
 echo "RUN: git clone https://github.com/enuesaa/playground-2025"
 confirm
+rm -rf playground-2025
 git clone https://github.com/enuesaa/playground-2025
 
 cd playground-2025/.devdev/devenv || exit 1
