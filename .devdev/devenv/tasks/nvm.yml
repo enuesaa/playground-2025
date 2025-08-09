@@ -8,6 +8,7 @@
 - name: nvm ... install node 22
   ansible.builtin.shell:
     cmd: |
+      source ~/.bashrc
       nvm install 22
       nvm use 22
       nvm alias default 22
