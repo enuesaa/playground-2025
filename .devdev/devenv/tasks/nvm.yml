@@ -13,11 +13,7 @@
       nvm install 22
       nvm use 22
       nvm alias default 22
+      npm install -g pnpm
     executable: /usr/bin/bash
   environment:
     HOME: "{{ ansible_env.HOME }}"
-
-- name: nvm ... install pnpm
-  ansible.builtin.shell:
-    cmd: npm install -g pnpm
-    executable: /usr/bin/bash
