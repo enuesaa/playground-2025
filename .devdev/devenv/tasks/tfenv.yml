@@ -2,11 +2,11 @@
 - name: tfenv ... git clone
   ansible.builtin.git:
     repo: https://github.com/tfutils/tfenv.git
-    dest: "{{ ansible_env.HOME }}/.tfenv"
     version: master
+    dest: /root/.tfenv
 
 - name: tfenv ... write bashrc
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: /root/.bashrc
     line: export PATH="${HOME}/.tfenv/bin:${PATH}"
     state: present

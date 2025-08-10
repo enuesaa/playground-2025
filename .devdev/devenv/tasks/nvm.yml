@@ -1,16 +1,34 @@
 ---
 - name: nvm ... install
   ansible.builtin.shell:
-    cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    creates: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
+    cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    creates: /root/.nvm/nvm.sh
     executable: /usr/bin/bash
+  environment:
+    PROFILE: /dev/null
 
-- name: nvm ... install node 22
+- name: nvm ... write bashrc
+  ansible.builtin.blockinfile:
+    path: /root/.bashrc
+    block: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    state: present
+    marker: '# {mark} ANSIBLE NVM BLOCK'
+
+- name: nvm ... install node
   ansible.builtin.shell:
     cmd: |
-      source $HOME/.bashrc
+      source /root/.bashrc
       nvm install 22
       nvm use 22
       nvm alias default 22
-      npm install -g pnpm
     executable: /usr/bin/bash
+
+- name: nvm ... install pnpm
+  ansible.builtin.shell:
+    executable: /usr/bin/bash
+    cmd: |
+      source /root/.bashrc
+      npm install -g pnpm

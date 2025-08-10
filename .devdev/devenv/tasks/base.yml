@@ -1,4 +1,9 @@
 ---
+- name: base ... clear ubuntu default bashrc
+  ansible.builtin.copy:
+    content: ''
+    dest: /root/.bashrc
+
 - name: base ... timezone
   community.general.timezone:
     name: Asia/Tokyo

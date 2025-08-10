@@ -1,33 +1,27 @@
 ---
 - name: cywagon ... install
   ansible.builtin.shell:
+    executable: /usr/bin/bash
     cmd: |
-      source $HOME/.bashrc
+      source /root/.bashrc
       go install github.com/enuesaa/cywagon@latest
     creates: /root/.goenv/shims/cywagon
-    executable: /usr/bin/bash
 
 - name: cywagon ... create systemd unit file
-  copy:
+  ansible.builtin.copy:
     src: cywagon.service
     dest: /etc/systemd/system/cywagon.service
     owner: root
     group: root
-    mode: '0644'
+    mode: 0644
 
 - name: cywagon ... reload
-  command: systemctl daemon-reload
+  ansible.builtin.command: systemctl daemon-reload
 
-- name: Create /var/www/html
-  file:
+- name: cywagon ... create /var/www/html
+  ansible.builtin.file:
     path: /var/www/html
     state: directory
     owner: root
     group: root
-    mode: '0777'
-
-# - name: cywagon ... enable
-#   systemd:
-#     name: cywagon.service
-#     enabled: yes
-#     state: started
+    mode: 0777
