@@ -8,5 +8,5 @@
 - name: tfenv ... write bashrc
   ansible.builtin.lineinfile:
     path: /root/.bashrc
-    line: export PATH="${HOME}/.tfenv/bin:${PATH}"
+    line: export PATH="/root/.tfenv/bin:${PATH}"
     state: present

@@ -9,7 +9,7 @@
   ansible.builtin.blockinfile:
     path: /root/.bashrc
     block: |
-      export GOENV_ROOT="${HOME}/.goenv"
+      export GOENV_ROOT="/root/.goenv"
       export PATH="${GOENV_ROOT}/bin:${PATH}"
       eval "$(goenv init -)"
     state: present

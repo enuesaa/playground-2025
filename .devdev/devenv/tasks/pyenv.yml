@@ -9,7 +9,7 @@
   ansible.builtin.blockinfile:
     path: /root/.bashrc
     block: |
-      export PYENV_ROOT="${HOME}/.pyenv"
+      export PYENV_ROOT="/root/.pyenv"
       export PATH="${PYENV_ROOT}/bin:${PATH}"
       eval "$(pyenv init --path)"
     state: present
