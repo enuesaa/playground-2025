@@ -3,10 +3,12 @@ Description=cywagon
 After=network.target
 
 [Service]
-Type=forking
-ExecStart=cywagon up /var/www/html/server
-PIDFile=/var/run/cywagon.pid
+Type=simple
+ExecStart=/usr/bin/bash -c '/root/.goenv/shims/cywagon up /var/www/html/server'
 Restart=always
+User=root
+StandardOutput=null
+StandardError=null
 
 [Install]
 WantedBy=multi-user.target
