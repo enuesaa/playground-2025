@@ -5,8 +5,8 @@
     dest: "{{ ansible_env.HOME }}/.tfenv"
     version: master
 
-- name: tfenv ... write bash_profile
+- name: tfenv ... write bashrc
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bash_profile"
+    path: "{{ ansible_env.HOME }}/.bashrc"
     line: export PATH="${HOME}/.tfenv/bin:${PATH}"
     state: present

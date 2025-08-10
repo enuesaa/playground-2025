@@ -2,13 +2,13 @@
 - name: nvm ... install
   ansible.builtin.shell:
     cmd: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    creates: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
     executable: /usr/bin/bash
 
 - name: nvm ... install node 22
   ansible.builtin.shell:
     cmd: |
-      source "$HOME/.bashrc"
+      source $HOME/.bashrc
       nvm install 22
       nvm use 22
       nvm alias default 22

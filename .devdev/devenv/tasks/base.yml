@@ -18,9 +18,3 @@
     - make
     - build-essential
     - libssl-dev
-
-- name: base ... create bash_profile
-  ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.bash_profile'
-    state: touch
-    mode: '0644'

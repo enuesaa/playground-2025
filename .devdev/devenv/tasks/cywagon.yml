@@ -2,7 +2,7 @@
 - name: cywagon ... install
   ansible.builtin.shell:
     cmd: |
-      source "$HOME/.bashrc"
+      source $HOME/.bashrc
       go install github.com/enuesaa/cywagon@latest
     creates: /root/.goenv/shims/cywagon
     executable: /usr/bin/bash
@@ -22,9 +22,9 @@
   file:
     path: /var/www/html
     state: directory
-    mode: '0777'
     owner: root
     group: root
+    mode: '0777'
 
 # - name: cywagon ... enable
 #   systemd:
