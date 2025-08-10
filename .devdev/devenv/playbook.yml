@@ -3,7 +3,9 @@
   connection: local
   become: true
   gather_facts: false
-
+  environment:
+    HOME: "{{ ansible_env.HOME | default('/root') }}"
+  
   tasks:
     - ansible.builtin.setup:
         gather_subset:
