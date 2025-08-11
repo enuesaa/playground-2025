@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/bash -c '/root/.goenv/shims/cywagon up /var/www/html/server'
+ExecStart=/usr/local/bin/cywagon up /var/www/html/server
 Restart=always
 User=root
 StandardOutput=null

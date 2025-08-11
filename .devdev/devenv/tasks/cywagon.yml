@@ -3,9 +3,9 @@
   ansible.builtin.shell:
     executable: /usr/bin/bash
     cmd: |
-      source /root/.bashrc
-      go install github.com/enuesaa/cywagon@latest
-    creates: /root/.goenv/shims/cywagon
+      curl -sL https://github.com/enuesaa/cywagon/releases/download/v0.0.5/install.sh | bash
+      mv cywagon /usr/local/bin/cywagon
+    creates: /usr/local/bin/cywagon
 
 - name: cywagon ... create systemd unit file
   ansible.builtin.copy:
@@ -25,3 +25,8 @@
     owner: root
     group: root
     mode: 0777
+
+- name: cywagon ... enable
+  ansible.builtin.systemd:
+    name: cywagon
+    enabled: true
