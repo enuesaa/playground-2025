@@ -35,6 +35,10 @@
       ansible.builtin.import_tasks:
         file: ./tasks/tfenv.yml
 
+    - name: cloudflared
+      ansible.builtin.import_tasks:
+        file: ./tasks/cloudflared.yml
+
     - name: cywagon
       ansible.builtin.import_tasks:
         file: ./tasks/cywagon.yml
