@@ -15,6 +15,7 @@ $ apt install -y pkg-config build-essential autoconf bison re2c libxml2-dev libs
 $ git clone https://github.com/php/php-src
 $ cd php-src
 
+### これ --force が必要かも。php8.5 beta1 では --force が必要だった
 $ ./buildconf
 buildconf: Checking installation
 buildconf: autoconf version 2.69 (ok)
