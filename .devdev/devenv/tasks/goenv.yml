@@ -13,7 +13,7 @@
       export PATH="${GOENV_ROOT}/bin:${PATH}"
       eval "$(goenv init -)"
     state: present
-    marker: '# {mark} ANSIBLE GOENV BLOCK'
+    marker: '# {mark} ANSIBLE GOENV'
 
 - name: goenv ... install go
   ansible.builtin.shell:

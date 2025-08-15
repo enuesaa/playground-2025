@@ -15,7 +15,7 @@
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     state: present
-    marker: '# {mark} ANSIBLE NVM BLOCK'
+    marker: '# {mark} ANSIBLE NVM'
 
 - name: nvm ... install node
   ansible.builtin.shell:
