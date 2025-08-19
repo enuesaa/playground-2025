@@ -1,12 +1,13 @@
 ---
 - name: cloudflared ... add gpg key
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: https://pkg.cloudflare.com/cloudflare-main.gpg
-    state: present
+    dest: /usr/share/keyrings/cloudflare-main.gpg
+    mode: 0644
 
 - name: cloudflared ... add apt repository
   ansible.builtin.apt_repository:
-    repo: deb https://pkg.cloudflare.com/cloudflared noble main
+    repo: 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared any main'
     state: present
 
 - name: cloudflared ... install
