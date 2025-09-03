@@ -10,3 +10,5 @@ cmake でいける
 
 CoreML 版とか色々あるらしく、あんまり違いがわかってない
 
+## Go Binding
+- https://github.com/mutablelogic/go-whisper
