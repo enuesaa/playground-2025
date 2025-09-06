@@ -2,11 +2,11 @@
 
 ## 手順
 1. Java をインストール
-    - `apt install openjdk-22-jre-headless`
-    ```bash
-    $ java -version
-    openjdk version "22.0.2" 2024-07-16
-    ```
+```bash
+$ apt install openjdk-22-jre-headless
+$ java -version
+openjdk version "22.0.2" 2024-07-16
+```
 
 2. Greengrass でデバイスを登録
     - Greengrass コアソフトウェアというセクションで、`Nucleus Classic` と `Nucleus Lite` を選択する
@@ -58,6 +58,40 @@ Component Name: UpdateSystemPolicyService
     Version: 0.0.0
     State: RUNNING
     Configuration: null
+```
+
+## カスタムコンポーネント
+レシピという。インストール直後にコマンドを実行するだけ。
+
+```json
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "com.example.HelloWorld",
+  "ComponentVersion": "1.0.0",
+  "ComponentType": "aws.greengrass.generic",
+  "ComponentDescription": "A minimal Hello World component",
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux"
+      },
+      "Lifecycle": {
+        "Run": "echo 'Hello from Greengrass Component!'"
+      },
+      "Artifacts": []
+    }
+  ],
+  "Lifecycle": {}
+}
+```
+
+greengrass-cli の時と同じようにして、これを選択してデプロイすれば raspberry pi で実行される。
+
+```bash
+$ tail /greengrass/v2/logs/com.example.HelloWorld.log
+2025-09-06T08:26:03.890Z [INFO] (pool-3-thread-23) com.example.HelloWorld: shell-runner-start. {scriptName=services.com.example.HelloWorld.lifecycle.Run, serviceName=com.example.HelloWorld, currentState=STARTING, command=["echo 'Hello from Greengrass Component!'"]}
+2025-09-06T08:26:03.909Z [INFO] (Copier) com.example.HelloWorld: stdout. Hello from Greengrass Component!. {scriptName=services.com.example.HelloWorld.lifecycle.Run, serviceName=com.example.HelloWorld, currentState=RUNNING}
+2025-09-06T08:26:03.912Z [INFO] (Copier) com.example.HelloWorld: Run script exited. {exitCode=0, serviceName=com.example.HelloWorld, currentState=RUNNING}
 ```
 
 ## メモ
