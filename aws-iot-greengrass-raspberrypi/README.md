@@ -99,3 +99,5 @@ $ tail /greengrass/v2/logs/com.example.HelloWorld.log
 
 ## Links
 - https://dev.classmethod.jp/articles/aws-iot-greengrass-v2-raspi-install/
+- https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2024_AWS-IoT-Greengrass-Basic_1106_v1.pdf
+- https://qiita.com/dsonoda/items/1c29497e2c8088296e88
