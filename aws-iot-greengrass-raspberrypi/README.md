@@ -41,5 +41,27 @@ $ systemctl status greengrass
      Active: active (running) since Sat 2025-09-06 16:40:37 JST; 48s ago
 ```
 
+## Greengrass CLI のインストール
+コンポーネントになっているので、AWS コンソールをいじったら raspberry pi へインストールされる
+
+1. AWS IoT へ
+2. 左メニューのGreengrassデバイス>コンポーネントへ
+3. パブリックコンポーネントに `aws.greengrass.Cli` があるので選択
+4. デプロイ
+5. raspberry pi へインストールされる
+
+インストールが完了すると、raspberry pi で greengrass-cli が使えるようになる
+```bash
+$ /greengrass/v2/bin/greengrass-cli component list
+Components currently running in Greengrass:
+Component Name: UpdateSystemPolicyService
+    Version: 0.0.0
+    State: RUNNING
+    Configuration: null
+```
+
+## メモ
+- AWS Iot にはポリシーというものがあり、いわゆる IAM 権限をデバイスに割り当てる感じだと認識している
+
 ## Links
 - https://dev.classmethod.jp/articles/aws-iot-greengrass-v2-raspi-install/
