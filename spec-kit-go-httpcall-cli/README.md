@@ -7,3 +7,4 @@
 ## Links
 - https://github.com/github/spec-kit
 - https://zenn.dev/rakuten_tech/articles/try-github-spec-kit
+- https://azukiazusa.dev/blog/spec-driven-development-with-spec-kit/
