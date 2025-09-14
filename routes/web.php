@@ -19,3 +19,7 @@ Route::prefix('/api')->group(function () {
 if (App::isLocal()) {
     Route::get('/dev/openapi.json', [DevOpenapiController::class, 'view']);
 }
+
+
+use App\Livewire\Counter; 
+Route::get('/counter', Counter::class);
