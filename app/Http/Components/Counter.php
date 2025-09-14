@@ -1,6 +1,6 @@
 <?php
  
-namespace App\Livewire;
+namespace App\Http\Components;
  
 use Livewire\Component;
  
@@ -20,6 +20,6 @@ class Counter extends Component
  
     public function render()
     {
-        return view('livewire.counter');
+        return view('components.counter');
     }
 }

@@ -5,9 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\DevOpenapiController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PictureController;
+use App\Http\Components\Counter;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Counter; 
 
 # ui
 Route::view('/', 'main');
