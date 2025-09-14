@@ -9,6 +9,8 @@ use App\Services\Nasa\DataModels\AstronomyPicture;
 /**
  * Asteroids - NeoWs を見ようかな
  * たぶん日単位でデータが変わるので、面白そう？
+ * 
+ * サービスによってドメインが違うらしいのでサービス単位でクラス分けしたほうがいいかも
  *
  * @see https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY
  */

@@ -17,8 +17,4 @@ docker compose up
 # db
 docker compose exec app ./artisan migrate
 docker compose exec app ./artisan migrate:status
-
-# ui
-npm i
-npm run dev
 ```
