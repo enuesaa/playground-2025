@@ -8,28 +8,10 @@ services:
     ports:
       - 8080:8000
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - .:/app
     tty: true
     depends_on:
-      - mysql
       - redis
-
-  mysql:
-    image: mysql:8.0
-    ports:
-      - 3306:3306
-    volumes:
-      - ./docker/mysql/init:/docker-entrypoint-initdb.d
-      - mysqldata:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=app
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppassword"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   redis:
     image: redis:8
@@ -40,5 +22,4 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
 
 volumes:
-  mysqldata:
   redisdata:
