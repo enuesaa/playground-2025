@@ -21,6 +21,17 @@ final class AstronomyPictureUseCase
         return $picture;
     }
 
+    public function getNow(): Picture
+    {
+        $data = $this->nasa->getAstronomyPictureOfTheDay();
+        $picture = new Picture();
+        $picture->title = $data->title();
+        $picture->image_url = $data->url();
+        $picture->explanation = $data->explanation();
+
+        return $picture;
+    }
+
     public function flush(): void
     {
         $data = $this->nasa->getAstronomyPictureOfTheDay();

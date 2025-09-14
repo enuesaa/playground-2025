@@ -26,7 +26,7 @@ final class PictureController extends Controller
     public function view(): Responsable
     {
         $usecase = new AstronomyPictureUseCase($this->nasa);
-        $picture = $usecase->get();
+        $picture = $usecase->getNow();
 
         return new PictureResource($picture);
     }
