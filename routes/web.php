@@ -5,13 +5,12 @@ declare(strict_types=1);
 use App\Http\Controllers\DevOpenapiController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PictureController;
-use App\Http\Components\Counter;
+use App\Http\Components\Top;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 # ui
-Route::view('/', 'main');
-Route::view('/about', 'main');
+Route::get('/', Top::class);
 
 # api
 Route::prefix('/api')->group(function () {
@@ -22,6 +21,3 @@ Route::prefix('/api')->group(function () {
 if (App::isLocal()) {
     Route::get('/dev/openapi.json', [DevOpenapiController::class, 'view']);
 }
-
-# dev
-Route::get('/counter', Counter::class);
