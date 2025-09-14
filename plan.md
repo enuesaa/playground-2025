@@ -21,5 +21,16 @@
 - 画像が多そうなので、スライドショー的な感じにしたい
 - いったんapiのレスポンスを整形して、色付けできればOK。そのうち何を作りたいか思い浮かぶだろう。
 
-## Livewire
+### Livewire
 - https://livewire.laravel.com/
+
+### Redis
+```bash
+docker compose exec redis redis-cli
+> keys *;
+```
+
+```bash
+# cache
+docker compose exec redis redis-cli -n 1
+```

@@ -6,6 +6,7 @@ namespace App\UseCases;
 
 use App\Models\Picture;
 use App\Services\Nasa\Nasa;
+use Illuminate\Support\Facades\Cache;
 
 final class AstronomyPictureUseCase
 {
@@ -23,7 +24,10 @@ final class AstronomyPictureUseCase
 
     public function getNow(): Picture
     {
-        $data = $this->nasa->getAstronomyPictureOfTheDay();
+        $data = Cache::remember('AstronomyPictureUseCase::getNow', 100, function () {
+            logger("not cached");
+            return $this->nasa->getAstronomyPictureOfTheDay();
+        });
         $picture = new Picture();
         $picture->title = $data->title();
         $picture->image_url = $data->url();
