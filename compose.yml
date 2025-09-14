@@ -13,6 +13,7 @@ services:
     tty: true
     depends_on:
       - mysql
+      - redis
 
   mysql:
     image: mysql:8.0
@@ -30,5 +31,14 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
+    volumes:
+      - redisdata:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
 volumes:
   mysqldata:
+  redisdata:
