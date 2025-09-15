@@ -7,7 +7,7 @@ use App\Services\Nasa\Nasa;
 use App\UseCases\AstronomyPictureUseCase;
 use Livewire\Component;
  
-class Marsphoto extends Component
+class TopMarsPhotos extends Component
 {
     /**
      * @var MarsRoverPhoto[] photos
@@ -22,7 +22,7 @@ class Marsphoto extends Component
  
     public function render()
     {
-        return view('components.marsphoto', [
+        return view('components.top-mars-photos', [
             'photos' => $this->photos,
         ]);
     }

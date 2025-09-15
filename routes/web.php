@@ -5,12 +5,12 @@ declare(strict_types=1);
 use App\Http\Controllers\DevOpenapiController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PictureController;
-use App\Http\Components\Top;
+use App\Http\Components\TopPage;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 # ui
-Route::get('/', Top::class);
+Route::get('/', TopPage::class);
 
 # api
 Route::prefix('/api')->group(function () {

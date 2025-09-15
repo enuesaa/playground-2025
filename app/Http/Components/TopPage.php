@@ -4,7 +4,7 @@ namespace App\Http\Components;
 
 use Livewire\Component;
  
-class Counter extends Component
+class TopPage extends Component
 {
     public $count = 1;
 
@@ -17,9 +17,9 @@ class Counter extends Component
     {
         $this->count--;
     }
- 
+
     public function render()
     {
-        return view('components.counter');
+        return view('components.top-page');
     }
 }
