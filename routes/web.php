@@ -6,6 +6,7 @@ use App\Http\Controllers\DevOpenapiController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PictureController;
 use App\Http\Components\TopPage;
+use App\Http\Controllers\ProxyController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ Route::get('/', TopPage::class);
 Route::prefix('/api')->group(function () {
     Route::get('/health', [HealthController::class, 'view']);
     Route::get('/picture', [PictureController::class, 'view']);
+    Route::get('/proxy', [ProxyController::class, 'view']);
 });
 
 if (App::isLocal()) {
