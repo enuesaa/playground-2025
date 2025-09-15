@@ -17,13 +17,6 @@ final class AstronomyPictureUseCase
 
     public function get(): Picture
     {
-        $picture = Picture::query()
-            ->firstOrFail();
-        return $picture;
-    }
-
-    public function getNow(): Picture
-    {
         $data = Cache::remember('AstronomyPictureUseCase::getNow', 100, function () {
             logger("not cached");
             return $this->nasa->getAstronomyPictureOfTheDay();
@@ -38,11 +31,6 @@ final class AstronomyPictureUseCase
 
     public function flush(): void
     {
-        $data = $this->nasa->getAstronomyPictureOfTheDay();
-        $picture = new Picture();
-        $picture->title = $data->title();
-        $picture->image_url = $data->url();
-        $picture->explanation = $data->explanation();
-        $picture->save();
+        // remove data
     }
 }

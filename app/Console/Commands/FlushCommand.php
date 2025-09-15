@@ -18,11 +18,11 @@ class FlushCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'setup app data for development';
+    protected $description = 'remove cached data';
 
     public function handle(Nasa $nasa): void
     {
-        $usecase = new AstronomyPictureUseCase($nasa);
-        $usecase->flush();
+        // $usecase = new AstronomyPictureUseCase($nasa);
+        // $usecase->flush();
     }
 }

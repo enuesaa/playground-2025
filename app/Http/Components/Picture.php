@@ -14,7 +14,7 @@ class Picture extends Component
     public function mount(Nasa $nasa): void
     {
         $usecase = new AstronomyPictureUseCase($nasa);
-        $this->picture = $usecase->getNow();
+        $this->picture = $usecase->get();
     }
  
     public function render()
