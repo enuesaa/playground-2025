@@ -1,13 +1,10 @@
 # aeroview
 A toy app to keep learning PHP
 
-## Runtime
-FrankenPHP
-
-## ライブラリ
+## Stacks
+- FrankenPHP
 - Laravel
-- Vue
-  - Vue Router
+- Livewire v3
 
 ## Commands
 ```bash
