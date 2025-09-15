@@ -33,4 +33,13 @@ final class AstronomyPictureUseCase
     {
         Cache::flush();
     }
+
+    public function listMarsRoverPhotos(): array
+    {
+        $data = Cache::remember('AstronomyPictureUseCase::listMarsRoverPhotos', 100, function () {
+            logger("not cached");
+            return $this->nasa->listMarsRoverPhotos();
+        });
+        return $data;
+    }
 }

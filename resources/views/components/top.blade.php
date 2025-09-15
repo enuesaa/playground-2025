@@ -1,4 +1,4 @@
 <div>
-    <livewire:counter />
     <livewire:picture />
+    <livewire:marsphoto />
 </div>

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Nasa;
 
 use App\Services\Nasa\DataModels\AstronomyPicture;
+use App\Services\Nasa\DataModels\MarsRoverPhoto;
 
 /**
  * Asteroids - NeoWs を見ようかな
@@ -31,8 +32,20 @@ class Nasa
         return new AstronomyPicture($resbody);
     }
 
-    public function listPictures()
+    /**
+     * @return MarsRoverPhoto[] photo
+     */
+    public function listMarsRoverPhotos(): array
     {
-        // https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY
+        $res = $this->client->get('/mars-photos/api/v1/rovers/curiosity/photos?sol=10');
+        $resbody = json_decode($res->getBody()->getContents(), associative: true);
+
+        logger("a", ["res" => $resbody]);
+
+        $list = [];
+        foreach ($resbody['photos'] as $photo) {
+            $list[] = new MarsRoverPhoto($photo);
+        }
+        return $list;
     }
 }
