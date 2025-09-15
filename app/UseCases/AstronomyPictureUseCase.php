@@ -31,6 +31,6 @@ final class AstronomyPictureUseCase
 
     public function flush(): void
     {
-        // remove data
+        Cache::flush();
     }
 }

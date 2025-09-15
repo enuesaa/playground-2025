@@ -22,7 +22,7 @@ class FlushCommand extends Command
 
     public function handle(Nasa $nasa): void
     {
-        // $usecase = new AstronomyPictureUseCase($nasa);
-        // $usecase->flush();
+        $usecase = new AstronomyPictureUseCase($nasa);
+        $usecase->flush();
     }
 }
