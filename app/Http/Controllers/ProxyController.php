@@ -17,6 +17,9 @@ final class ProxyController extends Controller
     ) {
     }
 
+    /**
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Support\Responsable
+     */
     public function view(Request $req)
     {
         $url = $req->query('url');

@@ -40,8 +40,6 @@ class Nasa
         $res = $this->client->get('/mars-photos/api/v1/rovers/curiosity/photos?sol=10');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);
 
-        logger("a", ["res" => $resbody]);
-
         $list = [];
         foreach ($resbody['photos'] as $photo) {
             $list[] = new MarsRoverPhoto($photo);

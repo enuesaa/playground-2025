@@ -6,7 +6,7 @@ use Livewire\Component;
  
 class TopPage extends Component
 {
-    public $count = 1;
+    public int $count = 1;
 
     public function increment(): void
     {
@@ -18,6 +18,9 @@ class TopPage extends Component
         $this->count--;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function render()
     {
         return view('components.top-page');

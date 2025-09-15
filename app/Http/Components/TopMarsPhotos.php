@@ -19,7 +19,10 @@ class TopMarsPhotos extends Component
         $usecase = new AstronomyPictureUseCase($nasa);
         $this->photos = $usecase->listMarsRoverPhotos();
     }
- 
+
+    /**
+     * @return \Illuminate\Contracts\View\View
+     */
     public function render()
     {
         return view('components.top-mars-photos', [

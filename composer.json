@@ -41,7 +41,7 @@
         "post-install-cmd": "App\\Support\\ComposerScripts::postInstall",
         "post-update-cmd": "./artisan vendor:publish --tag=laravel-assets --ansi --force",
         "format": "pint --preset psr12",
-        "stan": "phpstan analyse",
+        "stan": "phpstan analyse --memory-limit=-1",
         "tailog": "./artisan pail",
         "clear": "./artisan optimize:clear",
         "test": "./artisan test"

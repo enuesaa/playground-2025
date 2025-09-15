@@ -34,6 +34,9 @@ final class AstronomyPictureUseCase
         Cache::flush();
     }
 
+    /**
+     * @return \App\Services\Nasa\DataModels\MarsRoverPhoto[] photo
+     */
     public function listMarsRoverPhotos(): array
     {
         $data = Cache::remember('AstronomyPictureUseCase::listMarsRoverPhotos', 100, function () {
