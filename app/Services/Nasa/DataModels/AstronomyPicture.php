@@ -16,7 +16,7 @@ class AstronomyPicture extends DataModel
         return $this->get('explanation');
     }
 
-    public function url(): string
+    public function url(): ?string
     {
         return $this->get('url');
     }
