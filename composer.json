@@ -14,7 +14,6 @@
         "zircote/swagger-php": "^5.1"
     },
     "require-dev": {
-        "barryvdh/laravel-ide-helper": "^3.5",
         "brianium/paratest": "^7.8",
         "composer/composer": "^2.8",
         "fakerphp/faker": "^1.23",
@@ -41,13 +40,11 @@
     "scripts": {
         "post-install-cmd": "App\\Support\\ComposerScripts::postInstall",
         "post-update-cmd": "./artisan vendor:publish --tag=laravel-assets --ansi --force",
-        "buildui": "npm install && npm run build",
         "format": "pint --preset psr12",
         "stan": "phpstan analyse",
         "tailog": "./artisan pail",
         "clear": "./artisan optimize:clear",
-        "test": "./artisan test",
-        "modeldocgen": "./artisan ide-helper:models --write --no-interaction"
+        "test": "./artisan test"
     },
     "config": {
         "optimize-autoloader": true,
