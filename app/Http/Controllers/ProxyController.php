@@ -26,7 +26,7 @@ final class ProxyController extends Controller
         if (!$url) {
             return new Resource([]); // TODO: err
         }
-    
+
         $data = Cache::remember('proxy:'.$url, now()->addMinutes(10), function () use ($url) {
             $response = Http::get($url);
 

@@ -10,7 +10,8 @@ use OpenApi\Generator;
 class DevOpenapiController extends Controller
 {
     public function __construct()
-    {}
+    {
+    }
 
     public function view(): string
     {

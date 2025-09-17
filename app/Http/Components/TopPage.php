@@ -1,9 +1,9 @@
 <?php
- 
+
 namespace App\Http\Components;
 
 use Livewire\Component;
- 
+
 class TopPage extends Component
 {
     public int $count = 1;
@@ -12,7 +12,7 @@ class TopPage extends Component
     {
         $this->count++;
     }
- 
+
     public function decrement(): void
     {
         $this->count--;

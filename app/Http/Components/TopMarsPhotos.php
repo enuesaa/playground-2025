@@ -1,12 +1,12 @@
 <?php
- 
+
 namespace App\Http\Components;
 
 use App\Services\Nasa\DataModels\MarsRoverPhoto;
 use App\Services\Nasa\Nasa;
 use App\UseCases\AstronomyPictureUseCase;
 use Livewire\Component;
- 
+
 class TopMarsPhotos extends Component
 {
     /**

@@ -8,5 +8,5 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class Resource extends JsonResource
 {
-    static $wrap = null;
+    public static $wrap = null;
 }

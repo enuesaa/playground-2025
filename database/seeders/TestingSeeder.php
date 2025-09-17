@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Picture;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TestingSeeder extends Seeder
