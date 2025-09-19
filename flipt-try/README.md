@@ -6,4 +6,7 @@
 - UI はしっかりしている
 - 概念的には app config と違いがそんなになさそう
 - aws なら app config で、kubernetes なら flipt を考えるかーと思った。
-  - それくらい違いがない印象
+- analytics があるのは便利だな
+
+## Links
+- https://github.com/flipt-io/flipt
