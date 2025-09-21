@@ -37,7 +37,7 @@ class Nasa
      */
     public function listMarsRoverPhotos(): array
     {
-        $res = $this->client->get('/mars-photos/api/v1/rovers/curiosity/photos?sol=10');
+        $res = $this->client->get('/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);
 
         $list = [];

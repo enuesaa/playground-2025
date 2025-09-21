@@ -1,9 +1,4 @@
 <div>
-    <div>
-        <h1>{{ $count }}</h1>    
-        <button wire:click="increment">+</button>
-        <button wire:click="decrement">-</button>
-    </div>
-
+    <h1>Mars Photos</h1>
     <livewire:top-mars-photos />
 </div>

@@ -18,7 +18,6 @@ final class AstronomyPictureUseCase
     public function get(): Picture
     {
         $data = Cache::remember('AstronomyPictureUseCase::getNow', 100, function () {
-            logger("not cached");
             return $this->nasa->getAstronomyPictureOfTheDay();
         });
         $picture = new Picture();
@@ -40,7 +39,6 @@ final class AstronomyPictureUseCase
     public function listMarsRoverPhotos(): array
     {
         $data = Cache::remember('AstronomyPictureUseCase::listMarsRoverPhotos', 100, function () {
-            logger("not cached");
             return $this->nasa->listMarsRoverPhotos();
         });
         return $data;
