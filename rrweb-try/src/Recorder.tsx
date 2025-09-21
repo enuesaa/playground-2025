@@ -1,46 +1,28 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { record } from "rrweb";
+import { Player } from './Player';
 
-export function Recorder({ onEvents, onRecordingStart }: { onEvents: (events: any[]) => void; onRecordingStart?: () => void }) {
-  const [eventCount, setEventCount] = useState(0);
+export function Recorder() {
+  const [events, setEvents] = useState<any[]>([]);
   const [recording, setRecording] = useState(false);
-  const eventsRef = useRef<any[]>([]);
 
-  const startRecording = useCallback(() => {
-    eventsRef.current = [];
-    setEventCount(0);
-    onRecordingStart?.();
+  const startRecording = () => {
     setRecording(true);
-  }, [onRecordingStart]);
-
-  const stopRecording = useCallback(() => {
-    setRecording(false);
-  }, []);
-
-  const playRecording = useCallback(() => {
-    onEvents([...eventsRef.current]);
-  }, [onEvents]);
+  }
+  const stopRecording = () => setRecording(false);
 
   useEffect(() => {
     if (!recording) return;
 
-    let updateTimeout;
-
     const stopFn = record({
       emit(event: any) {
-        eventsRef.current.push(event);
-
-        clearTimeout(updateTimeout);
-        updateTimeout = setTimeout(() => {
-          setEventCount(eventsRef.current.length);
-        }, 100);
+        setEvents((v) => [...v, event])
       },
     });
 
     return () => {
-      clearTimeout(updateTimeout);
-      stopFn();
-    };
+      stopFn !== undefined && stopFn();
+    }
   }, [recording]);
 
   return (
@@ -48,11 +30,11 @@ export function Recorder({ onEvents, onRecordingStart }: { onEvents: (events: an
       <button onClick={recording ? stopRecording : startRecording}>
         {recording ? "記録停止" : "記録開始"}
       </button>
-      {eventCount > 0 && (
-        <button onClick={playRecording} style={{ marginLeft: 10 }}>
-          再生 ({eventCount} events)
-        </button>
-      )}
+
+      <div style={{ marginTop: "40px", padding: "20px", border: "2px solid #ddd" }}>
+        <h3>録画再生</h3>
+        <Player events={events} />
+      </div>
     </div>
   );
 }
