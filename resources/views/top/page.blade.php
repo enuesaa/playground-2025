@@ -1,5 +1,4 @@
 <div>
-    <livewire:common-header />
-    <h1>Mars Photos</h1>
+    <livewire:common-header title="Mars Photos" />
     <livewire:top-mars-photo />
 </div>

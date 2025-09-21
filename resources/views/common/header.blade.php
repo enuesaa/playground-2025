@@ -1,3 +1,3 @@
 <header>
-    <h1>aeroview</h1>
+    <h1>aeroview > {{ $title }}</h1>
 </header>
