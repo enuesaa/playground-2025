@@ -25,7 +25,7 @@ class TopMarsPhotos extends Component
      */
     public function render()
     {
-        return view('components.top-mars-photos', [
+        return view('top.mars-photos', [
             'photos' => $this->photos,
         ]);
     }

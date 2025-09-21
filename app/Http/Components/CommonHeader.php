@@ -4,13 +4,13 @@ namespace App\Http\Components;
 
 use Livewire\Component;
 
-class TopPage extends Component
+class CommonHeader extends Component
 {
     /**
      * @return \Illuminate\Contracts\View\View
      */
     public function render()
     {
-        return view('top.page');
+        return view('common.header');
     }
 }
