@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import html2canvas from 'html2canvas'
 import Card from '../components/Card'
 import ControlPanel from '../components/ControlPanel'
@@ -56,13 +57,32 @@ const Home = () => {
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      gap: '30px',
-      maxWidth: '1000px',
-      margin: '0 auto',
-      alignItems: 'flex-start'
-    }}>
+    <div>
+      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <Link
+          to="/mikurabe"
+          style={{
+            display: 'inline-block',
+            padding: '12px 24px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: '500'
+          }}
+        >
+          CSS 見比べツールへ
+        </Link>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        gap: '30px',
+        maxWidth: '1000px',
+        margin: '0 auto',
+        alignItems: 'flex-start'
+      }}>
       <ControlPanel
         width={width}
         height={height}
@@ -98,6 +118,7 @@ const Home = () => {
         />
       </div>
     </div>
+  </div>
   )
 }
 
