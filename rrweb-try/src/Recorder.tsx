@@ -26,7 +26,7 @@ export function Recorder() {
   }, [recording]);
 
   return (
-    <div style={{ position: "fixed", top: 10, right: 10, zIndex: 1000 }}>
+    <div>
       <button onClick={recording ? stopRecording : startRecording}>
         {recording ? "記録停止" : "記録開始"}
       </button>
