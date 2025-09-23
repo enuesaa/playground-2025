@@ -14,3 +14,36 @@
 brew install atuin
 echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
 ```
+
+## Links
+- https://github.com/atuinsh/atuin
+
+## メモ
+ちなみにコマンドの履歴ば、bash や zsh にあるフック関数を用いて取得するらしい
+
+```sh
+# zsh
+preexec() {
+  cmd="$1"
+  start=$(date +%s)
+}
+
+precmd() {
+  ret=$?
+  end=$(date +%s)
+  dur=$((end - start))
+  print -r -- "$(date '+%F %T') | $PWD | $cmd | exit=$ret | ${dur}s" >> ~/.command_log
+}
+```
+
+```sh
+# bash (動作未確認)
+# コマンド実行前に呼ばれる
+trap 'last_cmd=$BASH_COMMAND; start=$(date +%s)' DEBUG
+
+# コマンド終了後に呼ばれる
+PROMPT_COMMAND='ret=$?; end=$(date +%s); dur=$((end - start));
+  echo "$(date +"%F %T") | $PWD | $last_cmd | exit=$ret | ${dur}s" >> ~/.command_log'
+```
+
+こうかいておくと、後続のコマンドが .command_log へ記録された
