@@ -6,3 +6,13 @@
 - 入門にはぴったりだと思う。
 - クエリは datadog 並かな。
   - datadog は検索が難しいから相対的に使いやすそう。
+
+otelgen でデータを生成するには
+
+```bash
+otelgen --otel-exporter-otlp-endpoint api.honeycomb.io:443 --header x-honeycomb-team=xxx traces single
+```
+
+スクショ
+
+<img src="screenshot.png" width="500px" />
