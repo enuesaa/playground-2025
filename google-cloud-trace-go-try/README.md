@@ -13,3 +13,7 @@
 
 ## Links
 - https://zenn.dev/cloud_ace/articles/opentelemetry-go
+
+## スクショ
+
+<img src="./screenshot.png" width="500px" />

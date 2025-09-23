@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
-	"github.com/enuesaa/playground-2025/aws-otel-collector-go-try/handle"
-	"github.com/enuesaa/playground-2025/aws-otel-collector-go-try/oteltrace"
+	"github.com/enuesaa/playground-2025/google-cloud-trace-go-try/handle"
+	"github.com/enuesaa/playground-2025/google-cloud-trace-go-try/oteltrace"
 	"github.com/labstack/echo/v4"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 )
