@@ -3,7 +3,7 @@ Command history manager
 
 ## Stacks
 - rust
-- sqlx
+- SeaORM
 - SQLite
 
 ## PoC
