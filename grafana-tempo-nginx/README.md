@@ -16,3 +16,7 @@ web-1             | 2025/01/27 14:11:49 [error] 29#61: OTel export failure: unkn
 
 ## TraceQL
 - https://grafana.com/docs/tempo/latest/traceql/
+
+## Screenshot
+
+<img src="./screenshot.png" width="500px" />
