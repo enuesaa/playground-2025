@@ -1,7 +1,7 @@
 use sea_orm_migration::{prelude::*, schema::*};
 
 #[derive(DeriveIden)]
-enum Cake {
+enum Cakes {
     Table,
     Id,
     Title,
@@ -16,10 +16,10 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
-                    .table(Cake::Table)
+                    .table(Cakes::Table)
                     .if_not_exists()
-                    .col(pk_auto(Cake::Id))
-                    .col(string(Cake::Title))
+                    .col(pk_auto(Cakes::Id))
+                    .col(string(Cakes::Title))
                     .to_owned(),
             )
             .await
@@ -27,7 +27,7 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(Cake::Table).to_owned())
+            .drop_table(Table::drop().table(Cakes::Table).to_owned())
             .await
     }
 }
