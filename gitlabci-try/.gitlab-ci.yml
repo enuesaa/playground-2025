@@ -1,0 +1,34 @@
+image: node:latest
+
+stages:
+  - prepare
+  - hello
+  - test
+
+prepare-job:
+  stage: prepare
+  script: 
+    - echo aaa
+    - node -v
+    - npm -v
+
+prepare-job2:
+  stage: prepare
+  needs: [prepare-job]
+  script: 
+    - echo prepare2
+
+prepare-job3:
+  stage: prepare
+  script: 
+    - echo prepare3
+
+hello-job:
+  stage: hello
+  script: 
+    - echo hello
+
+test-job:
+  stage: test
+  script: 
+    - echo test
