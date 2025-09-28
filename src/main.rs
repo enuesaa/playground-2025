@@ -5,17 +5,38 @@ use sea_orm::QueryOrder;
 use sea_orm::{ActiveValue::Set, Database, DatabaseConnection};
 use sea_orm::entity::prelude::*;
 use migration::{Migrator, MigratorTrait};
+use clap::{Parser, Subcommand};
+
+#[derive(Parser)]
+#[command(version)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    /// Run database migrations
+    Migrate,
+}
 
 #[tokio::main]
-async fn main() {
-    if let Ok(db) = connectdb().await {
-        let ret = migrate(&db).await;
-        print!("{:?}\n", ret);
-        let ret = create_a_cake(&db).await;
-        print!("{:?}\n", ret);
-        let ret = find_cakes(&db).await;
-        print!("{:?}\n", ret);
+async fn main() -> Result<()> {
+    let cli = Cli::parse();
+
+    match cli.command {
+        Commands::Migrate => {
+            if let Ok(db) = connectdb().await {
+                let ret = migrate(&db).await;
+                print!("{:?}\n", ret);
+                let ret = create_a_cake(&db).await;
+                print!("{:?}\n", ret);
+                let ret = find_cakes(&db).await;
+                print!("{:?}\n", ret);
+            }
+        }
     }
+    Ok(())
 }
 
 async fn migrate(db: &DatabaseConnection) -> Result<()> {

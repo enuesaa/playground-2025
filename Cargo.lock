@@ -1038,6 +1038,7 @@ name = "histo"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "clap",
  "migration",
  "sea-orm",
  "tokio",
