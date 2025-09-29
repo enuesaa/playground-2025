@@ -1,4 +1,4 @@
-use sea_orm_migration::{prelude::*, schema::*};
+use sea_orm_migration::prelude::*;
 
 #[derive(DeriveIden)]
 enum Executions {
@@ -26,10 +26,10 @@ impl MigrationTrait for Migration {
                     .if_not_exists()
                     .col(ColumnDef::new(Executions::Id).integer().not_null().auto_increment().primary_key())
                     .col(ColumnDef::new(Executions::Command).string().not_null())
-                    .col(ColumnDef::new(Executions::Stdout).string())
-                    .col(ColumnDef::new(Executions::Stderr).string())
-                    .col(ColumnDef::new(Executions::Code).integer())
-                    .col(ColumnDef::new(Executions::Duration).integer())
+                    .col(ColumnDef::new(Executions::Stdout).string().not_null())
+                    .col(ColumnDef::new(Executions::Stderr).string().not_null())
+                    .col(ColumnDef::new(Executions::Code).integer().not_null())
+                    .col(ColumnDef::new(Executions::Duration).integer().not_null())
                     .col(ColumnDef::new(Executions::CreatedAt).timestamp().not_null().default(Expr::current_timestamp()))
                     .col(ColumnDef::new(Executions::UpdatedAt).timestamp().not_null().default(Expr::current_timestamp()))
                     .to_owned(),
