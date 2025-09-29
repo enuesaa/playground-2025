@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="log"></div>
+    <script>
+      const eventSource = new EventSource("http://localhost:3000/events");
+      eventSource.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        document.getElementById("log").innerHTML +=
+          `<p>${data.time} (count=${data.count})</p>`;
+      };
+    </script>
+  </body>
+</html>
+

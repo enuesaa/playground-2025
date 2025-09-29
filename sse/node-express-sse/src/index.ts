@@ -5,6 +5,7 @@ const app = express()
 app.get('/events', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream')
   res.setHeader('Cache-Control', 'no-cache')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
   let count = 0
   const interval = setInterval(() => {
