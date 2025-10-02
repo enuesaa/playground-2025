@@ -12,6 +12,7 @@ zig build run -- --help
 
 # test
 zig build test
+zig test src/*
 ```
 
 ## zig について

@@ -26,7 +26,9 @@ pub fn main() !void {
                 },
             }),
             .target = cli.CommandTarget{
-                .action = cli.CommandAction{ .exec = run_server },
+                .action = cli.CommandAction{
+                    .exec = run_server,
+                },
             },
         },
     };
