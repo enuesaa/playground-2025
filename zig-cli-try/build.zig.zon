@@ -2,7 +2,7 @@
     .name = .zig_cli_try,
     .version = "0.0.0",
     .fingerprint = 0x4bf018d7755cc4af,
-    .minimum_zig_version = "0.15.0",
+    .minimum_zig_version = "0.15.1",
     .dependencies = .{
         .cli = .{
             .url = "git+https://github.com/sam701/zig-cli?ref=zig-0.15#cb44aade25a3c1eddd8b6f990b50c2189442c1e2",

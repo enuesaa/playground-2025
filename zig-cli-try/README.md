@@ -19,3 +19,9 @@ zig test src/*
 - src/main.zig にアプリケーションを書くらしい
 - src/root.zig にライブラリを書くらしい
 - 同じファイルにテストをかける
+
+## zig v0.15.1
+
+はじめに試したときは zig の大きな変更がちょうどリリースされたタイミングだったらしく、その移行期であったため、なんか動かなかったっぽい。
+
+https://zenn.dev/smallkirby/articles/feb8ceefaddbd0
