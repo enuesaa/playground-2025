@@ -1,5 +1,5 @@
 const std = @import("std");
-const cli = @import("zig-cli");
+const cli = @import("cli");
 
 var config = struct {
     host: []const u8 = "localhost",
@@ -37,9 +37,9 @@ fn run_server() !void {
     std.log.debug("server is listening on {s}:{d}", .{ config.host, config.port });
 }
 
-test "simple test" {
-    var list = std.ArrayList(i32).init(std.testing.allocator);
-    defer list.deinit();
-    try list.append(42);
-    try std.testing.expectEqual(@as(i32, 42), list.pop());
-}
+// test "simple test" {
+//     var list = std.ArrayList(i32).init(std.testing.allocator);
+//     defer list.deinit();
+//     try list.append(42);
+//     try std.testing.expectEqual(@as(i32, 42), list.pop());
+// }

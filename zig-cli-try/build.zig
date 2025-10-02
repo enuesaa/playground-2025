@@ -4,16 +4,23 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const zigcli_dep = b.dependency("cli", .{ .target = target, .optimize = optimize });
-    const zigcli_mod = zigcli_dep.module("zig-cli");
-
-    const exe = b.addExecutable(.{
-        .name = "zig_cli_try",
-        .root_source_file = b.path("src/main.zig"),
+    const zigcli = b.dependency("cli", .{
         .target = target,
         .optimize = optimize,
     });
-    exe.root_module.addImport("zig-cli", zigcli_mod);
+
+    const root_module = b.createModule(.{
+        .root_source_file = b.path("src/main.zig"),
+        .target = target,
+        .optimize = optimize,
+        .imports = &.{
+            .{ .module = zigcli.module("cli"), .name = "cli" },
+        },
+    });
+    const exe = b.addExecutable(.{
+        .name = "zigclitry",
+        .root_module = root_module,
+    });
     b.installArtifact(exe);
 
     // This *creates* a Run step in the build graph, to be executed when another
@@ -40,7 +47,7 @@ pub fn build(b: *std.Build) void {
     run_step.dependOn(&run_cmd.step);
 
     const exe_unit_tests = b.addTest(.{
-        .root_source_file = b.path("src/main.zig"),
+        .root_module = root_module,
     });
     const run_exe_unit_tests = b.addRunArtifact(exe_unit_tests);
 
