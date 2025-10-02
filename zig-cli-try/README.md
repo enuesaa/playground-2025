@@ -8,7 +8,7 @@
 zig init
 
 # run
-zig run src/main.zig
+zig build run -- --help
 
 # test
 zig build test
