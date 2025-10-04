@@ -12,7 +12,5 @@ pub struct PostResponse {
 }
 
 pub async fn handle_post(Json(payload): Json<PostRequest>) -> Json<PostResponse> {
-    Json(PostResponse {
-        text: payload.text,
-    })
+    Json(PostResponse { text: payload.text })
 }

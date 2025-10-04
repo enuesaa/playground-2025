@@ -1,12 +1,12 @@
 use axum::{
-    routing::{get, post},
     Router,
+    routing::{get, post},
 };
-use tower_http::cors::{CorsLayer, Any};
+use tower_http::cors::{Any, CorsLayer};
 mod handlers;
 
-use handlers::top::handle_top;
 use handlers::post::handle_post;
+use handlers::top::handle_top;
 
 #[tokio::main]
 async fn main() {
@@ -19,7 +19,5 @@ async fn main() {
         .await
         .unwrap();
 
-    axum::serve(listener, app)
-        .await
-        .unwrap();
+    axum::serve(listener, app).await.unwrap();
 }
