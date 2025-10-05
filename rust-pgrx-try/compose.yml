@@ -2,10 +2,9 @@ services:
   builder:
     build:
       context: .
-      dockerfile: docker/builder/Dockerfile
-    entrypoint: sleep infinity
+      dockerfile: builder.Dockerfile
     volumes:
-      - .:/rust-pgrx-try
+      - .:/workdir
 
   # after build
   postgres:

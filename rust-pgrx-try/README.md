@@ -8,7 +8,7 @@
 
 - https://github.com/pgcentralfoundation/pgrx/blob/develop/cargo-pgrx/README.md
 
-## init
+## 1. init
 
 はじめに `cargo pgrx init` する。
 
@@ -21,15 +21,15 @@
   - https://github.com/pgcentralfoundation/pgrx/
   - ubuntu で作業するのが良い。クロスコンパイルできるのだろうがしんどい。たぶんそっちの方が楽
 
-## new
+## 2. new
 
 `cargo pgrx new <extension-name>` でプロジェクト作成。
 
-## run
+## 3. run
 
-`cargo pgrx run` すると、psql が立ち上がり、挙動を確認可能。
+`cargo pgrx run` すると psql が立ち上がり、挙動を確認可能。
 
-- `CREATE EXTENSION pgrxtry` で extension を作成
+- `CREATE EXTENSION pgrxtry;` で extension を作成
 - その後は、extension が読み込まれ、関数とか実行できるようになる。
 
 ```bash
@@ -47,18 +47,20 @@ pgrxtry=# SELECT hello_pgrxtry();
 (1 row)
 ```
 
-## build
+## 4. build
 
 `cargo pgrx package`
 
 - pg_config が必要
   - `cargo pgrx package --pg-config=~/.pgrx/17.6/pgrx-install/bin/pg_config`
-  - ローカルでパスが通っていればフラグをセットする必要ない
-- はじめmacでビルドしていたが、なんか dylib っていう形式で作成されるが、これは mac でしか使えないらしい？
+  - パスが通っていればフラグをセットする必要はない
+- はじめmacでビルドしていたが dylib っていう形式で作成されるらしく、これは mac でしか使えない？
   - https://github.com/pgcentralfoundation/pgrx/blob/2e515ae3fe3d350258ce9cd492ce41a7afcbaaef/cargo-pgrx/src/command/install.rs#L189
-  - なので docker でコンテナを立ててそこでビルドする方式に変えた (`compose.yml` の builder コンテナ)
+- なので docker でコンテナを立ててそこでビルドする方式に変えた。
+  - `compose.yml` の builder コンテナ
+  - run `task up`
 
-## 動作確認
+## 5. 動作確認
 
 ```bash
 ➜ docker compose exec postgres bash
