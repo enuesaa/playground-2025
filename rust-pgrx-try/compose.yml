@@ -1,12 +1,21 @@
 services:
+  builder:
+    build:
+      context: .
+      dockerfile: docker/builder/Dockerfile
+    entrypoint: sleep infinity
+    volumes:
+      - .:/rust-pgrx-try
+
+  # after build
   postgres:
-    image: postgres:17
+    image: postgres:17.4-bookworm
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
     volumes:
-      # pgrx build すると ./target/releases 配下の深いところにできて扱いづらいので、./target 配下へ移動する
-      - ./target/pgrx-install/lib/postgresql:/usr/lib/postgresql/17/lib/
-      - ./target/pgrx-install/share/postgresql/extension:/usr/share/postgresql/17/extension
+      - ./target/release/pgrxtry-pg17/usr/lib/postgresql/17/lib/pgrxtry.so:/usr/lib/postgresql/17/lib/pgrxtry.so
+      - ./target/release/pgrxtry-pg17/usr/share/postgresql/17/extension/pgrxtry--0.0.0.sql:/usr/share/postgresql/17/extension/pgrxtry--0.0.0.sql
+      - ./target/release/pgrxtry-pg17/usr/share/postgresql/17/extension/pgrxtry.control:/usr/share/postgresql/17/extension/pgrxtry.control
