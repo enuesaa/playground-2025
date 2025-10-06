@@ -1,6 +1,7 @@
-use sqlx::{mysql::MySqlPoolOptions, MySqlPool};
-use chrono::NaiveDateTime;
 use anyhow::Result;
+use chrono::NaiveDateTime;
+use sqlx::{MySqlPool, mysql::MySqlPoolOptions};
+use serde::Deserialize;
 
 struct Note {
     id: i64,
@@ -20,28 +21,22 @@ impl Default for Note {
     }
 }
 
-use serde::Deserialize;
-
 #[derive(Debug, Deserialize)]
 struct Config {
     database_url: String,
 }
 
-fn loadenv() -> Result<Config> {
-    dotenv::dotenv()?;
-    let config = envy::from_env::<Config>()?;
-    Ok(config)
-}
-
 #[tokio::main]
 async fn main() -> Result<()> {
-    let config = loadenv()?;
+    dotenv::dotenv()?;
+    let config = envy::from_env::<Config>()?;
 
     let dbpool = MySqlPoolOptions::new()
         .max_connections(5)
-        .connect(&config.database_url).await?;
+        .connect(&config.database_url)
+        .await?;
 
-    let mut note = Note{
+    let mut note = Note {
         description: "aaa".to_string(),
         ..Default::default()
     };
@@ -76,7 +71,7 @@ async fn create_note(dbpool: &MySqlPool, note: &mut Note) -> Result<()> {
     Ok(())
 }
 
-async fn update_note(dbpool:  &MySqlPool, note: &mut Note) -> Result<()> {
+async fn update_note(dbpool: &MySqlPool, note: &mut Note) -> Result<()> {
     sqlx::query!(
         "UPDATE notes SET description = ? WHERE id = ?",
         note.description,
@@ -88,7 +83,7 @@ async fn update_note(dbpool:  &MySqlPool, note: &mut Note) -> Result<()> {
     Ok(())
 }
 
-async fn list_notes(dbpool:  &MySqlPool) -> Result<Vec<Note>> {
+async fn list_notes(dbpool: &MySqlPool) -> Result<Vec<Note>> {
     let rows = sqlx::query_as!(
         Note,
         "SELECT id, description, created_at, updated_at FROM notes ORDER BY id"
