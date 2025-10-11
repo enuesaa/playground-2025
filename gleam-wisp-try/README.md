@@ -43,3 +43,29 @@ INFO 200 GET /
 .
 1 tests, no failures
 ```
+
+### build
+```console
+➜ gleam build --target erlang
+
+   Compiled in 0.04s
+```
+
+ビルドすると `build/dev/erlang/*/ebin` ができる。これを Erlang で動かすには
+
+```console
+➜ erl -pa build/dev/erlang/*/ebin
+Erlang/OTP 28 [erts-16.1] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
+
+Eshell V16.1 (press Ctrl+G to abort, type help(). for help)
+1> wisptry:main().
+Listening on http://127.0.0.1:8000
+INFO 200 GET /
+WARN Failed to lookup date, re-calculating
+INFO 200 GET /favicon.ico
+WARN Failed to lookup date, re-calculating
+INFO 200 GET /
+WARN Failed to lookup date, re-calculating
+```
+
+あっているのか不明。ただまあ動いている。デプロイをどうするのかも不明。手探りだなあ。
