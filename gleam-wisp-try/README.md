@@ -51,7 +51,7 @@ INFO 200 GET /
    Compiled in 0.04s
 ```
 
-ビルドすると `build/dev/erlang/*/ebin` ができる。これを Erlang で動かすには
+ビルドすると `build/dev/erlang/*/ebin` ができる。これを Erlang VM で動かすには
 
 ```console
 ➜ erl -pa build/dev/erlang/*/ebin
@@ -69,3 +69,11 @@ WARN Failed to lookup date, re-calculating
 ```
 
 あっているのか不明。ただまあ動いている。デプロイをどうするのかも不明。手探りだなあ。
+
+### メモ
+- build/dev/erlang/wisptry/_gleam_artefacts/wisptry.erl におそらく Erlang のコードがある。まあ読めなくはない。
+- beam というのは = Erlang VM と同義らしい
+
+### 参考
+- https://kuenishi.hatenadiary.jp/entry/2014/02/17/012441
+- https://stackoverflow.com/questions/30670087/what-does-beam-stand-for-in-iex-for-the-elixir-programming-language
