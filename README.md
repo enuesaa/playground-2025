@@ -25,4 +25,17 @@ precmd() {
 
 ## Feature Plan
 
-もともとコマンドの実行履歴を取ろうと考えていたが、あんまり必要性を感じておらずモチベーションを維持できなそうなので方針転換し、ブラウザのネットワークタブの情報を取り込み解析する感じにする。
+- コマンドの履歴をとる
+- stdout/stderr もほぞんする
+- リプレイできるようにしたい
+
+```bash
+# activate (create subshell)
+histo
+
+# exit
+exit
+
+# list history
+histo ry
+```
