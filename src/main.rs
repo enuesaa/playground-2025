@@ -21,6 +21,8 @@ enum Commands {
     Migrate,
     /// Run subshell
     Start,
+    /// echo hook script
+    Echo,
 }
 
 #[tokio::main]
@@ -40,6 +42,9 @@ async fn main() -> Result<()> {
         },
         Commands::Start => {
             subshell::run();
+        },
+        Commands::Echo => {
+            subshell::echohook();
         },
     }
     Ok(())
