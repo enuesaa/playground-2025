@@ -4,6 +4,9 @@
 - ファイルの作りとかよく似ている
 - C へトランスパイルするらしい
   - なので、まあどこでも動く
+- veb というウェブフレームワークがある
+  - https://modules.vlang.io/veb.html
+- Language Server がちょっと弱いかも？ソースコードに飛べない
 
 ## Links
 - https://vlang.io/
