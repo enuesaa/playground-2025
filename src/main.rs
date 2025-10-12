@@ -1,5 +1,6 @@
 mod models;
 mod usecases;
+mod subshell;
 
 use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};
@@ -18,6 +19,8 @@ struct Cli {
 enum Commands {
     /// Run database migrations
     Migrate,
+    /// Run subshell
+    Start,
 }
 
 #[tokio::main]
@@ -34,7 +37,10 @@ async fn main() -> Result<()> {
                 let ret = cakes::find_all(&db).await;
                 print!("{:?}\n", ret);
             }
-        }
+        },
+        Commands::Start => {
+            subshell::run();
+        },
     }
     Ok(())
 }
