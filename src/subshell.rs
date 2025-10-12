@@ -25,6 +25,7 @@ pub fn run() {
         .unwrap();
 }
 
+// cargo run echo | zsh -c 'eval "$(cat)"'
 pub fn echohook() {
     let hook = r#"
 preexec() {
