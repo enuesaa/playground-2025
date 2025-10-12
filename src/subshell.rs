@@ -1,6 +1,8 @@
 use std::process::Command;
 use std::process::Stdio;
 
+// atuin の場合は、、これがフック
+// echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
 pub fn run() {
     let hook = r#"
     preexec() {
@@ -25,7 +27,7 @@ pub fn run() {
         .unwrap();
 }
 
-// cargo run echo | zsh -c 'eval "$(cat)"'
+// eval "$(cargo run echo)"
 pub fn echohook() {
     let hook = r#"
 preexec() {
