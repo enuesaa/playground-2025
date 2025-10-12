@@ -43,3 +43,12 @@ Hellope!
 ➜ ./odin-try
 Hellope!
 ```
+
+## クロスコンパイル
+
+- LLVM ベース。コンパイルまではできるがリンクまではできないという理解。
+- https://forum.odin-lang.org/t/how-to-crosscompile-from-mac-m1/891
+
+## パッケージマネージャ
+- ないらしい
+- vendor 配下に置いて、、みたいな感じかも
