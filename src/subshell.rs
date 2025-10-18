@@ -3,10 +3,12 @@ use std::process::Stdio;
 
 // atuin の場合は、、これがフック
 // echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+// eval するしかなさそうかも。
 pub fn run() {
-    let _ = Command::new("eval")
-        // .arg("$(cargo run echo)")
-        // .arg("eval \"$(cargo run echo)\"")
+    let _ = Command::new("zsh")
+        // .arg("--rcs") // 独自rcスクリプトを渡す
+        // .arg("/Users/nsrciog/autoliving/histo/hook.sh")
+        .env("ZDOTDIR", ".")
         .stdin(Stdio::inherit())
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
