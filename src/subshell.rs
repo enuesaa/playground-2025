@@ -4,6 +4,7 @@ use std::process::Stdio;
 // atuin の場合は、、これがフック
 // echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
 // eval するしかなさそうかも。
+// そもそも stdout は取れなさそう
 pub fn run() {
     let _ = Command::new("zsh")
         // .arg("--rcs") // 独自rcスクリプトを渡す
