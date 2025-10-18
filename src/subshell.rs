@@ -4,22 +4,9 @@ use std::process::Stdio;
 // atuin の場合は、、これがフック
 // echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
 pub fn run() {
-    let hook = r#"
-    preexec() {
-        cmd="$1"
-        start=$(date +%s)
-    }
-
-    precmd() {
-        ret=$?
-        end=$(date +%s)
-        dur=$((end - start))
-        print -r -- "$(date '+%F %T') | $PWD | $cmd | exit=$ret | ${dur}s" >> ~/.command_log
-    }
-    "#;
-    let _ = Command::new("zsh")
-        .arg("-c")
-        .arg(hook)
+    let _ = Command::new("eval")
+        // .arg("$(cargo run echo)")
+        // .arg("eval \"$(cargo run echo)\"")
         .stdin(Stdio::inherit())
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
@@ -41,6 +28,7 @@ precmd() {
     dur=$((end - start))
     print -r -- "$(date '+%F %T') | $PWD | $cmd | exit=$ret | ${dur}s" >> ~/.command_log
 }
+echo aaa
 "#;
     println!("{}", hook);
 }
