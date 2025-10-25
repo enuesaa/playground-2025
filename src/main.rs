@@ -5,6 +5,8 @@ mod subshell;
 use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};
 use clap::{Parser, Subcommand};
+use sysinfo::System;
+use std::time::Duration;
 
 use crate::usecases::{cakes, migrate};
 
@@ -23,6 +25,8 @@ enum Commands {
     Start,
     /// echo hook script
     Echo,
+    /// Cpu
+    Cpu,
 }
 
 #[tokio::main]
@@ -46,6 +50,9 @@ async fn main() -> Result<()> {
         Commands::Echo => {
             subshell::echohook();
         },
+        Commands::Cpu => {
+            print_cpu().await;
+        },
     }
     Ok(())
 }
@@ -54,3 +61,21 @@ async fn connectdb() -> Result<DatabaseConnection> {
     let db = Database::connect("sqlite://testdata/data.db?mode=rwc").await?;
     Ok(db)
 }
+
+async fn print_cpu() {
+    let mut sys = System::new_all();
+
+    loop {
+        sys.refresh_cpu_usage();
+        let cpus = sys.cpus();
+
+        let total_usage: f32 = cpus.iter().map(|c| c.cpu_usage()).sum::<f32>() / cpus.len() as f32;
+        println!("CPU使用率: {:.2}%", total_usage);
+
+        // for (i, cpu) in cpus.iter().enumerate() {
+        //     println!("  CPU{}: {:.2}%", i, cpu.cpu_usage());
+        // }
+        tokio::time::sleep(Duration::from_secs(1)).await;
+    }
+}
+
