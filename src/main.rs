@@ -1,12 +1,12 @@
 mod models;
-mod usecases;
 mod subshell;
+mod usecases;
 
 use anyhow::Result;
-use sea_orm::{Database, DatabaseConnection};
 use clap::{Parser, Subcommand};
-use sysinfo::System;
+use sea_orm::{Database, DatabaseConnection};
 use std::time::Duration;
+use sysinfo::System;
 
 use crate::usecases::{cakes, migrate};
 
@@ -43,16 +43,16 @@ async fn main() -> Result<()> {
                 let ret = cakes::find_all(&db).await;
                 print!("{:?}\n", ret);
             }
-        },
+        }
         Commands::Start => {
             subshell::run();
-        },
+        }
         Commands::Echo => {
             subshell::echohook();
-        },
+        }
         Commands::Cpu => {
             print_cpu().await;
-        },
+        }
     }
     Ok(())
 }
@@ -78,4 +78,3 @@ async fn print_cpu() {
         tokio::time::sleep(Duration::from_secs(1)).await;
     }
 }
-

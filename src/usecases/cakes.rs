@@ -1,7 +1,7 @@
 use anyhow::Result;
 use sea_orm::QueryOrder;
-use sea_orm::{ActiveValue::Set, DatabaseConnection};
 use sea_orm::entity::prelude::*;
+use sea_orm::{ActiveValue::Set, DatabaseConnection};
 
 use crate::models;
 
