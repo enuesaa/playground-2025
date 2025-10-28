@@ -19,12 +19,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Run database migrations
-    Migrate,
     /// Run subshell
     Start,
-    /// echo hook script
-    Echo,
     /// Cpu
     Cpu,
 }
@@ -34,21 +30,18 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Migrate => {
-            if let Ok(db) = connectdb().await {
-                let ret = migrate::migrate(&db).await;
-                print!("{:?}\n", ret);
-                let ret = cakes::create(&db).await;
-                print!("{:?}\n", ret);
-                let ret = cakes::find_all(&db).await;
-                print!("{:?}\n", ret);
-            }
-        }
+        // Commands::Migrate => {
+        //     if let Ok(db) = connectdb().await {
+        //         let ret = migrate::migrate(&db).await;
+        //         print!("{:?}\n", ret);
+        //         let ret = cakes::create(&db).await;
+        //         print!("{:?}\n", ret);
+        //         let ret = cakes::find_all(&db).await;
+        //         print!("{:?}\n", ret);
+        //     }
+        // }
         Commands::Start => {
             subshell::run();
-        }
-        Commands::Echo => {
-            subshell::echohook();
         }
         Commands::Cpu => {
             print_cpu().await;
