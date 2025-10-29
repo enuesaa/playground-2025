@@ -5,6 +5,7 @@
 
 ## Livewire
 - https://livewire.laravel.com/
+- livewire v4 beta がでったっぽいからそれにしたいなあ
 
 ## Redis
 ```bash
