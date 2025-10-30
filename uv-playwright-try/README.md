@@ -16,6 +16,7 @@
   - npx 的な
   - パッケージを自動でダウンロード
   - これはグローバルかも
+  - https://emily.space/posts/251023-uv
 
 - uv export --format requirements.txt
   - これは相当便利
