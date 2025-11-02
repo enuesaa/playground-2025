@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-#WORKDIR /var/www/html
+WORKDIR /var/www/html
 
-#COPY . .
-#RUN composer install --optimize-autoloader --no-interaction
+COPY . .
+RUN composer install --optimize-autoloader --no-interaction
 
-#CMD ["php-fpm"]
+CMD ["php-fpm"]
