@@ -34,9 +34,16 @@ class Nasa
 
     /**
      * @return MarsRoverPhoto[] photo
+     * @deprecated APIが廃止されたっぽい
      */
     public function listMarsRoverPhotos(): array
     {
+        return [
+            // TODO: mock
+            new MarsRoverPhoto(['id' => 'a', 'img_src' => 'https://bb0416a7-0b68-4f49-99e9-5a9ea4da5b28.mdnplay.dev/shared-assets/images/examples/grapefruit-slice.jpg']),
+            new MarsRoverPhoto(['id' => 'b', 'img_src' => 'https://008f76ca15a5fc78de7f018082bd53f7bbcb24eb.mdnplay.dev/shared-assets/images/examples/favicon144.png']),
+        ];
+
         $res = $this->client->get('/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=fhaz');
         $resbody = json_decode($res->getBody()->getContents(), associative: true);
 

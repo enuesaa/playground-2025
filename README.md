@@ -10,8 +10,4 @@ A toy app to keep learning PHP
 ```bash
 docker compose build
 docker compose up
-
-# db
-docker compose exec app ./artisan migrate
-docker compose exec app ./artisan migrate:status
 ```
