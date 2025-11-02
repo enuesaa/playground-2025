@@ -3,9 +3,11 @@
 ## NASA API
 - https://api.nasa.gov/
 
-## Livewire
-- https://livewire.laravel.com/
-- livewire v4 beta がでったっぽいからそれにしたいなあ
+## Livewire V4
+変更点が多い
+
+- https://livewire.laravel.com/docs/4.x/quickstart
+- https://github.com/Ercogx/laravel-filament-starter-kit
 
 ## Redis
 ```bash

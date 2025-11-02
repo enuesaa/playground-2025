@@ -14,8 +14,7 @@ return [
     */
 
     'component_locations' => [
-        resource_path('views/components'),
-        resource_path('views/livewire'),
+        resource_path('views'),
     ],
 
     /*
@@ -30,8 +29,8 @@ return [
     */
 
     'component_namespaces' => [
-        'layouts' => resource_path('views/layouts'),
-        'pages' => resource_path('views/pages'),
+        'layouts' => resource_path('views'),
+        'pages' => resource_path('views'),
     ],
 
     /*
@@ -44,7 +43,7 @@ return [
     |
     */
 
-    'component_layout' => 'layouts::app',
+    'component_layout' => 'layouts::main',
 
     /*
     |---------------------------------------------------------------------------
@@ -70,7 +69,7 @@ return [
 
     'make_command' => [
         'type' => 'sfc', // Options: 'sfc', 'mfc', 'class'
-        'emoji' => true, // Options: true, false
+        'emoji' => false, // Options: true, false
     ],
 
     /*
@@ -97,7 +96,7 @@ return [
     |
     */
 
-    'view_path' => resource_path('views/livewire'),
+    'view_path' => resource_path('views'),
 
     /*
     |---------------------------------------------------------------------------
