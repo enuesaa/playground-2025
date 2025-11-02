@@ -5,13 +5,12 @@ declare(strict_types=1);
 use App\Http\Controllers\DevOpenapiController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PictureController;
-use App\Http\Components\TopPage;
 use App\Http\Controllers\ProxyController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 # ui
-Route::get('/', TopPage::class);
+Route::livewire('/', 'top.page');
 
 # api
 Route::prefix('/api')->group(function () {
