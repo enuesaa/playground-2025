@@ -6,6 +6,7 @@ namespace App\Services\Nasa;
 
 use App\Services\Nasa\DataModels\AstronomyPicture;
 use App\Services\Nasa\DataModels\MarsRoverPhoto;
+use GuzzleHttp\Client;
 
 /**
  * Asteroids - NeoWs を見ようかな
@@ -22,6 +23,29 @@ class Nasa
     public function __construct(ApiClient $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * https://images-api.nasa.gov
+     * @return MarsRoverPhoto[] photo
+     */
+    public function listImages(): array
+    {
+        $client = new Client();
+        $res = $client->get('https://images-api.nasa.gov/search?q=orion');
+        $resbody = json_decode($res->getBody()->getContents(), associative: true);
+
+        $list = [];
+
+        foreach ($resbody['collection']['items'] as $entry) {
+            if (count($entry['links']) === 0) {
+                continue;
+            }
+            foreach ($entry['links'] as $link) {
+                $list[] = new MarsRoverPhoto(['id' => $link['href'], 'img_src' => $link['href']]);
+            }
+        }
+        return $list;
     }
 
     public function getAstronomyPictureOfTheDay(): AstronomyPicture
