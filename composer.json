@@ -9,7 +9,7 @@
         "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.31",
         "laravel/octane": "^2.8",
-        "livewire/livewire": "^3.6",
+        "livewire/livewire": "^4.0@beta",
         "predis/predis": "^3.2",
         "zircote/swagger-php": "^5.1"
     },
