@@ -4,14 +4,13 @@
     "dev": "tsx src/main.ts",
     "format": "biome format --write src/main.ts"
   },
-  "devDependencies": {
-    "@biomejs/biome": "2.3.2",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
-  },
   "dependencies": {
     "arkregex": "^0.0.2",
     "arktype": "^2.1.25"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }
