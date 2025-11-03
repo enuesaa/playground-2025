@@ -1,53 +1,54 @@
-mod models;
-mod subshell;
-mod usecases;
+// mod models;
+// mod subshell;
+// mod usecases;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 use users::get_user_by_uid;
 // use sea_orm::{Database, DatabaseConnection};
-use std::{any::Any, path::Path, time::Duration};
+use std::{path::Path, time::Duration};
 use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 
 // use crate::usecases::{cakes, migrate};
 
-#[derive(Parser)]
-#[command(version)]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-}
+// #[derive(Parser)]
+// #[command(version)]
+// struct Cli {
+//     #[command(subcommand)]
+//     command: Commands,
+// }
 
-#[derive(Subcommand)]
-enum Commands {
-    /// Run subshell
-    Start,
-    /// Cpu
-    Cpu,
-}
+// #[derive(Subcommand)]
+// enum Commands {
+//     /// Run subshell
+//     Start,
+//     /// Cpu
+//     Cpu,
+// }
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let cli = Cli::parse();
+    query()?;
+    // let cli = Cli::parse();
 
-    match cli.command {
-        // Commands::Migrate => {
-        //     if let Ok(db) = connectdb().await {
-        //         let ret = migrate::migrate(&db).await;
-        //         print!("{:?}\n", ret);
-        //         let ret = cakes::create(&db).await;
-        //         print!("{:?}\n", ret);
-        //         let ret = cakes::find_all(&db).await;
-        //         print!("{:?}\n", ret);
-        //     }
-        // }
-        Commands::Start => {
-            subshell::run();
-        }
-        Commands::Cpu => {
-            print_cpu().await;
-        }
-    }
+    // match cli.command {
+    //     // Commands::Migrate => {
+    //     //     if let Ok(db) = connectdb().await {
+    //     //         let ret = migrate::migrate(&db).await;
+    //     //         print!("{:?}\n", ret);
+    //     //         let ret = cakes::create(&db).await;
+    //     //         print!("{:?}\n", ret);
+    //     //         let ret = cakes::find_all(&db).await;
+    //     //         print!("{:?}\n", ret);
+    //     //     }
+    //     // }
+    //     Commands::Start => {
+    //         query()?;
+    //     }
+    //     Commands::Cpu => {
+    //         print_cpu().await;
+    //     }
+    // }
     Ok(())
 }
 
@@ -123,4 +124,51 @@ async fn print_cpu() {
     if let Some(user) = get_user_by_uid(501) {
         print!("{:?}\n", user.name());
     }
+}
+
+
+
+use rusqlite::{Connection, Result as RResult};
+
+#[derive(Debug)]
+struct Person {
+    id: i32,
+    name: String,
+    data: Option<Vec<u8>>,
+}
+
+fn query() -> RResult<()> {
+    let conn = Connection::open("example.db")?;
+
+    conn.execute(
+        "CREATE TABLE person (
+            id    INTEGER PRIMARY KEY,
+            name  TEXT NOT NULL,
+            data  BLOB
+        )",
+        (), // empty list of parameters.
+    )?;
+    let me = Person {
+        id: 0,
+        name: "Steven".to_string(),
+        data: None,
+    };
+    conn.execute(
+        "INSERT INTO person (name, data) VALUES (?1, ?2)",
+        (&me.name, &me.data),
+    )?;
+
+    let mut stmt = conn.prepare("SELECT id, name, data FROM person")?;
+    let person_iter = stmt.query_map([], |row| {
+        Ok(Person {
+            id: row.get(0)?,
+            name: row.get(1)?,
+            data: row.get(2)?,
+        })
+    })?;
+
+    for person in person_iter {
+        println!("Found person {:?}", person.unwrap());
+    }
+    Ok(())
 }
