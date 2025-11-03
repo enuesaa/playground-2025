@@ -55,6 +55,14 @@ async fn main() -> Result<()> {
 //     Ok(db)
 // }
 
+struct ProcessStat {
+    pid: u32,
+    name: String,
+    cpu: u32,
+    memory: u32,
+    cmds: String,
+}
+
 async fn print_cpu() {
     let mut sys = System::new_all();
 
@@ -64,15 +72,33 @@ async fn print_cpu() {
         ProcessRefreshKind::everything(),
     );
     tokio::time::sleep(Duration::from_secs(1)).await;
+
     sys.refresh_processes_specifics(
         ProcessesToUpdate::All,
         true,
         ProcessRefreshKind::everything(),
     );
 
+    let mut stats = Vec::<ProcessStat>::new();
+
     for (pid, process) in sys.processes() {
-        println!("PID {}: {} {:?} {:?}", pid, process.name().to_str().unwrap(), process.cmd(), process.cpu_usage());
+        // println!("PID {}: {} {:?} {:?} {:?}", pid, process.name().to_str().unwrap(), process.cmd(), process.cpu_usage(), process.memory());
+
+        let stat = ProcessStat{
+            pid: pid.as_u32(),
+            name: process.name().to_str().unwrap_or("none").to_string(),
+            cpu: process.cpu_usage() as u32,
+            memory: process.memory() as u32,
+            cmds: format!("{:?}", process.cmd()),
+        };
+        stats.push(stat);
     }
+    stats.sort_by(|a, b| b.cpu.cmp(&a.cpu));
+
+    for s in stats.iter().take(10) {
+        println!("{} {}% {} {}", s.pid, s.cpu, s.memory, s.name);
+    }
+
 
     // sys.refresh_processes_specifics(
     //     ProcessesToUpdate::All,
