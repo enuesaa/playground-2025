@@ -3,8 +3,6 @@ use sea_orm::ActiveValue::Set;
 use std::{path::Path, time::Duration};
 use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use users::get_user_by_uid;
-use sea_orm::{Database, DatabaseConnection};
-use migration::{Migrator, MigratorTrait};
 
 use crate::models;
 use crate::usecases::pstats;
@@ -77,7 +75,7 @@ pub async fn print_cpu() -> Result<()> {
             s.status,
             s.group_id,
             s.parent_id,
-            s.user_id
+            s.user_id,
         );
 
         if let Some(pid) = s.parent_id {
@@ -102,14 +100,26 @@ pub async fn print_cpu() -> Result<()> {
             let pstat = models::pstats::ActiveModel {
                 pid: Set(s.pid),
                 name: Set(s.name.to_string()),
+                command: Set(Some(s.cmds.to_string())),
+                cpu_usage: Set(Some(s.cpu)),
+                cpu_time: Set(Some(s.cputime)),
+                memory_usage: Set(Some(s.memory)),
+                cwd: Set(Some(s.cwd.to_string())),
+                status: Set(Some(s.status.to_string())),
+    //         s.parent_id,
+    //         s.user_id,
                 ..Default::default()
             };
-            pstats::create(&db, pstat).await?;
+            let id = pstats::create(&db, pstat).await?;
+            print!("created: {}\n", id);
         }
 
-        let ret = pstats::find_all(&db).await;
-        print!("{:?}\n", ret);
-    };
+        let ret = pstats::find_all(&db).await?;
+        for record in ret {
+            print!("found: {} {:?} ({:?})\n", record.name, record.cpu_usage, record.cpu_time);
+        }
 
+        pstats::deleteall(&db).await?;
+    }
     Ok(())
 }
