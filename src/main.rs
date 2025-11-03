@@ -5,7 +5,7 @@ mod usecases;
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 // use sea_orm::{Database, DatabaseConnection};
-use std::time::Duration;
+use std::{any::Any, path::Path, time::Duration};
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 
 // use crate::usecases::{cakes, migrate};
@@ -59,8 +59,14 @@ struct ProcessStat {
     pid: u32,
     name: String,
     cpu: u32,
+    cputime: u32,
     memory: u32,
     cmds: String,
+    cwd: String,
+    status: String,
+    group_id: String,
+    parent_id: String,
+    user_id: String,
 }
 
 async fn print_cpu() {
@@ -82,43 +88,24 @@ async fn print_cpu() {
     let mut stats = Vec::<ProcessStat>::new();
 
     for (pid, process) in sys.processes() {
-        // println!("PID {}: {} {:?} {:?} {:?}", pid, process.name().to_str().unwrap(), process.cmd(), process.cpu_usage(), process.memory());
-
         let stat = ProcessStat{
             pid: pid.as_u32(),
             name: process.name().to_str().unwrap_or("none").to_string(),
             cpu: process.cpu_usage() as u32,
+            cputime: process.accumulated_cpu_time() as u32,
             memory: process.memory() as u32,
             cmds: format!("{:?}", process.cmd()),
+            cwd: process.cwd().unwrap_or(Path::new("/")).to_str().unwrap_or("").into(),
+            status: format!("{:?}", process.status()),
+            group_id: format!("{:?}", process.group_id()),
+            parent_id: format!("{:?}", process.parent()),
+            user_id: format!("{:?}", process.user_id()),
         };
         stats.push(stat);
     }
     stats.sort_by(|a, b| b.cpu.cmp(&a.cpu));
 
     for s in stats.iter().take(10) {
-        println!("{} {}% {} {}", s.pid, s.cpu, s.memory, s.name);
+        println!("{} {}% ({}) {} {} {} {} {} {} {}", s.pid, s.cpu, s.cputime, s.memory, s.name, s.cwd, s.status, s.group_id, s.parent_id, s.user_id);
     }
-
-
-    // sys.refresh_processes_specifics(
-    //     ProcessesToUpdate::All,
-    //     true,
-    //     ProcessRefreshKind::everything(),
-    // );
-
-    // for (pid, process) in sys.processes() {
-    //     println!("PID {}: {} {:?} {:?}", pid, process.name().to_str().unwrap(), process.cmd(), process.cpu_usage());
-    // }
-    // loop {
-    //     sys.refresh_cpu_usage();
-    //     let cpus = sys.cpus();
-
-    //     let total_usage: f32 = cpus.iter().map(|c| c.cpu_usage()).sum::<f32>() / cpus.len() as f32;
-    //     println!("CPU使用率: {:.2}%", total_usage);
-
-    //     // for (i, cpu) in cpus.iter().enumerate() {
-    //     //     println!("  CPU{}: {:.2}%", i, cpu.cpu_usage());
-    //     // }
-    //     tokio::time::sleep(Duration::from_secs(1)).await;
-    // }
 }
