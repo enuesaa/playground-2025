@@ -5,11 +5,11 @@ use sea_orm::{ActiveValue::Set, DatabaseConnection};
 
 use crate::models;
 
-pub async fn create(db: &DatabaseConnection) -> Result<()> {
-    let pstat = models::pstats::ActiveModel {
-        name: Set("hello".to_owned()),
-        ..Default::default()
-    };
+pub async fn create(db: &DatabaseConnection, pstat: models::pstats::ActiveModel) -> Result<()> {
+    // let pstat = models::pstats::ActiveModel {
+    //     name: Set("hello".to_owned()),
+    //     ..Default::default()
+    // };
     let res = models::pstats::Entity::insert(pstat).exec(db).await?;
     print!("id{:?}\n", res);
     Ok(())

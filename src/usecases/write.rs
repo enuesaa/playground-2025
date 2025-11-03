@@ -2,7 +2,7 @@ use anyhow::Result;
 use sea_orm::{Database, DatabaseConnection};
 use migration::{Migrator, MigratorTrait};
 
-use crate::usecases::cakes;
+// use crate::usecases::pstats;
 
 pub async fn connect() -> Result<DatabaseConnection> {
     let db = Database::connect("sqlite://testdata/data.db?mode=rwc").await?;
@@ -18,10 +18,10 @@ pub async fn write() -> Result<()> {
     if let Ok(db) = connect().await {
         let ret = migrate(&db).await;
         print!("{:?}\n", ret);
-        let ret = cakes::create(&db).await;
-        print!("{:?}\n", ret);
-        let ret = cakes::find_all(&db).await;
-        print!("{:?}\n", ret);
+        // let ret = pstats::create(&db).await;
+        // print!("{:?}\n", ret);
+        // let ret = pstats::find_all(&db).await;
+        // print!("{:?}\n", ret);
     };
     Ok(())
 }

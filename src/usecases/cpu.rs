@@ -1,7 +1,14 @@
 use anyhow::Result;
+use sea_orm::ActiveValue::Set;
 use std::{path::Path, time::Duration};
 use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use users::get_user_by_uid;
+use sea_orm::{Database, DatabaseConnection};
+use migration::{Migrator, MigratorTrait};
+
+use crate::models;
+use crate::usecases::pstats;
+use crate::usecases::write;
 
 struct ProcessStat {
     pid: u32,
@@ -87,6 +94,22 @@ pub async fn print_cpu() -> Result<()> {
     if let Some(user) = get_user_by_uid(501) {
         print!("{:?}\n", user.name());
     }
+
+    if let Ok(db) = write::connect().await {
+        write::migrate(&db).await?;
+
+        for s in stats.iter().take(10) {
+            let pstat = models::pstats::ActiveModel {
+                pid: Set(s.pid),
+                name: Set(s.name.to_string()),
+                ..Default::default()
+            };
+            pstats::create(&db, pstat).await?;
+        }
+
+        let ret = pstats::find_all(&db).await;
+        print!("{:?}\n", ret);
+    };
 
     Ok(())
 }
