@@ -1,5 +1,3 @@
-pub mod cakes;
-pub mod connect;
+mod cakes;
 pub mod cpu;
-pub mod migrate;
 pub mod write;

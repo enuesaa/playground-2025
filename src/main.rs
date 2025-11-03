@@ -1,7 +1,6 @@
 mod models;
 mod usecases;
 
-use crate::usecases::{cpu, write};
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 
@@ -14,7 +13,7 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// db
+    /// write
     Write,
     /// Cpu
     Cpu,
@@ -25,12 +24,8 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Write => {
-            write::write().await?;
-        }
-        Commands::Cpu => {
-            cpu::print_cpu().await?;
-        }
+        Commands::Write => usecases::write::write().await?,
+        Commands::Cpu => usecases::cpu::print_cpu().await?,
     }
     Ok(())
 }
