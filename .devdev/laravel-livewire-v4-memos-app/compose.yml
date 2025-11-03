@@ -5,4 +5,21 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/var/www/html
+    ports:
+      - 8080:80
     tty: true
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  dbdata:
