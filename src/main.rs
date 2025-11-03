@@ -4,9 +4,10 @@ mod usecases;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
+use users::get_user_by_uid;
 // use sea_orm::{Database, DatabaseConnection};
 use std::{any::Any, path::Path, time::Duration};
-use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
+use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 
 // use crate::usecases::{cakes, migrate};
 
@@ -65,7 +66,7 @@ struct ProcessStat {
     cwd: String,
     status: String,
     group_id: String,
-    parent_id: String,
+    parent_id: Option<Pid>,
     user_id: String,
 }
 
@@ -98,7 +99,7 @@ async fn print_cpu() {
             cwd: process.cwd().unwrap_or(Path::new("/")).to_str().unwrap_or("").into(),
             status: format!("{:?}", process.status()),
             group_id: format!("{:?}", process.group_id()),
-            parent_id: format!("{:?}", process.parent()),
+            parent_id: process.parent(),
             user_id: format!("{:?}", process.user_id()),
         };
         stats.push(stat);
@@ -106,6 +107,20 @@ async fn print_cpu() {
     stats.sort_by(|a, b| b.cpu.cmp(&a.cpu));
 
     for s in stats.iter().take(10) {
-        println!("{} {}% ({}) {} {} {} {} {} {} {}", s.pid, s.cpu, s.cputime, s.memory, s.name, s.cwd, s.status, s.group_id, s.parent_id, s.user_id);
+        print!("{} {}% ({}) {} {} {} {} {} {:?} {}", s.pid, s.cpu, s.cputime, s.memory, s.name, s.cwd, s.status, s.group_id, s.parent_id, s.user_id);
+        
+        if let Some(pid) = s.parent_id {
+            if let Some(parent) = sys.process(pid) {
+                print!("  Parent: {} {}\n",pid, parent.name().to_string_lossy());
+            } else {
+                println!("");
+            }
+        } else {
+            println!("");
+        }
+    }
+
+    if let Some(user) = get_user_by_uid(501) {
+        print!("{:?}\n", user.name());
     }
 }
