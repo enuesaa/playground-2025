@@ -1,7 +1,7 @@
 use anyhow::Result;
+use sea_orm::DatabaseConnection;
 use sea_orm::QueryOrder;
 use sea_orm::entity::prelude::*;
-use sea_orm::DatabaseConnection;
 
 use crate::models;
 
@@ -23,9 +23,7 @@ pub async fn find_all(db: &DatabaseConnection) -> Result<Vec<models::pstats::Mod
 }
 
 pub async fn deleteall(db: &DatabaseConnection) -> Result<()> {
-    let pstats: Vec<models::pstats::Model> = models::pstats::Entity::find()
-        .all(db)
-        .await?;
+    let pstats: Vec<models::pstats::Model> = models::pstats::Entity::find().all(db).await?;
 
     for pstat in pstats.into_iter() {
         pstat.delete(db).await?;

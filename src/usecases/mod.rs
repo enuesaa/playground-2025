@@ -1,3 +1,3 @@
 pub mod cpu;
-pub mod write;
 mod pstats;
+pub mod write;

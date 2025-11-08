@@ -106,8 +106,8 @@ pub async fn print_cpu() -> Result<()> {
                 memory_usage: Set(Some(s.memory)),
                 cwd: Set(Some(s.cwd.to_string())),
                 status: Set(Some(s.status.to_string())),
-    //         s.parent_id,
-    //         s.user_id,
+                //         s.parent_id,
+                //         s.user_id,
                 ..Default::default()
             };
             let id = pstats::create(&db, pstat).await?;
@@ -116,7 +116,10 @@ pub async fn print_cpu() -> Result<()> {
 
         let ret = pstats::find_all(&db).await?;
         for record in ret {
-            print!("found: {} {:?} ({:?})\n", record.name, record.cpu_usage, record.cpu_time);
+            print!(
+                "found: {} {:?} ({:?})\n",
+                record.name, record.cpu_usage, record.cpu_time
+            );
         }
 
         pstats::deleteall(&db).await?;
