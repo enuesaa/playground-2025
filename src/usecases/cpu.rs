@@ -5,8 +5,8 @@ use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use users::get_user_by_uid;
 
 use crate::models;
-use crate::usecases::pstats;
-use crate::usecases::write;
+use crate::usecases::dbpstats;
+use crate::usecases::db;
 
 struct ProcessStat {
     pid: u32,
@@ -93,8 +93,8 @@ pub async fn print_cpu() -> Result<()> {
         print!("{:?}\n", user.name());
     }
 
-    if let Ok(db) = write::connect().await {
-        write::migrate(&db).await?;
+    if let Ok(db) = db::connect().await {
+        db::migrate(&db).await?;
 
         for s in stats.iter().take(10) {
             let pstat = models::pstats::ActiveModel {
@@ -110,11 +110,11 @@ pub async fn print_cpu() -> Result<()> {
                 //         s.user_id,
                 ..Default::default()
             };
-            let id = pstats::create(&db, pstat).await?;
+            let id = dbpstats::create(&db, pstat).await?;
             print!("created: {}\n", id);
         }
 
-        let ret = pstats::find_all(&db).await?;
+        let ret = dbpstats::find_all(&db).await?;
         for record in ret {
             print!(
                 "found: {} {:?} ({:?})\n",
@@ -122,7 +122,7 @@ pub async fn print_cpu() -> Result<()> {
             );
         }
 
-        pstats::deleteall(&db).await?;
+        dbpstats::deleteall(&db).await?;
     }
     Ok(())
 }

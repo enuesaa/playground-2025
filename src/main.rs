@@ -13,8 +13,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// write
-    Write,
+    /// run
+    Run,
     /// Cpu
     Cpu,
 }
@@ -24,8 +24,16 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Write => usecases::write::write().await?,
+        Commands::Run => run().await?,
         Commands::Cpu => usecases::cpu::print_cpu().await?,
     }
+    Ok(())
+}
+
+async fn run() -> Result<()> {
+    if let Ok(db) = usecases::db::connect().await {
+        let ret = usecases::db::migrate(&db).await;
+        print!("{:?}\n", ret);
+    };
     Ok(())
 }

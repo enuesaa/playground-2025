@@ -11,11 +11,3 @@ pub async fn migrate(db: &DatabaseConnection) -> Result<()> {
     Migrator::up(db, None).await?;
     Ok(())
 }
-
-pub async fn write() -> Result<()> {
-    if let Ok(db) = connect().await {
-        let ret = migrate(&db).await;
-        print!("{:?}\n", ret);
-    };
-    Ok(())
-}
