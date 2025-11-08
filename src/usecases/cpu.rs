@@ -5,8 +5,8 @@ use sysinfo::{Pid, ProcessRefreshKind, ProcessesToUpdate, System};
 use users::get_user_by_uid;
 
 use crate::models;
-use crate::usecases::dbpstats;
 use crate::usecases::db;
+use crate::usecases::dbpstats;
 
 struct ProcessStat {
     pid: u32,
@@ -23,6 +23,32 @@ struct ProcessStat {
 }
 
 pub async fn print_cpu() -> Result<()> {
+    let stats = get_cpustats().await?;
+
+    let db = db::connect().await?;
+    db::migrate(&db).await?;
+
+    for s in stats.iter().take(10) {
+        let pstat = models::pstats::ActiveModel {
+            pid: Set(s.pid),
+            name: Set(s.name.to_string()),
+            command: Set(Some(s.cmds.to_string())),
+            cpu_usage: Set(Some(s.cpu)),
+            cpu_time: Set(Some(s.cputime)),
+            memory_usage: Set(Some(s.memory)),
+            cwd: Set(Some(s.cwd.to_string())),
+            status: Set(Some(s.status.to_string())),
+            //         s.parent_id,
+            //         s.user_id,
+            ..Default::default()
+        };
+        let id = dbpstats::create(&db, pstat).await?;
+        print!("created: {}\n", id);
+    }
+    Ok(())
+}
+
+async fn get_cpustats() -> Result<Vec<ProcessStat>> {
     let mut sys = System::new_all();
 
     sys.refresh_processes_specifics(
@@ -63,66 +89,11 @@ pub async fn print_cpu() -> Result<()> {
     }
     stats.sort_by(|a, b| b.cpu.cmp(&a.cpu));
 
-    for s in stats.iter().take(10) {
-        print!(
-            "{} {}% ({}) {} {} {} {} {} {:?} {}",
-            s.pid,
-            s.cpu,
-            s.cputime,
-            s.memory,
-            s.name,
-            s.cwd,
-            s.status,
-            s.group_id,
-            s.parent_id,
-            s.user_id,
-        );
+    Ok(stats)
+}
 
-        if let Some(pid) = s.parent_id {
-            if let Some(parent) = sys.process(pid) {
-                print!("  Parent: {} {}\n", pid, parent.name().to_string_lossy());
-            } else {
-                println!("");
-            }
-        } else {
-            println!("");
-        }
-    }
-
+fn get_user() {
     if let Some(user) = get_user_by_uid(501) {
         print!("{:?}\n", user.name());
     }
-
-    if let Ok(db) = db::connect().await {
-        db::migrate(&db).await?;
-
-        for s in stats.iter().take(10) {
-            let pstat = models::pstats::ActiveModel {
-                pid: Set(s.pid),
-                name: Set(s.name.to_string()),
-                command: Set(Some(s.cmds.to_string())),
-                cpu_usage: Set(Some(s.cpu)),
-                cpu_time: Set(Some(s.cputime)),
-                memory_usage: Set(Some(s.memory)),
-                cwd: Set(Some(s.cwd.to_string())),
-                status: Set(Some(s.status.to_string())),
-                //         s.parent_id,
-                //         s.user_id,
-                ..Default::default()
-            };
-            let id = dbpstats::create(&db, pstat).await?;
-            print!("created: {}\n", id);
-        }
-
-        let ret = dbpstats::find_all(&db).await?;
-        for record in ret {
-            print!(
-                "found: {} {:?} ({:?})\n",
-                record.name, record.cpu_usage, record.cpu_time
-            );
-        }
-
-        dbpstats::deleteall(&db).await?;
-    }
-    Ok(())
 }
