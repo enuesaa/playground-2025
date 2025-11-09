@@ -16,4 +16,5 @@ php artisan livewire:layout
 php artisan livewire
 php artisan livewire:publish
 php artisan make:livewire pages::post.create
+php artisan make:livewire pages::top
 ```
