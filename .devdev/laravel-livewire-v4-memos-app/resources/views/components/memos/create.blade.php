@@ -21,8 +21,8 @@ new class extends Component
 };
 ?>
 
-
 <div class="bg-white rounded-lg shadow-lg border border-slate-100 p-4">
+    
     <div class="flex items-center justify-between mb-3">
         <h3 class="text-lg font-semibold">New Memo</h3>
         <button wire:click="$parent.close()" class="text-slate-600 hover:text-slate-900">✕</button>

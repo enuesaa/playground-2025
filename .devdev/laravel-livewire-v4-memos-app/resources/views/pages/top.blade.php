@@ -36,6 +36,6 @@ new class extends Component
     </ul>
 
     <livewire:common.modal wire:model="showModal">
-         aa
+        <livewire:memos.create />aa
     </livewire:common.modal>
 </div>
