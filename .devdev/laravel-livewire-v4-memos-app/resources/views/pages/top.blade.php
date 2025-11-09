@@ -24,10 +24,6 @@ new class extends Component
         </button>
     </div>
 
-    @if ($this->showModal)
-    <div >aaa</div>
-    @endif
-
     <ul class="mt-6 space-y-3">
     @foreach ($this->memos as $memo)
         <li>
@@ -39,4 +35,7 @@ new class extends Component
     @endforeach
     </ul>
 
+    <livewire:common.modal wire:model="showModal">
+         aa
+    </livewire:common.modal>
 </div>
