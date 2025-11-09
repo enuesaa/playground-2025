@@ -17,9 +17,11 @@ new class extends Component
 <div>
     <h1 class="text-3xl font-bold underline">top page</h1>
 
+    <ul>
     @foreach ($this->memos as $memo)
-        <article>{{ $memo->title }}</article>
+        <li><a href="/memos/{{ $memo->id }}">{{ $memo->title }}</a></li>
     @endforeach
+    </ul>
 
-    <a href="/post/create">create</a>
+    <a href="/memos/create">create</a>
 </div>
