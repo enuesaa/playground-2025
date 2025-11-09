@@ -19,7 +19,7 @@ new class extends Component
 <div>
     <div class="flex items-center justify-between">
         <h1 class="text-2xl sm:text-3xl font-bold">Top</h1>
-        <button wire:click="showModal = true" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-600 text-white text-sm hover:bg-sky-700">
+        <button wire:click="$dispatch('createMemoModal.open')" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-sky-600 text-white text-sm hover:bg-sky-700">
             New Post
         </button>
     </div>
@@ -35,7 +35,7 @@ new class extends Component
     @endforeach
     </ul>
 
-    <livewire:common.modal wire:model="showModal">
-        <livewire:memos.create />
+    <livewire:common.modal name="createMemoModal">
+        <livewire:memos.create onClose="createMemoModal.close" />
     </livewire:common.modal>
 </div>
