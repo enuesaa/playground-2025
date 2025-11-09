@@ -15,7 +15,7 @@ services:
     image: postgres:17
     environment:
       - POSTGRES_DB=app
-      - DB_USERNAME=root
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=password
     volumes:
       - dbdata:/var/lib/postgresql/data

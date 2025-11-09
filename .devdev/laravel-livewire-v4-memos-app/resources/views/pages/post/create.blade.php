@@ -1,21 +1,18 @@
 <?php
- 
+
+use App\Livewire\Forms\MemoCreateForm;
+use App\Models\Memo;
 use Livewire\Component;
  
 new class extends Component
 {
-    public string $title = '';
- 
-    public string $content = '';
+    public MemoCreateForm $form;
  
     public function save()
     {
-        $this->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-        ]);
- 
-        dd($this->title, $this->content);
+        Memo::create($this->form->validate());
+
+        return redirect()->to('/');
     }
 };
 ?>
@@ -23,15 +20,15 @@ new class extends Component
 <form wire:submit="save">
     <label>
         Title
-        <input type="text" wire:model="title">
-        @error('title') <span style="color: red;">{{ $message }}</span> @enderror
+        <input type="text" wire:model="form.title" class="border">
+        @error('form.title') <span style="color: red;">{{ $message }}</span> @enderror
     </label>
  
     <label>
         Content
-        <textarea wire:model="content" rows="5"></textarea>
-        @error('content') <span style="color: red;">{{ $message }}</span> @enderror
+        <textarea wire:model="form.content" rows="5" class="border"></textarea>
+        @error('form.content') <span style="color: red;">{{ $message }}</span> @enderror
     </label>
  
-    <button type="submit">Save Post</button>
+    <button type="submit" class="border">Save</button>
 </form>
