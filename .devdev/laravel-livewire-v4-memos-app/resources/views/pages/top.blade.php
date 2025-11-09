@@ -5,7 +5,9 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 
 new class extends Component
-{ 
+{
+    public $showModal = false;
+
     #[Computed]
     public function memos()
     {
@@ -23,5 +25,9 @@ new class extends Component
     @endforeach
     </ul>
 
-    <a href="/memos/create">create</a>
+    <button x-on:click="$wire.showModal = true">New Post</button>
+ 
+    <div wire:show="showModal">
+        <livewire:memos.create />
+    </div>
 </div>
