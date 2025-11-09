@@ -9,5 +9,6 @@ new class extends Component
 ?>
 
 <div>
+    <h1 class="text-3xl font-bold underline">top page</h1>
     top
 </div>
