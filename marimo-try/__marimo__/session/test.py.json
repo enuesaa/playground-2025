@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.17.7"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1cbc694403fc3e7cde17ed237af2caf3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "'aaa'\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    }
+  ]
+}
