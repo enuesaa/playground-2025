@@ -7,9 +7,6 @@ composer global exec laravel new laravel-livewire-v4-memos
 ```
 
 ## Livewire v4 Setup Command
-
-see https://livewire.laravel.com/docs/4.x/quickstart
-
 ```bash
 composer require livewire/livewire:^4.0@beta
 php artisan livewire:layout
@@ -18,3 +15,6 @@ php artisan livewire:publish
 php artisan make:livewire pages::post.create
 php artisan make:livewire pages::top
 ```
+
+## Links
+- https://livewire.laravel.com/docs/4.x/quickstart
