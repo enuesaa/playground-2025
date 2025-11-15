@@ -1,0 +1,23 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL
+);
+
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES users(id),
+  name TEXT NOT NULL,
+  description TEXT
+);
+
+INSERT INTO users (name, email) VALUES
+('Alice', 'alice@example.com'),
+('Bob', 'bob@example.com'),
+('Charlie', 'charlie@example.com');
+
+INSERT INTO tasks (user_id, name, description) VALUES
+(1, 'Task A', 'Alice のタスク A'),
+(1, 'Task B', 'Alice のタスク B'),
+(2, 'Task C', 'Bob のタスク C'),
+(3, 'Task D', 'Charlie のタスク D');
