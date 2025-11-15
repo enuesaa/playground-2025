@@ -6,8 +6,6 @@ use Livewire\Attributes\Computed;
 
 new class extends Component
 {
-    public $showModal = false;
-
     #[Computed]
     public function memos()
     {
@@ -35,7 +33,5 @@ new class extends Component
     @endforeach
     </ul>
 
-    <livewire:common.modal name="createMemoModal">
-        <livewire:memos.create onClose="createMemoModal.close" />
-    </livewire:common.modal>
+    <livewire:memos.create />
 </div>
