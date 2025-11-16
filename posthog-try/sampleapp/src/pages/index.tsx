@@ -5,10 +5,13 @@ export default function Page() {
     e.preventDefault();
     posthog.capture('my event', { property: 'value' })
   }
+
   return (
     <>
       a
-      <button onClick={handleClick}>aa</button>
+      {posthog.getFeatureFlag('testkey') === 'b' && 'click this'}
+      <br />
+      <button onClick={handleClick}>click</button>
     </>
   )
 }
