@@ -9,7 +9,7 @@ new #[Title('about')] class extends Component
 ?>
 
 <div>
-    <livewire:common.pagetop title="About" />
+    <livewire:pagetop title="About" />
 
     ...
 </div>

@@ -16,9 +16,9 @@ new #[Title('top')] class extends Component
 ?>
 
 <div>
-    <livewire:common.pagetop title="Top">
-        <livewire:common.button label="New Post" onClick="$dispatch('createMemoModal.open')" />
-    </livewire:common.pagetop>
+    <livewire:pagetop title="Top">
+        <livewire:button label="New Post" onClick="$dispatch('createMemoModal.open')" />
+    </livewire:pagetop>
 
     <ul class="mt-6 space-y-3">
     @foreach ($this->memos as $memo)

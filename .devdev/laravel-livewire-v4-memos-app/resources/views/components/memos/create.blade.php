@@ -36,7 +36,7 @@ new class extends Component
 };
 ?>
 
-<livewire:common.modal title="New Memo" onClose="$dispatch('createMemoModal.close')">
+<livewire:modal title="New Memo" onClose="$dispatch('createMemoModal.close')">
     <form wire:submit="save" class="space-y-3">
         <label>
             Title
@@ -50,7 +50,7 @@ new class extends Component
         </label>
         <div class="flex justify-end gap-2">
             <button type="button" wire:click="close" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm bg-transparent text-slate-700 hover:bg-slate-50">Cancel</button>
-            <livewire:common.button type="submit" label="Save" />
+            <livewire:button type="submit" label="Save" />
         </div>
     </form>
-</livewire:common.modal>
+</livewire:modal>
