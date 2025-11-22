@@ -36,12 +36,7 @@ new class extends Component
 };
 ?>
 
-<livewire:common.modal wire:model="show">
-    <div class="flex items-center justify-between mb-3">
-        <h3 class="text-lg font-semibold">New Memo</h3>
-        <button wire:click="close" class="text-slate-600 hover:text-slate-900">✕</button>
-    </div>
-
+<livewire:common.modal title="New Memo" show="$show" onClose="$dispatch('createMemoModal.close')">
     <form wire:submit="save" class="space-y-3">
         <label>
             Title
