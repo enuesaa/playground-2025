@@ -26,7 +26,7 @@ new #[Title('memo')] class extends Component
 
 <div>
     <livewire:pagetop title="{{ $this->post->title }}">
-        <livewire:button label="delete" click="memos.{{ $post->id }}.delete" />
+        <livewire:button label="delete" dispatchOnClick="memos.{{ $post->id }}.delete" />
     </livewire:pagetop>
 
     <div class="text-sm text-slate-500 mb-3">

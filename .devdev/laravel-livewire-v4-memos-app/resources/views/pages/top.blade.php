@@ -17,7 +17,7 @@ new #[Title('top')] class extends Component
 
 <div>
     <livewire:pagetop title="Top">
-        <livewire:button label="New Post" click="createMemoModal.open" />
+        <livewire:button label="New Post" dispatchOnClick="createMemoModal.open" />
     </livewire:pagetop>
 
     <ul class="mt-6 space-y-3">
