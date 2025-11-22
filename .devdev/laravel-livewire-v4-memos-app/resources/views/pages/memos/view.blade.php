@@ -1,9 +1,10 @@
 <?php
  
 use App\Models\Memo;
+use Livewire\Attributes\Title;
 use Livewire\Component;
  
-new class extends Component
+new #[Title('memo')] class extends Component
 {
     public Memo $post;
  

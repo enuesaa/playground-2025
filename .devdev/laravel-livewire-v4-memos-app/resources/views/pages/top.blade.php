@@ -3,8 +3,9 @@
 use App\Models\Memo;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Title;
 
-new class extends Component
+new #[Title('top')] class extends Component
 {
     #[Computed]
     public function memos()
