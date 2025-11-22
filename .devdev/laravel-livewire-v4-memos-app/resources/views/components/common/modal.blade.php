@@ -1,13 +1,9 @@
 <?php
 
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 new class extends Component
 {
-    #[Reactive]
-    public bool $show = false;
-
     public string $title = '';
     public string $onClose;
 };
