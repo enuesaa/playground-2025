@@ -20,7 +20,7 @@ new class extends Component
         <div class="relative w-full max-w-lg mx-4 bg-white rounded-lg shadow-lg border border-slate-100 p-4">
             <div class="flex items-center justify-between mb-3">
                 <h3 class="text-lg font-semibold">{{ $title }}</h3>
-                <button wire:click="$dispatch('{{ $dispatchOnClose }}')" class="text-slate-600 hover:text-slate-900">✕</button>
+                <button wire:click="$dispatch('{{ $dispatchOnClose }}')" class="bg-white">✕</button>
             </div>
 
             {{ $slot }}
