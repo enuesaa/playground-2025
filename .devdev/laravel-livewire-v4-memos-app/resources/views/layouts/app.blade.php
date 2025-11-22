@@ -6,7 +6,7 @@
 
         <!-- styles -->
         <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind-compat.min.css" />
 
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
