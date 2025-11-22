@@ -1,6 +1,7 @@
 <?php
  
 use App\Models\Memo;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
  
@@ -12,27 +13,27 @@ new #[Title('memo')] class extends Component
     {
         $this->post = Memo::findOrFail($id);
     }
+
+    #[On('memos.{post.id}.delete')] 
+    public function delete()
+    {
+        $this->post->deleteOrFail();
+
+        return redirect()->to('/');
+    }
 };
 ?>
 
 <div>
-    <div class="flex items-center gap-4 mb-6">
-        <a href="/" class="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900">
-            <span class="i-heroicons-arrow-left-20-solid w-5 h-5"></span>
-            Back
-        </a>
+    <livewire:pagetop title="{{ $this->post->title }}">
+        <livewire:button label="delete" click="memos.{{ $post->id }}.delete" />
+    </livewire:pagetop>
+
+    <div class="text-sm text-slate-500 mb-3">
+        Created {{ $this->post->created_at->diffForHumans() }}
     </div>
 
-    <article class="bg-white rounded-lg border border-slate-100 p-6">
-        <header class="mb-4">
-            <h1 class="text-2xl font-bold text-slate-900">{{ $this->post->title }}</h1>
-            <div class="mt-2 text-sm text-slate-500">
-                Created {{ $this->post->created_at->diffForHumans() }}
-            </div>
-        </header>
-
-        <div class="prose prose-slate max-w-none">
-            {{ $this->post->content }}
-        </div>
-    </article>
+    <div class="bg-white rounded-lg border border-slate-100 p-6 prose prose-slate max-w-none">
+        {{ $this->post->content }}
+    </div>
 </div>
