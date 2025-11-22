@@ -1,15 +1,20 @@
 <?php
 
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 new class extends Component
 {
+    #[Reactive]
+    public bool $show = false;
     public string $title = '';
     public string $onClose;
 };
 ?>
 
-<div wire:show="show">
+<div>
+
+@if ($show == true)
     <div class="fixed inset-0 z-50 flex items-center justify-center">
         <div class="absolute inset-0 bg-black/40" wire:click="{{ $onClose }}"></div>
         <div class="relative w-full max-w-lg mx-4 bg-white rounded-lg shadow-lg border border-slate-100 p-4">
@@ -21,5 +26,6 @@ new class extends Component
             {{ $slot }}
         </div>
     </div>
-</div>
+@endif
 
+</div>

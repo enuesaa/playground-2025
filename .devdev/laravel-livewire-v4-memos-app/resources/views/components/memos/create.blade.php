@@ -36,7 +36,7 @@ new class extends Component
 };
 ?>
 
-<livewire:modal title="New Memo" onClose="$dispatch('createMemoModal.close')">
+<livewire:modal title="New Memo" :show="$show" onClose="$dispatch('createMemoModal.close')">
     <form wire:submit="save" class="space-y-3">
         <label>
             Title
