@@ -3,6 +3,11 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=app
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
     volumes:
       - .:/app
     ports:

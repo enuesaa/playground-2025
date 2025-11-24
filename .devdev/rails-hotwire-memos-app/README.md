@@ -1,24 +1,24 @@
-# README
+# rails hotwire memos app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Commands
+```bash
+docker compose up
+```
 
-Things you may want to cover:
+### migration
+```bash
+# generate
+rails g migration create_memos
 
-* Ruby version
+# status
+rails db:migrate:status
 
-* System dependencies
+# migrate
+rails db:migrate
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### model
+```bash
+# generate
+rails g model Memo title:text content:text --skip-migration
+```
