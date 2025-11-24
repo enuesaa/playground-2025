@@ -22,3 +22,9 @@ rails db:migrate
 # generate
 rails g model Memo title:text content:text --skip-migration
 ```
+
+### controller など
+```bash
+# generate
+rails g scaffold Memo title:text content:text
+```
