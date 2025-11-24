@@ -1,5 +1,6 @@
 mod models;
 mod usecases;
+mod cpustats;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
@@ -17,6 +18,8 @@ enum Commands {
     Run,
     /// Cpu
     Cpu,
+    /// Cpu2
+    Cpu2,
 }
 
 #[tokio::main]
@@ -26,6 +29,7 @@ async fn main() -> Result<()> {
     match cli.command {
         Commands::Run => run().await?,
         Commands::Cpu => usecases::cpu::print_cpu().await?,
+        Commands::Cpu2 => cpustats::print_cpu().await?,
     }
     Ok(())
 }
