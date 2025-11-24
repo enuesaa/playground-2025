@@ -25,9 +25,18 @@ class MemosController < ApplicationController
 
     respond_to do |format|
       if @memo.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.prepend("memos", partial: "memos/memo", locals: { memo: @memo }),
+            turbo_stream.update("modal", "")
+          ]
+        end
         format.html { redirect_to @memo, notice: "Memo was successfully created." }
         format.json { render :show, status: :created, location: @memo }
       else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("modal", partial: "memos/form", locals: { memo: @memo })
+        end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @memo.errors, status: :unprocessable_entity }
       end
@@ -60,11 +69,11 @@ class MemosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_memo
-      @memo = Memo.find(params.expect(:id))
+      @memo = Memo.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def memo_params
-      params.expect(memo: [ :title, :content ])
+      params.require(:memo).permit(:title, :content)
     end
 end
