@@ -31,3 +31,7 @@ rails g model Memo title:text content:text --skip-migration
 # generate
 rails g scaffold Memo title:text content:text
 ```
+
+## Links
+- https://www.hotrails.dev/turbo-rails/crud-controller-ruby-on-rails
+- https://zenn.dev/shita1112/books/cat-hotwire-turbo/viewer/turbo-drive
