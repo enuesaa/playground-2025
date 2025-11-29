@@ -15,40 +15,59 @@ class MemosController < ApplicationController
   def create
     @memo = Memo.new(memo_params)
 
-    respond_to do |format|
-      if @memo.save
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.prepend("memos", partial: "memos/memo", locals: { memo: @memo }),
-            turbo_stream.update("modal", "")
-          ]
-        end
-        format.html { redirect_to @memo, notice: "Memo was successfully created." }
-        format.json { render :show, status: :created, location: @memo }
-      else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update("modal", partial: "memos/form", locals: { memo: @memo })
-        end
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @memo.errors, status: :unprocessable_entity }
-      end
+    if @memo.save
+      redirect_to memos_path, notice: "Memo was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
-  end
+    end
 
   def update
-    respond_to do |format|
-      if @memo.update(memo_params)
-        format.html { redirect_to @memo, notice: "Memo was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @memo }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @memo.errors, status: :unprocessable_entity }
-      end
+    if @memo.update(memo_params)
+      redirect_to memos_path, notice: "Memo was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
+
+
+  # def create
+  #   @memo = Memo.new(memo_params)
+
+  #   respond_to do |format|
+  #     if @memo.save
+  #       format.turbo_stream do
+  #         render turbo_stream: [
+  #           turbo_stream.prepend("memos", partial: "memos/memo", locals: { memo: @memo }),
+  #           turbo_stream.update("modal", "")
+  #         ]
+  #       end
+  #       format.html { redirect_to @memo, notice: "Memo was successfully created." }
+  #       format.json { render :show, status: :created, location: @memo }
+  #     else
+  #       format.turbo_stream do
+  #         render turbo_stream: turbo_stream.update("modal", partial: "memos/form", locals: { memo: @memo })
+  #       end
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @memo.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  # def update
+  #   respond_to do |format|
+  #     if @memo.update(memo_params)
+  #       format.html { redirect_to @memo, notice: "Memo was successfully updated.", status: :see_other }
+  #       format.json { render :show, status: :ok, location: @memo }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @memo.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   def destroy
     @memo.destroy!

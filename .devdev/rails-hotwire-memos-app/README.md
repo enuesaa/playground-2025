@@ -15,6 +15,9 @@ rails db:migrate:status
 
 # migrate
 rails db:migrate
+
+# put seed data
+rails db:seed
 ```
 
 ### model
