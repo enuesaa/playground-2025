@@ -1,16 +1,21 @@
 <%= turbo_frame_tag memo do %>
-  <div class="memo">
-    <%= link_to memo.title,
-                memo_path(memo),
-                data: { turbo_frame: "_top" } %>
-    <div class="memo__actions">
-      <%= button_to "Delete",
+  <div class="bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-200 p-6 border border-slate-200">
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex-1">
+        <%= link_to memo.title,
                     memo_path(memo),
-                    method: :delete,
-                    class: "btn btn--light" %>
-      <%= link_to "Edit",
-                  edit_memo_path(memo),
-                  class: "btn btn--light" %>
+                    class: "text-xl font-semibold text-slate-900 hover:text-blue-600 transition-colors duration-200",
+                    data: { turbo_frame: "_top" } %>
+      </div>
+      <div class="flex items-center gap-2">
+        <%= link_to "Edit",
+                    edit_memo_path(memo),
+                    class: "px-3 py-1 text-sm bg-slate-200 hover:bg-slate-300 text-slate-900 rounded transition-colors duration-200" %>
+        <%= button_to "Delete",
+                      memo_path(memo),
+                      method: :delete,
+                      class: "px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-900 rounded transition-colors duration-200" %>
+      </div>
     </div>
   </div>
 <% end %>
