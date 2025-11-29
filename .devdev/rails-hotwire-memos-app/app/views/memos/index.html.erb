@@ -1,5 +1,6 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
   <div class="max-w-2xl mx-auto px-4">
+
     <div class="flex items-center justify-between mb-12">
       <h1 class="text-4xl font-bold text-slate-900">Memos</h1>
       <%= link_to "New memo",
@@ -7,7 +8,6 @@
                   class: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200",
                   data: { turbo_frame: dom_id(Memo.new) } %>
     </div>
-
     <%= turbo_frame_tag Memo.new %>
 
     <%= turbo_frame_tag "memos" do %>
@@ -15,5 +15,6 @@
         <%= render @memos %>
       </div>
     <% end %>
+
   </div>
 </div>

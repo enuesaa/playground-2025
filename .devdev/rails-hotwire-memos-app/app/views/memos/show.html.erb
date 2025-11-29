@@ -19,16 +19,6 @@
             <%= @memo.content %>
           </p>
         </div>
-
-        <div class="flex items-center gap-3 mt-8 pt-6 border-t border-slate-200">
-          <%= link_to "Edit",
-                      edit_memo_path(@memo),
-                      class: "px-3 py-1 text-sm bg-slate-200 hover:bg-slate-300 text-slate-900 rounded transition-colors duration-200" %>
-          <%= button_to "Delete",
-                        memo_path(@memo),
-                        method: :delete,
-                        class: "px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-900 rounded transition-colors duration-200" %>
-        </div>
       </div>
     <% end %>
       
