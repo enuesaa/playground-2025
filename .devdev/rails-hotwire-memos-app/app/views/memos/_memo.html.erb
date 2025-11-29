@@ -1,12 +1,13 @@
-<div id="<%= dom_id memo %>">
-  <div>
-    <strong>Title:</strong>
-    <%= memo.title %>
+<div class="memo">
+  <%= link_to quote.title, memo_path(quote) %>
+  <%= memo.content %>
+  <div class="memo__actions">
+    <%= button_to "Delete",
+                  memo_path(quote),
+                  method: :delete,
+                  class: "btn btn--light" %>
+    <%= link_to "Edit",
+                edit_memo_path(quote),
+                class: "btn btn--light" %>
   </div>
-
-  <div>
-    <strong>Content:</strong>
-    <%= memo.content %>
-  </div>
-
 </div>

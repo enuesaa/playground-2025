@@ -1,25 +1,17 @@
 class MemosController < ApplicationController
-  before_action :set_memo, only: %i[ show edit update destroy ]
+  before_action :set_memo, only: [:show, :edit, :update, :destroy]
 
-  # GET /memos or /memos.json
   def index
     @memos = Memo.all
   end
 
-  # GET /memos/1 or /memos/1.json
   def show
   end
 
-  # GET /memos/new
   def new
     @memo = Memo.new
   end
 
-  # GET /memos/1/edit
-  def edit
-  end
-
-  # POST /memos or /memos.json
   def create
     @memo = Memo.new(memo_params)
 
@@ -43,7 +35,9 @@ class MemosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /memos/1 or /memos/1.json
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @memo.update(memo_params)
@@ -56,7 +50,6 @@ class MemosController < ApplicationController
     end
   end
 
-  # DELETE /memos/1 or /memos/1.json
   def destroy
     @memo.destroy!
 
@@ -67,12 +60,10 @@ class MemosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_memo
       @memo = Memo.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def memo_params
       params.require(:memo).permit(:title, :content)
     end

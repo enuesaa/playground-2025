@@ -1,35 +1,10 @@
-<% content_for :title, "New memo" %>
+<main class="container">
+  <%= link_to sanitize("&larr; Back to memos"), memos_path %>
 
-<%- frame_id = request.headers["Turbo-Frame"] || nil -%>
-<% if frame_id.present? %>
-  <%= turbo_frame_tag frame_id, data: { controller: "modal" } do %>
-    <div class="modal-header">
-      <h1>New memo</h1>
-      <button type="button" class="modal-close" data-action="click->modal#close">×</button>
-    </div>
-
-    <div class="modal-body">
-      <%= render "form", memo: @memo %>
-    </div>
-
-    <br>
-
-    <div>
-      <%= link_to "Back to memos", memos_path, data: { turbo_frame: "_top" } %>
-    </div>
-  <% end %>
-<% else %>
-  <div class="modal-header">
+  <div class="header">
     <h1>New memo</h1>
   </div>
 
-  <div class="modal-body">
-    <%= render "form", memo: @memo %>
-  </div>
+  <%= render "form", memo: @memo %>
+</main>
 
-  <br>
-
-  <div>
-    <%= link_to "Back to memos", memos_path %>
-  </div>
-<% end %>

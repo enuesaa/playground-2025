@@ -1,20 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<main class="container">
+  <div class="header">
+    <h1>Memos</h1>
+    <%= link_to "New memo",
+                new_memo_path,
+                class: "btn btn--primary" %>
+  </div>
 
-<% content_for :title, "Memos" %>
-
-<h1>Memos</h1>
-
-<div id="memos">
-  <% @memos.each do |memo| %>
-    <%= render memo %>
-    <p>
-      <%= link_to "Show this memo", memo %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New memo", new_memo_path, data: { turbo_frame: "modal" } %>
-
-<%= turbo_frame_tag "modal", data: { controller: "modal" } do %>
-  <!-- Modal content will be loaded here by Turbo -->
-<% end %>
+  <%= render @memos %>
+</main>
