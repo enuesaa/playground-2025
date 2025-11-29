@@ -1,5 +1,2 @@
 #!/usr/bin/env ruby
-pid = spawn("./bin/rails", "tailwindcss:build")
-Process.detach(pid)
-
 exec "./bin/rails", "server", "-b", "0.0.0.0", *ARGV
