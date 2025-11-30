@@ -1,5 +1,5 @@
 ---
-title: Welcome to Evidence
+title: Home
 ---
 
 <Details title='How to edit this page'>
@@ -7,50 +7,43 @@ title: Welcome to Evidence
   This page can be found in your project at `/pages/index.md`. Make a change to the markdown file and save it to see the change take effect in your browser.
 </Details>
 
-```sql categories
-  select
-      category
-  from needful_things.orders
-  group by category
+## ユーザー一覧
+
+```sql users
+SELECT 
+    user_id,
+    user_name,
+    email,
+    created_at,
+    '/users/' || user_id as user_link
+FROM users
+ORDER BY user_name
 ```
 
-<Dropdown data={categories} name=category value=category>
-    <DropdownOption value="%" valueLabel="All Categories"/>
-</Dropdown>
+<DataTable data={users} link=user_link>
+    <Column id=user_name title="ユーザー名" />
+    <Column id=email title="メール" />
+    <Column id=created_at title="登録日" />
+</DataTable>
 
-<Dropdown name=year>
-    <DropdownOption value=% valueLabel="All Years"/>
-    <DropdownOption value=2019/>
-    <DropdownOption value=2020/>
-    <DropdownOption value=2021/>
-</Dropdown>
+## 最近のメモ
 
-```sql orders_by_category
-  select 
-      date_trunc('month', order_datetime) as month,
-      sum(sales) as sales_usd,
-      category
-  from needful_things.orders
-  where category like '${inputs.category.value}'
-  and date_part('year', order_datetime) like '${inputs.year.value}'
-  group by all
-  order by sales_usd desc
+```sql recent_memos
+SELECT 
+    m.memo_id,
+    m.title,
+    m.content,
+    u.user_name,
+    m.created_at,
+    '/users/' || m.user_id as user_link
+FROM memos m
+JOIN users u ON m.user_id = u.user_id
+ORDER BY m.created_at DESC
+LIMIT 10
 ```
 
-<BarChart
-    data={orders_by_category}
-    title="Sales by Month, {inputs.category.label}"
-    x=month
-    y=sales_usd
-    series=category
-/>
-
-## What's Next?
-- [Connect your data sources](settings)
-- Edit/add markdown files in the `pages` folder
-- Deploy your project with [Evidence Cloud](https://evidence.dev/cloud)
-
-## Get Support
-- Message us on [Slack](https://slack.evidence.dev/)
-- Read the [Docs](https://docs.evidence.dev/)
-- Open an issue on [Github](https://github.com/evidence-dev/evidence)
+<DataTable data={recent_memos}>
+    <Column id=title title="タイトル" />
+    <Column id=user_name title="作成者" contentType=link linkLabel=user_name href=user_link />
+    <Column id=created_at title="作成日時" />
+</DataTable>

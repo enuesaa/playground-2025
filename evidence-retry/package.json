@@ -2,12 +2,8 @@
   "name": "my-evidence-project",
   "version": "0.0.1",
   "scripts": {
+    "dev": "evidence sources && evidence dev",
     "build": "evidence build",
-    "build:strict": "evidence build:strict",
-    "dev": "evidence dev --open /",
-    "test": "evidence build",
-    "sources": "evidence sources",
-    "sources:strict": "evidence sources --strict",
     "preview": "evidence preview"
   },
   "engines": {
@@ -24,7 +20,7 @@
     "@evidence-dev/evidence": "^40.1.5",
     "@evidence-dev/motherduck": "^1.0.4",
     "@evidence-dev/mssql": "^1.1.2",
-    "@evidence-dev/mysql": "^1.1.4",
+    "@evidence-dev/mysql": "^1.1.5",
     "@evidence-dev/postgres": "^1.0.7",
     "@evidence-dev/snowflake": "^1.2.2",
     "@evidence-dev/source-javascript": "^0.0.3",
