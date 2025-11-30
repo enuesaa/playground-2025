@@ -3,6 +3,10 @@
 - 過去に試したことあった。名前は覚えてた。
   - https://github.com/enuesaa/playground-2024/tree/main/evidence-try
 - BIツール
+- Sveltekit ベース
+  - なので svelte のシンタックスを使える
+- テーマの変更は難しそう
+  - svelte を書けばできると思うが。wordpressみたいにいろんなテーマがあるわけではない
 
 ## Commands
 ```bash
