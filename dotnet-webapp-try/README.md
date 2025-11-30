@@ -2,7 +2,8 @@
 
 - .NET (ASP.NET)
 - 言語としては C# で、そのフレームワークが .NET のはず
-- 意外にもすぐ動いた。
+- 意外にもすぐ動いた
+- ヘルプは日本語になっており新鮮
 
 ### インストール
 ```bash
@@ -99,4 +100,28 @@ info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: /dotnet-webapp-try
+```
+
+### watch
+便利
+```bash
+$ dotnet watch
+dotnet watch ⌚ File updated: ./README.md
+dotnet watch ⌚ No C# changes to apply.
+dotnet watch ⌚ File updated: ./Program.cs
+dotnet watch ⚠  Press "Ctrl + R" to restart.
+dotnet watch 🔥 [dotnet-webapp-try (net10.0)] Hot reload succeeded.
+```
+
+### build
+クロスプラットフォームビルドできる。LLVMがバックエンドで、glibc に依存するらしい
+
+```bash
+# mac (arm)
+dotnet publish -c Release -r osx-arm64 --self-contained true /p:PublishSingleFile=true
+./bin/Release/net10.0/osx-arm64/dotnet-webapp-try
+
+# linux (arm)
+dotnet publish -c Release -r linux-arm64 --self-contained true /p:PublishSingleFile=true
+./bin/Release/net10.0/linux-arm64/dotnet-webapp-try
 ```
