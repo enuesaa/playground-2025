@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      # see https://github.com/aws/aws-sam-cli/issues/7744
+      - uv pip compile --quiet -o dutest/requirements.txt pyproject.toml
+      - uvx --from aws-sam-cli sam build
+
+  deploy:
+    cmds:
+      - uvx --from aws-sam-cli sam deploy
+
+  delete:
+    cmds:
+      - uvx --from aws-sam-cli sam delete
