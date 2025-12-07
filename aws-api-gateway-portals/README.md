@@ -21,3 +21,7 @@
   - ポータルで$147.00/月
   - ポータル製品で$14.70/月
   - この料金だと仮にたてるにしてもクロスアカウントでまとめたいと思うレベル
+
+## Links
+- https://aws.amazon.com/jp/about-aws/whats-new/2025/11/api-gateway-developer-portal-capabilities/
+- https://dev.classmethod.jp/articles/api-gateway-developer-portal-capabilities/
