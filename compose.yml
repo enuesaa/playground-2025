@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
     command: bash -c 'composer install && php artisan octane:frankenphp --caddyfile Caddyfile'
     ports:
       - 8080:8000
