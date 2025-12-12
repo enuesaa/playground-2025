@@ -44,7 +44,8 @@ type ChangePasswordRequest struct {
 
 type ConfirmSignUpRequest struct {
 	Username string `json:"username"`
-	Code     string `json:"code"`
+	OldPassword string `json:"old_password"`
+	NewPassword string `json:"new_password"`
 }
 
 // SignUp - ユーザー作成
@@ -67,40 +68,15 @@ func (a *App) SignUp(c echo.Context) error {
 				Value: aws.String("false"),
 			},
 		},
-		MessageAction: types.MessageActionTypeSuppress,
+		DesiredDeliveryMediums: []types.DeliveryMediumType{
+			types.DeliveryMediumTypeEmail,
+		},
+		// MessageAction: types.MessageActionTypeSuppress,
 	}
-
 	_, err := a.cognitoClient.AdminCreateUser(c.Request().Context(), input)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
-
-	_, err = a.cognitoClient.AdminSetUserPassword(context.Background(), &cognitoidentityprovider.AdminSetUserPasswordInput{
-		UserPoolId: aws.String(a.userPoolID),
-		Username: aws.String(req.Username),
-		Password: aws.String(req.Password),
-		Permanent: true,
-	})
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
-	}
-
-	_, err = a.cognitoClient.ResendConfirmationCode(context.Background(), &cognitoidentityprovider.ResendConfirmationCodeInput{
-		ClientId: aws.String(a.clientID),
-		Username: aws.String(req.Username),
-	})
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
-	}
-
-	// _, err := a.cognitoClient.SignUp(context.Background(), &cognitoidentityprovider.SignUpInput{
-	// 	ClientId: &a.clientID,
-	// 	Username: &req.Username,
-	// 	Password: &req.Password,
-	// })
-	// if err != nil {
-	// 	return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
-	// }
 	return c.JSON(http.StatusOK, map[string]any{})
 }
 
@@ -111,13 +87,30 @@ func (a *App) ConfirmSignUp(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": err.Error()})
 	}
 
-	input := &cognitoidentityprovider.ConfirmSignUpInput{
-		ClientId:         aws.String(a.clientID),
-		Username:         aws.String(req.Username),
-		ConfirmationCode: aws.String(req.Code),
+	input := &cognitoidentityprovider.AdminInitiateAuthInput{
+		AuthFlow:   types.AuthFlowTypeAdminUserPasswordAuth,
+		UserPoolId: aws.String(a.userPoolID),
+		ClientId:   aws.String(a.clientID),
+		AuthParameters: map[string]string{
+			"USERNAME": req.Username,
+			"PASSWORD": req.OldPassword,
+		},
 	}
-
-	_, err := a.cognitoClient.ConfirmSignUp(c.Request().Context(), input)
+	res, err := a.cognitoClient.AdminInitiateAuth(c.Request().Context(), input)
+	if err != nil {
+		return c.JSON(http.StatusUnauthorized, map[string]string{"error": err.Error()})
+	}
+	challenge := &cognitoidentityprovider.AdminRespondToAuthChallengeInput{
+		ChallengeName: types.ChallengeNameTypeNewPasswordRequired,
+		UserPoolId:    aws.String(a.userPoolID),
+		ClientId:      aws.String(a.clientID),
+		Session:       res.Session,
+		ChallengeResponses: map[string]string{
+			"USERNAME":     req.Username,
+			"NEW_PASSWORD": req.NewPassword,
+		},
+	}
+	_, err = a.cognitoClient.AdminRespondToAuthChallenge(c.Request().Context(), challenge)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
@@ -131,20 +124,19 @@ func (a *App) SignIn(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": err.Error()})
 	}
 
-	input := &cognitoidentityprovider.InitiateAuthInput{
-		AuthFlow: types.AuthFlowTypeUserPasswordAuth,
-		ClientId: aws.String(a.clientID),
+	input := &cognitoidentityprovider.AdminInitiateAuthInput{
+		AuthFlow:   types.AuthFlowTypeAdminUserPasswordAuth,
+		UserPoolId: aws.String(a.userPoolID),
+		ClientId:   aws.String(a.clientID),
 		AuthParameters: map[string]string{
 			"USERNAME": req.Username,
 			"PASSWORD": req.Password,
 		},
 	}
-
-	result, err := a.cognitoClient.InitiateAuth(c.Request().Context(), input)
+	result, err := a.cognitoClient.AdminInitiateAuth(c.Request().Context(), input)
 	if err != nil {
 		return c.JSON(http.StatusUnauthorized, map[string]string{"error": err.Error()})
 	}
-
 	return c.JSON(http.StatusOK, map[string]any{
 		"access_token":  *result.AuthenticationResult.AccessToken,
 		"id_token":      *result.AuthenticationResult.IdToken,
