@@ -1,12 +1,16 @@
-# azure web staticapp
+# azure static web apps
 
 - azure の静的Webサイトホスティングサービス
 - vercel とか cloudflare pages みたいな感覚で静的サイトをデプロイできる
   - cdn というより、アプリケーションのホスト環境というワードの方が合っている
+- ぜんぜん知らなかったけど、パターンとしてあるっぽい。事例多い
 - swa というコマンドでデプロイできる
   - `pnpm add -D @azure/static-web-apps-cli`
   - `pnpm swa init` で swa-cli.config.json を生成
 - 無料プランあり
+  - 有料プランでも機能的にはそんなに差異がない
+  - がSLAを握られているので、業務では有料にするしかないかな
+  - https://azure.microsoft.com/ja-jp/pricing/details/app-service/static/
 
 ## デプロイコマンド
 ```bash
@@ -30,4 +34,5 @@ Deploying project to Azure Static Web Apps...
 ```
 
 ## Links
-- https://tech.kentem.jp/entry/2023/11/21/091222
+- https://azure.microsoft.com/ja-jp/pricing/details/app-service/static/
+- https://blog.shibayan.jp/entry/20240110/1704862567
