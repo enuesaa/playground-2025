@@ -7,9 +7,10 @@
       "run": "pnpm dev",
       "appBuildCommand": "pnpm build",
       "appDevserverUrl": "http://localhost:3000",
-      "apiLocation": "api",
-      "apiLanguage": "node",
-      "apiVersion": "20",
+      "apiLocation": "apipython",
+      "apiLanguage": "python",
+      "apiVersion": "3.10",
+      "apiBuildCommand": "uv pip freeze > requirements.txt",
       "swaConfigLocation": "."
     }
   }
