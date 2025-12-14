@@ -11,6 +11,9 @@
   - 有料プランでも機能的にはそんなに差異がない
   - がSLAを握られているので、業務では有料にするしかないかな
   - https://azure.microsoft.com/ja-jp/pricing/details/app-service/static/
+- azure static web apps に api を作る機能があるが、これは有料っぽい
+  - ただし直で azure functions を作るのは無料のはず
+  - https://learn.microsoft.com/ja-jp/azure/static-web-apps/apis-overview
 
 ## デプロイコマンド
 ```bash

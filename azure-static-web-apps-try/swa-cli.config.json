@@ -5,8 +5,11 @@
       "appLocation": ".",
       "outputLocation": "dist",
       "appBuildCommand": "pnpm build",
-      "run": "pnpm dev",
-      "appDevserverUrl": "http://localhost:3000"
+      "appDevserverUrl": "http://localhost:3000",
+      "apiLocation": "api",
+      "apiLanguage": "node",
+      "apiVersion": "20",
+      "swaConfigLocation": "."
     }
   }
 }
