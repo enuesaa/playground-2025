@@ -1,6 +1,8 @@
 {
+  "name": "api",
   "private": true,
   "dependencies": {
     "@azure/functions": "^4"
-  }
+  },
+  "main": "src/index.js"
 }

@@ -4,6 +4,7 @@
     "azure-web-staticapp-try": {
       "appLocation": ".",
       "outputLocation": "dist",
+      "run": "pnpm dev",
       "appBuildCommand": "pnpm build",
       "appDevserverUrl": "http://localhost:3000",
       "apiLocation": "api",

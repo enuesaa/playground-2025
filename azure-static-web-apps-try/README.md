@@ -2,18 +2,32 @@
 
 - azure の静的Webサイトホスティングサービス
 - vercel とか cloudflare pages みたいな感覚で静的サイトをデプロイできる
-  - cdn というより、アプリケーションのホスト環境というワードの方が合っている
-- ぜんぜん知らなかったけど、パターンとしてあるっぽい。事例多い
+  - CDN というより、アプリケーションのホスト環境というワードの方が合っている
+- ぜんぜん知らなかったけど、パターンとしてあるっぽい
+- 事例が多い
 - swa というコマンドでデプロイできる
   - `pnpm add -D @azure/static-web-apps-cli`
-  - `pnpm swa init` で swa-cli.config.json を生成
+  - `pnpm swa init` で `swa-cli.config.json` を生成
 - 無料プランあり
   - 有料プランでも機能的にはそんなに差異がない
   - がSLAを握られているので、業務では有料にするしかないかな
   - https://azure.microsoft.com/ja-jp/pricing/details/app-service/static/
-- azure static web apps に api を作る機能があるが、これは有料っぽい
-  - ただし直で azure functions を作るのは無料のはず
-  - https://learn.microsoft.com/ja-jp/azure/static-web-apps/apis-overview
+- free プランで api をホストできる
+  - `/api/{name}` に FaaS が生えるイメージ
+  - Next.js の API Route 的なやつではなくて、JS以外の言語でもぜんぜんいい。
+  - 実体は azure functions
+  - 実体は azure functions だが、デプロイしてもそっちには表示されないっぽい
+  - コンソールを見ると `Free ホスティング プランでは、独自の API バックエンドの持ち込みはサポートされていません` と書いてあるが、これは azure static web apps の外で api を定義して、それを紐づける？のが？有料っぽい
+    - マネージドな api のデプロイは free でもできる
+    - https://learn.microsoft.com/ja-jp/azure/static-web-apps/apis-overview
+- `pnpm swa start` でローカルで立ち上げられる
+  - 関数もついてきた
+  - なんかエミュレーターをダウンロードしてるっぽい
+- `@azure/functions@v4` で書き方が変わったらしく手間取った。
+  - swa deploy でデプロイしても api が 404 を返していたら、構成が間違っているのでローカルでデバッグした方が良い
+  - https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-node-upgrade-v4?tabs=v4&pivots=programming-language-javascript
+    - この `main` が何を指しているか分からなかったが、どうやら `package.json` の `main` フィールドのことらしい
+    - `"main": "src/index.js"` を書かなかったら api のハンドラーが認識されなかった
 
 ## デプロイコマンド
 ```bash
