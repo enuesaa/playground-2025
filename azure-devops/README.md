@@ -16,3 +16,10 @@
 - Pipelineには無料枠がある
   - が、申請しないと使えない
   - `##[error]No hosted parallelism has been purchased or granted. To request a free parallelism grant, please fill out the following form https://aka.ms/azpipelines-parallelism-request`
+  - で、申請して数日後に試してみたら、使えるようになっていた。
+  - 特にメール無かったけど
+    - そういえば通知を全部オフにしてたかも
+  - 1800 minutes 無料らしい
+- Pipeline は、GitHub Actions ライク
+  - 折り畳まれる感じがすごく似ている
+  - でも、yml のフィールドとかぜんぜん違うから互換性はなさそう
