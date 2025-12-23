@@ -1,71 +1,116 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
 
-  <!-- Shaka Player UI -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.10.0/shaka-player.ui.min.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.10.0/controls.min.css"
-  />
+    <title>Player</title>
 
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      background: #000;
-    }
+    <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.16.12/shaka-player.ui.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/shaka-player/4.16.12/controls.css" />
 
-    #container {
-      width: 100%;
-      height: 100%;
-      background: #000;
-      position: relative; /* ← 重要 */
-    }
-
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
-  </style>
-</head>
-<body>
-  <div id="container"></div>
-
-  <script>
-    const src = 'http://localhost:3000/videos/sample/index.m3u8';
-
-    async function init() {
-      if (!shaka.Player.isBrowserSupported()) {
-        console.error('Browser not supported');
-        return;
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
       }
+      #video-container {
+        width: 100%;
+        height: 100%;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #000;
+      }
+    </style>
+  </head>
 
-      const container = document.getElementById('container');
+  <body>
+    <div id="video-container">
+      <video id="video" muted playsinline></video>
+    </div>
 
-      // video 要素を JS で生成（UI とズレない）
-      const video = document.createElement('video');
-      video.playsInline = true;
-      container.appendChild(video);
+    <script>
+      const VIDEO_URL = "http://192.168.3.3:3000/videos/sample2/index.m3u8";
+      const DOWNLOAD_URL = "http://192.168.3.3:3000/videos/sample2/sample2.mov";
+      const FILENAME = "sample2.mov";
+
+      const video = document.getElementById("video");
+      const container = document.getElementById("video-container");
 
       const player = new shaka.Player(video);
+      const ui = new shaka.ui.Overlay(player, container, video);
 
-      // UI Overlay（設定は触らない）
-      new shaka.ui.Overlay(player, container, video);
+      if (ui.isMobile()) {
+        video.controls = true;
+        ui.setEnabled(false);
+      } else {
+        class DownloadButton extends shaka.ui.Element {
+          constructor(parent, controls) {
+            super(parent, controls);
 
-      player.addEventListener('error', e => {
-        console.error('Shaka error', e.detail);
+            const button = document.createElement("button");
+            button.classList.add("shaka-overflow-button");
+            button.setAttribute("aria-label", "ダウンロード");
+
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 -960 960 960");
+            svg.classList.add("material-svg-icon");
+            svg.innerHTML = '<path d="M480-120 280-320l56-56 104 104v-408h80v408l104-104 56 56-200 200ZM200-40q-33 0-56.5-23.5T120-120v-120h80v120h560v-120h80v120q0 33-23.5 56.5T760-40H200Z"/>';
+
+            const label = document.createElement("label");
+            const text = document.createElement("span");
+            text.textContent = "ダウンロード";
+            label.appendChild(text);
+            button.appendChild(svg);
+            button.appendChild(label);
+
+            button.addEventListener("click", () => {
+              const a = document.createElement("a");
+              a.href = DOWNLOAD_URL;
+              a.download = FILENAME;
+              a.click();
+              controls.hideSettingsMenus();
+            });
+            this.parent?.appendChild(button);
+          }
+        }
+        class DownloadButtonFactory {
+          create(rootElement, controls) {
+            return new DownloadButton(rootElement, controls);
+          }
+        }
+        shaka.ui.OverflowMenu.registerElement("download", new DownloadButtonFactory());
+
+        ui.configure({
+          controlPanelElements: [
+            "play_pause",
+            "time_and_duration",
+            "spacer",
+            "mute",
+            "volume",
+            "overflow_menu",
+            "fullscreen",
+          ],
+          overflowMenuButtons: [
+            "captions",
+            // 'quality',
+            "playback_rate",
+            "download",
+          ],
+          playbackRates: [0.5, 1, 1.25, 1.5, 2],
+          alwaysShowVolumeBar: true,
+        });
+      }
+      player.load(VIDEO_URL).catch((err) => {
+        console.error("Load failed", err);
       });
-
-      await player.load(src);
-    }
-
-    document.addEventListener('DOMContentLoaded', init);
-  </script>
-</body>
+    </script>
+  </body>
 </html>
