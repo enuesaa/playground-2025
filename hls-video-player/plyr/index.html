@@ -1,71 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
 
-  <!-- Plyr -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"
-  />
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+    <!-- Plyr -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
 
-  <!-- hls.js -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15"></script>
+    <!-- hls.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15"></script>
 
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      background: #000;
-    }
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #000;
+      }
 
-    .container {
-      width: 100%;
-      height: 100%;
-      background: #000;
-    }
+      .container {
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
 
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <video id="video" playsinline></video>
-  </div>
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <video id="video" playsinline></video>
+    </div>
 
-  <script>
-    const source = 'http://localhost:3000/videos/sample/index.m3u8';
-    const video = document.getElementById('video');
+    <script>
+      const source = "http://localhost:3000/videos/sample/index.m3u8";
+      const video = document.getElementById("video");
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(source);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari / iOS
-      video.src = source;
-    }
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(source);
+        hls.attachMedia(video);
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        // Safari / iOS
+        video.src = source;
+      }
 
-    const player = new Plyr(video, {
-      controls: [
-        'play',
-        'progress',
-        'current-time',
-        'duration',
-        'mute',
-        'volume',
-        'fullscreen'
-      ],
-      fullscreen: { enabled: true, fallback: true },
-    });
-  </script>
-</body>
+      const player = new Plyr(video, {
+        controls: [
+          "play",
+          "progress",
+          "current-time",
+          "duration",
+          "mute",
+          "volume",
+          "fullscreen",
+        ],
+        fullscreen: { enabled: true, fallback: true },
+      });
+    </script>
+  </body>
 </html>

@@ -1,66 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, height=device-height, initial-scale=1.0"
-  />
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0"
+    />
 
-  <!-- Tailwind (browser版) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind (browser版) -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Video.js -->
-  <link
-    href="https://vjs.zencdn.net/8.10.0/video-js.css"
-    rel="stylesheet"
-  />
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <!-- Video.js -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
 
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      background: #000;
-    }
-  </style>
-</head>
-<body>
-  <!-- iframe 内でピッタリ埋める -->
-  <div id="app" class="w-full h-full flex items-center justify-center bg-black">
-    <video
-      id="player"
-      class="video-js vjs-default-skin w-full h-full"
-      controls
-      preload="auto"
-      playsinline
-      data-setup="{}"
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- iframe 内でピッタリ埋める -->
+    <div
+      id="app"
+      class="w-full h-full flex items-center justify-center bg-black"
     >
-      <source
-        src="http://localhost:3000/videos/sample/index.m3u8"
-        type="application/x-mpegURL"
-      />
-    </video>
-  </div>
+      <video
+        id="player"
+        class="video-js vjs-default-skin w-full h-full"
+        controls
+        preload="auto"
+        playsinline
+        data-setup="{}"
+      >
+        <source
+          src="http://localhost:3000/videos/sample/index.m3u8"
+          type="application/x-mpegURL"
+        />
+      </video>
+    </div>
 
-  <script>
-    const player = videojs('player',   {
-      controls: true,
-      fluid: true,
-      controlBar: {
-        progressControl: true,
-        seekBar: true,
-        remainingTimeDisplay: true,
-        currentTimeDisplay: true,
-        durationDisplay: true,
-      },
-    });
+    <script>
+      const player = videojs("player", {
+        controls: true,
+        fluid: true,
+        controlBar: {
+          progressControl: true,
+          seekBar: true,
+          remainingTimeDisplay: true,
+          currentTimeDisplay: true,
+          durationDisplay: true,
+        },
+      });
 
-    // iframe resize 対策（親がサイズ変更した場合）
-    window.addEventListener('resize', () => {
-      player.resize();
-    });
-  </script>
-</body>
+      // iframe resize 対策（親がサイズ変更した場合）
+      window.addEventListener("resize", () => {
+        player.resize();
+      });
+    </script>
+  </body>
 </html>

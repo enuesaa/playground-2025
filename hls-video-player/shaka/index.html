@@ -6,7 +6,10 @@
     <title>Player</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.16.12/shaka-player.ui.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/shaka-player/4.16.12/controls.css" />
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/shaka-player/4.16.12/controls.css"
+    />
 
     <style>
       html,
@@ -59,10 +62,14 @@
             button.classList.add("shaka-overflow-button");
             button.setAttribute("aria-label", "ダウンロード");
 
-            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            const svg = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "svg",
+            );
             svg.setAttribute("viewBox", "0 -960 960 960");
             svg.classList.add("material-svg-icon");
-            svg.innerHTML = '<path d="M480-120 280-320l56-56 104 104v-408h80v408l104-104 56 56-200 200ZM200-40q-33 0-56.5-23.5T120-120v-120h80v120h560v-120h80v120q0 33-23.5 56.5T760-40H200Z"/>';
+            svg.innerHTML =
+              '<path d="M480-120 280-320l56-56 104 104v-408h80v408l104-104 56 56-200 200ZM200-40q-33 0-56.5-23.5T120-120v-120h80v120h560v-120h80v120q0 33-23.5 56.5T760-40H200Z"/>';
 
             const label = document.createElement("label");
             const text = document.createElement("span");
@@ -86,7 +93,10 @@
             return new DownloadButton(rootElement, controls);
           }
         }
-        shaka.ui.OverflowMenu.registerElement("download", new DownloadButtonFactory());
+        shaka.ui.OverflowMenu.registerElement(
+          "download",
+          new DownloadButtonFactory(),
+        );
 
         ui.configure({
           controlPanelElements: [
