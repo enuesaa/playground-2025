@@ -21,6 +21,14 @@ sh-5.1# whoami
 root
 ```
 
+## ファイルの送受信
+- https://elchika.com/article/0e41a4a7-eecc-471e-a259-4fc8d710c26a/
+
+```bash
+adb push README.md /root
+adb pull /root/a .
+```
+
 ## OS
 ```bash
 sh-5.1# cat /etc/os-release
