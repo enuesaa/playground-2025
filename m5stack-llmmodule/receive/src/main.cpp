@@ -32,3 +32,31 @@ void loop() {
   Serial2.println(body);
   M5.Display.println("ok");
 }
+
+// WiFiServer proxy(8888);
+
+// void setup() {
+//   M5.begin();
+//   M5.Display.setTextSize(2);
+
+//   WiFi.begin("", "");
+
+//   while (WiFi.status() != WL_CONNECTED) delay(300);
+//   proxy.begin();
+//   M5.Display.println("connected");
+
+//   Serial2.begin(921600, SERIAL_8N1, 18, 17);
+//   M5.Display.println("begin");
+// }
+
+// void loop() {
+//   WiFiClient c = proxy.available();
+//   if (!c) return;
+
+//   while (c.connected() && c.available()) {
+//     Serial2.write(c.read());
+//   }
+//   while (Serial2.available()) {
+//     c.write(Serial2.read());
+//   }
+// }
