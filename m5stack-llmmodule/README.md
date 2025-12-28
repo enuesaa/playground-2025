@@ -81,3 +81,14 @@ llm-yolo/now 1.3 arm64 [installed,local]
 
 ## 起動音の消し方
 - https://qiita.com/nnn112358/items/8157d2534e1a6e11ccdd
+
+## メモリの割り当ての変更
+- https://qiita.com/nnn112358/items/ead108aa094fe6e3d432
+
+```bash
+sh-5.1# core-config
+sh-5.1# free -h
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       127Mi       1.6Gi       0.0Ki       156Mi       1.7Gi
+Swap:             0B          0B          0B
+```
