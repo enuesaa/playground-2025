@@ -77,3 +77,6 @@ llm-yolo/now 1.3 arm64 [installed,local]
 
 ## ファームウェアアップデート
 https://docs.m5stack.com/ja/guide/llm/llm/image
+
+## 起動音の消し方
+https://qiita.com/nnn112358/items/8157d2534e1a6e11ccdd
