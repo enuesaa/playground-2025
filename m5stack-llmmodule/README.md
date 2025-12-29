@@ -100,3 +100,9 @@ sh-5.1# free -h
 Mem:           1.9Gi       127Mi       1.6Gi       0.0Ki       156Mi       1.7Gi
 Swap:             0B          0B          0B
 ```
+
+## USB wifi
+思ったよりしんどい
+- https://github.com/lwfinger/rtl8188eu
+- https://wiki.onakasuita.org/pukiwiki/?Module%20LLM%2F%E7%84%A1%E7%B7%9ALAN
+- https://heavymoon.org/2022/02/05/raspberrypi-tp-link-tl-wn725n/
