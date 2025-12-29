@@ -102,7 +102,8 @@ Swap:             0B          0B          0B
 ```
 
 ## USB wifi
-思ったよりしんどい
+TL-WN725N を買った。
+
 - https://github.com/lwfinger/rtl8188eu
 - https://wiki.onakasuita.org/pukiwiki/?Module%20LLM%2F%E7%84%A1%E7%B7%9ALAN
 - https://heavymoon.org/2022/02/05/raspberrypi-tp-link-tl-wn725n/
