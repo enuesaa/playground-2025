@@ -107,3 +107,4 @@ TL-WN725N を買った。
 - https://github.com/lwfinger/rtl8188eu
 - https://wiki.onakasuita.org/pukiwiki/?Module%20LLM%2F%E7%84%A1%E7%B7%9ALAN
 - https://heavymoon.org/2022/02/05/raspberrypi-tp-link-tl-wn725n/
+- https://scrapbox.io/M5S/OSC_2025_Osaka%E3%81%A7Module_LLM%E3%81%AE%E3%83%87%E3%83%A2%E5%B1%95%E7%A4%BA
