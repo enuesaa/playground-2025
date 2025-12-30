@@ -50,6 +50,11 @@ Deploying project to Azure Static Web Apps...
 ✔ Project deployed to https://xxx.3.azurestaticapps.net 🚀
 ```
 
+## カスタムドメイン
+無料。Digicert の証明書もついてくる。半年で自動更新らしい
+
+- https://dev.classmethod.jp/articles/static-web-app-custom-domain/
+
 ## Links
 - https://azure.microsoft.com/ja-jp/pricing/details/app-service/static/
 - https://blog.shibayan.jp/entry/20240110/1704862567
