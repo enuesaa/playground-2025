@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\UseCases;
+
+use App\Models\Picture;
+use App\Services\Nasa\Nasa;
+use Illuminate\Support\Facades\Cache;
+
+final class AstronomyPictureUseCase
+{
+    public function __construct(
+        protected Nasa $nasa,
+    ) {
+    }
+
+    public function get(): Picture
+    {
+        $data = Cache::remember('AstronomyPictureUseCase::getNow', 100, function () {
+            return $this->nasa->listImages();
+        });
+        $picture = new Picture();
+        $picture->title = $data->title();
+        $picture->image_url = $data->url();
+        $picture->explanation = $data->explanation();
+
+        return $picture;
+    }
+
+    public function flush(): void
+    {
+        Cache::flush();
+    }
+
+    /**
+     * @return \App\Services\Nasa\DataModels\MarsRoverPhoto[] photo
+     */
+    public function listMarsRoverPhotos(): array
+    {
+        $data = Cache::remember('AstronomyPictureUseCase::listMarsRoverPhotos', 100, function () {
+            return $this->nasa->listImages();
+        });
+        return $data;
+    }
+}

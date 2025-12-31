@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c 'composer install && php artisan octane:frankenphp --caddyfile Caddyfile'
+    ports:
+      - 8080:8000
+    volumes:
+      - .:/app
+    tty: true
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
+    volumes:
+      - redisdata:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  redisdata:
