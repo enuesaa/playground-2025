@@ -1,6 +1,6 @@
 # playground-2025
 My playground in 2025 🐍  
-Repository for getting started with new library.
+A repository for trying new tools, libraries, and ideas.
 
 ## Archives
 
