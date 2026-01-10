@@ -1,0 +1,13 @@
+[package]
+name = "histo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+migration = { path = "migration" }
+anyhow = "1.0.100"
+sea-orm = { version = "1.1.16", features = ["sqlx-sqlite", "runtime-tokio-native-tls", "macros"] }
+tokio = { version = "1.47.1", features = ["full"] }
+clap = "4.5.48"
+sysinfo = "0.37.2"
+users = "0.11.0"
